@@ -1,2 +1,10 @@
-proto
+config.yaml
+
+log
+*.log
+
+
 *.proto
+
+__pycache__
+.flake8

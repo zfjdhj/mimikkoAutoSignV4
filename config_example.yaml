@@ -1,0 +1,13 @@
+Basic:
+  # 抓包获得 "xxxxxxxxxx"
+  device_id: ""
+  # 抓包获得 "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  authorization: ""
+
+  # api延迟 默认0.1秒 防止被封，虽然兽耳官方并不管
+  delay: 0.5
+  
+
+Task:
+  Sign:
+    enable: True
