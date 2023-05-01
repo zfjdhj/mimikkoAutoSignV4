@@ -8,6 +8,8 @@ from types import SimpleNamespace
 from util.logger import Logger
 import proto.sign_pb2 as sign_pb2
 import proto.sign_pb2_grpc as sign_pb2_grpc
+import proto.character_pb2 as character_pb2
+import proto.character_pb2_grpc as character_pb2_grpc
 
 
 base_path = os.path.dirname(os.path.abspath(__file__))
@@ -74,6 +76,7 @@ class Client():
         else:
             log.error("缺少账户信息,device_id authorization")
             sys.exit(0)
+        self.delay = self.basic.delay
         pass
 
     def GetUserSignStatus(self):
@@ -94,10 +97,21 @@ class Client():
             metadata=self.metadata)
         return res
 
+    def EnergyExchange(self, character_code):
+        # 兑换成长值
+        sub = character_pb2_grpc.CharacterStub(channel=self.ssl_channel)
+        res = sub.EnergyExchange(
+            character_pb2.request(character_code=character_code),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
 
 def task_sign(client):
-    # 任务：签到
+    # 任务：每日签到
     res = ""
+    log.info("签到任务执行中...")
+    time.sleep(client.delay)
     # 1.获取签到信息
     sign_info = client.GetUserSignStatus()
     res = f"当前累计签到{sign_info.continuousSign}天,今日{'已' if sign_info.isSign else '未'}签到"
@@ -110,9 +124,20 @@ def task_sign(client):
     return res
 
 
+def task_energy_exchange(client, character_code):
+    # 任务：成长值兑换
+    res = ""
+    log.info("成长值兑换任务执行中...")
+    time.sleep(client.delay)
+    client.EnergyExchange(character_code)
+
+
 def main(device_id, authorization):
     client = Client(device_id, authorization)
-    task_sign(client)
+    if client.task.Sign["enable"]:
+        task_sign(client)
+    if client.task.EnergyExchange["enable"]:
+        task_energy_exchange(client, client.task.EnergyExchange["character_code"])
 
 
 if __name__ == '__main__':
