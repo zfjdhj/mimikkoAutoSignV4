@@ -7,7 +7,16 @@ Basic:
   # api延迟 默认0.5秒 防止被封，虽然兽耳官方并不管
   delay: 0.5
   
-
+# 脚本功能相关设置
 Task:
   Sign:
+    # 任务：每日签到
+    # 是否启用
+    enable: True
+  EnergyExchange:
+    # 任务：能量值兑换成长值。随时间增加的那个，不是电力能源
+    enable: True
+    # 要换给哪个助手 "character_code"
+    character_code: "character_miruku2"
+  EnergyCenter:
     enable: True
