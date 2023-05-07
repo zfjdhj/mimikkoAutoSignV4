@@ -1,15 +1,16 @@
 # mimikkoAutoSignV4  
-用于兽耳桌面相关V4接口测试
-
+用于兽耳桌面相关V4接口测试  
+不要到处宣传 偷偷用就行了 应该不会封号吧
 ## 使用
 1. 抓包软件获取登录时的`device-id`,`authorization`  
 2. 修改`config.yaml`相关设置  
     当前已支持功能  
-    |Task|功能|参数备注|
-    |-|-|-|
-    |Sign|每日签到|`character_code`见下表|
-    |EnergyExchange|成长值兑换|`character_code`见下表|
-    |EnergyCenter|能源中心|硬币换电力|  
+    |Task|功能|参数|说明|
+    |-|-|-|-|
+    |Sign|每日签到|`character_code`见下表|日常签到，希望不要断连签|
+    |EnergyExchange|成长值兑换|`character_code`见下表|-|
+    |EnergyCenter|能源中心|-|默认硬币换电力|  
+    |OrdinaryWork|工会悬赏任务|`work_characters`见下表|电力换硬币，积累公会等级|
 
     | 助手名称 | code |
     | :- | :- |

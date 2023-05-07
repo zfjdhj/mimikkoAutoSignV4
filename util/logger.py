@@ -3,6 +3,7 @@ from logging import handlers
 import datetime
 import pytz
 
+
 class Logger(object):
     level_relations = {
         "debug": logging.DEBUG,
@@ -26,19 +27,21 @@ class Logger(object):
         fmt="[%(asctime)s-%(pathname)s][line:%(lineno)d][%(levelname)s]: %(message)s",
     ):
         self.logger = logging.getLogger(filename)
+        self.logger.handlers = []
         format_str = logging.Formatter(fmt)  # 设置日志格式
-        #设置时间格式
+        # 设置时间格式
         logging.Formatter.converter = self.beijing
         self.logger.setLevel(self.level_relations[level])  # 设置日志级别
         sh = logging.StreamHandler()  # 往屏幕上输出
-        single_format_str=logging.Formatter("[%(asctime)s][%(levelname)s]:%(message)s",'%Y%m%d-%H:%M:%S')
+        single_format_str = logging.Formatter(
+            "[%(asctime)s][line:%(lineno)d][%(levelname)s]:%(message)s", '%Y%m%d-%H:%M:%S')
         sh.setFormatter(single_format_str)  # 设置屏幕上显示的格式
         fh = handlers.TimedRotatingFileHandler(
             filename=filename, when=when, interval=interval, backupCount=backCount, encoding="utf-8"
         )
-        #fh_all = handlers.TimedRotatingFileHandler(filename=base_path + "/log/all.log", when="D", interval=30, backupCount=backCount, encoding="utf-8")
+        # fh_all = handlers.TimedRotatingFileHandler(filename=base_path + "/log/all.log", when="D", interval=30, backupCount=backCount, encoding="utf-8")
         fh.setFormatter(format_str)  # 设置文件里写入的格式
-        #fh_all.setFormatter(format_str)  # 设置文件里写入的格式
+        # fh_all.setFormatter(format_str)  # 设置文件里写入的格式
         self.logger.addHandler(sh)  # 把对象加到logger里
         self.logger.addHandler(fh)
-        #self.logger.addHandler(fh_all)
+        # self.logger.addHandler(fh_all)

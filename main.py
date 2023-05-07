@@ -10,8 +10,12 @@ import proto.sign_pb2 as sign_pb2
 import proto.sign_pb2_grpc as sign_pb2_grpc
 import proto.character_pb2 as character_pb2
 import proto.character_pb2_grpc as character_pb2_grpc
+import proto.scalar_pb2 as scalar_pb2
+import proto.scalar_pb2_grpc as scalar_pb2_grpc
 import proto.energy_pb2 as energy_pb2
 import proto.energy_pb2_grpc as energy_pb2_grpc
+import proto.work_pb2 as work_pb2
+import proto.work_pb2_grpc as work_pb2_grpc
 
 
 base_path = os.path.dirname(os.path.abspath(__file__))
@@ -69,6 +73,10 @@ class Client():
             config = yaml.safe_load(f)
         self.basic = SimpleNamespace(**config['Basic'])
         self.task = SimpleNamespace(**config['Task'])
+        if self.basic.debug:
+            log = Logger(base_path, base_path + f"/log/{date}.log", level="debug").logger
+        else:
+            log = Logger(base_path, base_path + f"/log/{date}.log", level="info").logger
         if device_id and authorization:
             self.authorization = authorization
             self.device_id = device_id
@@ -95,6 +103,16 @@ class Client():
         sub = sign_pb2_grpc.SignStub(channel=self.ssl_channel)
         res = sub.Sign(
             sign_pb2.request(characterCode=character_code),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
+    def GetUserAutoScalar(self):
+        # 获取能量值信息
+        # 暂时可用，进度90%
+        sub = scalar_pb2_grpc.ScalarStub(channel=self.ssl_channel)
+        res = sub.GetUserAutoScalar(
+            scalar_pb2.request(code="user_energy"),
             compression=grpc.Compression.Gzip,
             metadata=self.metadata)
         return res
@@ -140,6 +158,47 @@ class Client():
             metadata=self.metadata)
         return res
 
+    def ListOrdinaryWork(self):
+        sub = work_pb2_grpc.WorkStub(channel=self.ssl_channel)
+        res = sub.ListOrdinaryWork(
+            work_pb2.request(page=1, pageSize=60),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
+    def GetOrdinaryWorkRecord(self, id):
+        sub = work_pb2_grpc.WorkStub(channel=self.ssl_channel)
+        res = sub.GetOrdinaryWorkRecord(
+            work_pb2.request2(id=id),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
+    def ReceiveOrdinaryWorkReward(self, id):
+        sub = work_pb2_grpc.WorkStub(channel=self.ssl_channel)
+        res = sub.ReceiveOrdinaryWorkReward(
+            work_pb2.request3(id=id),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
+    def ListWorksCharacter(self):
+        sub = work_pb2_grpc.WorkStub(channel=self.ssl_channel)
+        res = sub.ListWorksCharacter(
+            work_pb2.request4(page=1, pageSize=60),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
+    def PickOrdinaryWork(self, id, character_code):
+        sub = work_pb2_grpc.WorkStub(channel=self.ssl_channel)
+        body = work_pb2.PickOrdinaryWorkRequestBody(characterCode=character_code)
+        res = sub.PickOrdinaryWork(
+            work_pb2.request5(id=id, body=body),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
 
 def task_sign(client, character_code):
     # 任务：每日签到
@@ -163,7 +222,17 @@ def task_energy_exchange(client, character_code):
     # 任务：成长值兑换
     log.info("成长值兑换任务执行中...")
     time.sleep(client.delay)
-    client.EnergyExchange(character_code)
+    # # 获取能量值(用于兑换成长值)信息
+    res = client.GetUserAutoScalar()
+    # print(res)
+    if res.newValue > 0:
+        character_code = "character_miruku2"
+        res2 = client.EnergyExchange(character_code)
+        if res2.character_code == character_code:
+            print(f"{character_code}成长值兑换成功")
+        else:
+            print(f"{character_code}成长值兑换失败")
+    # client.EnergyExchange(character_code)
 
 
 def task_energy_center(client):
@@ -183,7 +252,7 @@ def task_energy_center(client):
                 res2 = client.ReceiveEnergySourceReward(i.id)
                 log.debug(res2)
                 log.info(f'能源中心领取{i.position+1}号位')
-                return
+                continue
             elif status == 'UNLOCKED':
                 # # # 创建
                 # # # print('获取充能方式-普通芯片-id')
@@ -194,10 +263,59 @@ def task_energy_center(client):
                         res4 = client.CreateEnergySourceRecord(model_id=item.modelId, position=i.position)
                         log.debug(res4)
                         log.info(f'能源中心创建充能{i.position+1}号位')
-                return
-
+                continue
     else:
         log.info("能源中心暂时没有事情做")
+
+
+def task_ordinary_work(client):
+    # 任务：公会悬赏任务
+    log.info("公会悬赏任务执行中...")
+    time.sleep(client.delay)
+    for i in range(2):
+        log.info("公会悬赏任务check...")
+        time.sleep(client.delay)
+        work_list = client.ListOrdinaryWork()
+        print(f"今日悬赏任务{work_list.total}个")
+        for work in work_list.content:
+            status = work_pb2.PlayStatus.Name(work.playStatus)
+            # print(i.level, statusexpected a)
+            if status == 'CAN_RECEIVE':
+                # # 收取奖励
+                # 获取任务详细信息
+                work_info = client.GetOrdinaryWorkRecord(work.recordId)
+                time.sleep(client.delay)
+                # print(res2)
+                reward_info = client.ReceiveOrdinaryWorkReward(id=i.recordId)
+                log.info("收取{}级任务{}，奖励:{}*{}".format(
+                    work_info.level,
+                    work_info.workName,
+                    reward_info.rewards.scalarName,
+                    reward_info.rewards.scalarName.value)
+                )
+            elif status == 'NOT_STARTED':
+                # print(status)
+                time.sleep(client.delay)
+                characterre_list = client.ListWorksCharacter()
+                print(f"当前空闲助手{characterre_list.total}个")
+                time.sleep(client.delay)
+                work_characters = client.task.OrdinaryWork["work_characters"]
+                for character in characterre_list.content:
+                    # print(character.code)
+                    if character.code in work_characters:
+                        print("{}将被派往执行{}级任务{}，奖励:{}*{}".format(
+                            character.name,
+                            work.level,
+                            work.name,
+                            work.rewards.scalarName,
+                            work.rewards.value
+                        ))
+                        time.sleep(client.delay)
+                        client.PickOrdinaryWork(id=work.recordId, character_code=character.code)
+                        # return
+                        break
+    else:
+        log.info("公会悬赏暂时没有事情做")
 
 
 def main(device_id, authorization):
@@ -211,6 +329,8 @@ def main(device_id, authorization):
         task_energy_exchange(client, client.task.EnergyExchange["character_code"])
     if client.task.EnergyCenter["enable"]:
         task_energy_center(client)
+    if client.task.OrdinaryWork["enable"]:
+        task_ordinary_work(client)
 
 
 if __name__ == '__main__':

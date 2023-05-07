@@ -1,6 +1,8 @@
 config.yaml
+readmetest.md
 
 log
+test
 *.log
 
 
