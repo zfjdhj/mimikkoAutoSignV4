@@ -21,7 +21,8 @@ Task:
   EnergyCenter:
     # 任务：能源中心:硬币换电力
     enable: True
-    OrdinaryWork:
+  OrdinaryWork:
     # 任务：公会悬赏:电力换硬币
     enable: True
+    # 要接取任务的助手
     work_characters: ["character_ruri", "character_nemuri"]
