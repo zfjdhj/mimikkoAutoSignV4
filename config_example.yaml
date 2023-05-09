@@ -34,3 +34,7 @@ Task:
   MailReceive:
     # 任务：邮件领取:一键领取邮件奖励
     enable: True
+  CoinMall:
+    # 任务：硬币商店:换取每周刷新
+    enable: True
+    exchange_list: ['_supplementary_signature_card','_work_refresh_ticket','energy_speedup_ticket']

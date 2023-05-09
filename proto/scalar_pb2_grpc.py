@@ -24,6 +24,16 @@ class ScalarStub(object):
                 request_serializer=proto_dot_scalar__pb2.request.SerializeToString,
                 response_deserializer=proto_dot_scalar__pb2.response2.FromString,
                 )
+        self.ListCoinExchangeRelation = channel.unary_unary(
+                '/com.mimikko.app.api.general.scalar.Scalar/ListCoinExchangeRelation',
+                request_serializer=proto_dot_scalar__pb2.request3.SerializeToString,
+                response_deserializer=proto_dot_scalar__pb2.response3.FromString,
+                )
+        self.Exchange = channel.unary_unary(
+                '/com.mimikko.app.api.general.scalar.Scalar/Exchange',
+                request_serializer=proto_dot_scalar__pb2.request4.SerializeToString,
+                response_deserializer=proto_dot_scalar__pb2.response4.FromString,
+                )
 
 
 class ScalarServicer(object):
@@ -41,6 +51,18 @@ class ScalarServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListCoinExchangeRelation(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Exchange(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ScalarServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -53,6 +75,16 @@ def add_ScalarServicer_to_server(servicer, server):
                     servicer.GetUserScalar,
                     request_deserializer=proto_dot_scalar__pb2.request.FromString,
                     response_serializer=proto_dot_scalar__pb2.response2.SerializeToString,
+            ),
+            'ListCoinExchangeRelation': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListCoinExchangeRelation,
+                    request_deserializer=proto_dot_scalar__pb2.request3.FromString,
+                    response_serializer=proto_dot_scalar__pb2.response3.SerializeToString,
+            ),
+            'Exchange': grpc.unary_unary_rpc_method_handler(
+                    servicer.Exchange,
+                    request_deserializer=proto_dot_scalar__pb2.request4.FromString,
+                    response_serializer=proto_dot_scalar__pb2.response4.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -95,5 +127,39 @@ class Scalar(object):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.scalar.Scalar/GetUserScalar',
             proto_dot_scalar__pb2.request.SerializeToString,
             proto_dot_scalar__pb2.response2.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListCoinExchangeRelation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.scalar.Scalar/ListCoinExchangeRelation',
+            proto_dot_scalar__pb2.request3.SerializeToString,
+            proto_dot_scalar__pb2.response3.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Exchange(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.scalar.Scalar/Exchange',
+            proto_dot_scalar__pb2.request4.SerializeToString,
+            proto_dot_scalar__pb2.response4.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

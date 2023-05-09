@@ -262,6 +262,25 @@ class Client():
             metadata=self.metadata)
         return res
 
+    def ListCoinExchangeRelation(self):
+        sub = scalar_pb2_grpc.ScalarStub(channel=self.ssl_channel)
+        res = sub.ListCoinExchangeRelation(
+            scalar_pb2.request3(page=1, pageSize=60),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
+    def Exchange(self, relation_code, relation_type, times):
+        sub = scalar_pb2_grpc.ScalarStub(channel=self.ssl_channel)
+        res = sub.Exchange(
+            scalar_pb2.request4(
+                relationCode=relation_code,
+                relationType=relation_type,
+                times=times),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
 
 def task_sign(client, character_code):
     # 任务：每日签到
@@ -452,6 +471,29 @@ def task_mail_receive(client):
         log.info("邮件领取暂时没有事情做")
 
 
+def task_coin_mall(client):
+    # 任务：硬币商店
+    log.info("硬币商店任务执行中...")
+    # # 获取商店物品列表
+    time.sleep(client.delay)
+    exchange_list = client.ListCoinExchangeRelation()
+    for exchange in exchange_list.content:
+        if exchange.target.materialCode in client.task.CoinMall['exchange_list']:
+            times = exchange.maxTimes - exchange.userTimes
+            log.debug(f"本周还可换取{times}次{exchange.target.materialName}")
+            if exchange.maxTimes > exchange.userTimes:
+                # # 兑换
+                relation_code = exchange.relationCode
+                relation_type = exchange.relationType
+                time.sleep(client.delay)
+                log.info(f"硬币换取{times}次{exchange.target.materialName}")
+                client.Exchange(
+                    relation_code=relation_code,
+                    relation_type=relation_type,
+                    times=times
+                )
+
+
 def main(device_id, authorization):
     client = Client(device_id, authorization)
     # res = client.ListEnergySourceRecord()
@@ -469,6 +511,8 @@ def main(device_id, authorization):
         task_task(client)
     if client.task.MailReceive["enable"]:
         task_mail_receive(client)
+    if client.task.CoinMall["enable"]:
+        task_coin_mall(client)
 
 
 if __name__ == '__main__':

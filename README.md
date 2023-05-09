@@ -13,7 +13,8 @@
     |OrdinaryWork|工会悬赏任务|`work_characters`见下表|电力换硬币，积累公会等级|  
     |Task|每日任务|`task_characters`见下表|完成任务获得成长值|
     |MailReceive|邮件领取|-|邮件一键领取|
-
+    |MailReceive|硬币商店|`material_code`见下表|硬币换取每周刷新物品|
+    
 
     | 助手名称 | code |
     | :- | :- |
@@ -27,6 +28,14 @@
     | 阿尔法零 | alpha0 |
     | 米露可 | miruku2 |
     | 优莉卡 | ulrica |
+    | 等等 | etc |
+
+    |物品|material_code|
+    | :- | :- |
+    |补签卡|`_supplementary_signature_card`|
+    |工作刷新券|`_work_refresh_ticket`|
+    |电力充能券|`energy_speedup_ticket`|
+    
 3. ```python main.py```
 ## 说明
 这只是一个脚本，不要期望有太多功能。

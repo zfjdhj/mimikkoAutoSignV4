@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12proto/scalar.proto\x12\"com.mimikko.app.api.general.scalar\"\x17\n\x07request\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\"\x90\x01\n\x08response\x12\x14\n\x0cmaterialCode\x18\x01 \x01(\t\x12\x12\n\nscalarCode\x18\x02 \x01(\t\x12\x10\n\x08oldValue\x18\x03 \x01(\x01\x12\x10\n\x08newValue\x18\x04 \x01(\x01\x12\x12\n\nscalarType\x18\x05 \x01(\x05\x12\x10\n\x08maxValue\x18\x06 \x01(\x02\x12\x10\n\x08minValue\x18\x07 \x01(\x02\"\xba\x01\n\tresponse2\x12\x13\n\x0bunknownData\x18\x01 \x01(\x03\x12\x0e\n\x06userId\x18\x02 \x01(\x03\x12\x0f\n\x07string2\x18\x03 \x01(\t\x12\x0f\n\x07string4\x18\x04 \x01(\t\x12\x14\n\x0cmaterialCode\x18\x05 \x01(\t\x12\x0e\n\x06int326\x18\x06 \x01(\x05\x12\x14\n\x0c\x65nergryValue\x18\x07 \x01(\x05\x12\x17\n\x0fmaxEnergryValue\x18\x0e \x01(\x05\x12\x11\n\timagePath\x18\x13 \x01(\t2\xe9\x01\n\x06Scalar\x12p\n\x11GetUserAutoScalar\x12+.com.mimikko.app.api.general.scalar.request\x1a,.com.mimikko.app.api.general.scalar.response\"\x00\x12m\n\rGetUserScalar\x12+.com.mimikko.app.api.general.scalar.request\x1a-.com.mimikko.app.api.general.scalar.response2\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12proto/scalar.proto\x12\"com.mimikko.app.api.general.scalar\"\x17\n\x07request\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\"\x90\x01\n\x08response\x12\x14\n\x0cmaterialCode\x18\x01 \x01(\t\x12\x12\n\nscalarCode\x18\x02 \x01(\t\x12\x10\n\x08oldValue\x18\x03 \x01(\x01\x12\x10\n\x08newValue\x18\x04 \x01(\x01\x12\x12\n\nscalarType\x18\x05 \x01(\x05\x12\x10\n\x08maxValue\x18\x06 \x01(\x02\x12\x10\n\x08minValue\x18\x07 \x01(\x02\"\xba\x01\n\tresponse2\x12\x13\n\x0bunknownData\x18\x01 \x01(\x03\x12\x0e\n\x06userId\x18\x02 \x01(\x03\x12\x0f\n\x07string2\x18\x03 \x01(\t\x12\x0f\n\x07string4\x18\x04 \x01(\t\x12\x14\n\x0cmaterialCode\x18\x05 \x01(\t\x12\x0e\n\x06int326\x18\x06 \x01(\x05\x12\x14\n\x0c\x65nergryValue\x18\x07 \x01(\x05\x12\x17\n\x0fmaxEnergryValue\x18\x0e \x01(\x05\x12\x11\n\timagePath\x18\x13 \x01(\t\"*\n\x08request3\x12\x0c\n\x04page\x18\x02 \x01(\x05\x12\x10\n\x08pageSize\x18\x03 \x01(\x05\"\x86\x01\n\tresponse3\x12\x0c\n\x04page\x18\x01 \x01(\x05\x12\x10\n\x08pageSize\x18\x02 \x01(\x05\x12\r\n\x05total\x18\x03 \x01(\x05\x12J\n\x07\x63ontent\x18\x04 \x03(\x0b\x32\x39.com.mimikko.app.api.general.scalar.ExchangeRelationReply\"\x8f\x03\n\x15\x45xchangeRelationReply\x12\x12\n\nrelationId\x18\x01 \x01(\x03\x12\x14\n\x0crelationCode\x18\x02 \x01(\t\x12\x14\n\x0crelationType\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x19\n\x11sourceAggregateId\x18\x05 \x01(\x03\x12\x19\n\x11targetAggregateId\x18\x06 \x01(\x03\x12\x18\n\x10\x63\x61nExchangeTimes\x18\x07 \x01(\x05\x12\x10\n\x08maxTimes\x18\x08 \x01(\x03\x12\x11\n\tuserTimes\x18\t \x01(\x05\x12U\n\x06source\x18\n \x01(\x0b\x32\x45.com.mimikko.app.api.general.scalar.GetExchangeRelationReplyAggregate\x12U\n\x06target\x18\x0b \x01(\x0b\x32\x45.com.mimikko.app.api.general.scalar.GetExchangeRelationReplyAggregate\"\xb0\x03\n!GetExchangeRelationReplyAggregate\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x13\n\x0b\x61ggregateId\x18\x02 \x01(\x03\x12\x12\n\nscalarCode\x18\x03 \x01(\t\x12\x12\n\nscalarName\x18\x04 \x01(\t\x12\x13\n\x0bscalarCover\x18\x05 \x01(\t\x12\x14\n\x0cmaterialCode\x18\x06 \x01(\t\x12\x14\n\x0cmaterialName\x18\x07 \x01(\t\x12\x15\n\rmaterialCover\x18\x08 \x01(\t\x12\x10\n\x08isSource\x18\t \x01(\x08\x12\x12\n\nscalarType\x18\n \x01(\x05\x12\x14\n\x0cmaterialType\x18\x0b \x01(\t\x12\x10\n\x08intValue\x18\x0c \x01(\x05\x12\x12\n\nfloatValue\x18\r \x01(\x01\x12\x14\n\x0c\x62ooleanValue\x18\x0e \x01(\x08\x12\x13\n\x0bintMaxValue\x18\x0f \x01(\x05\x12\x15\n\rfloatMaxValue\x18\x10 \x01(\x01\x12\x14\n\x0cintUserValue\x18\x11 \x01(\x05\x12\x16\n\x0e\x66loatUserValue\x18\x12 \x01(\x01\x12\x18\n\x10\x62ooleanUserValue\x18\x13 \x01(\x08\"}\n\x08request4\x12\x14\n\x0crelationCode\x18\x01 \x01(\t\x12\x14\n\x0crelationType\x18\x02 \x01(\t\x12\x1a\n\x12sourceMaterialCode\x18\x03 \x01(\t\x12\x1a\n\x12targetMaterialCode\x18\x04 \x01(\t\x12\r\n\x05times\x18\x05 \x01(\x05\"\x0b\n\tresponse42\xcf\x03\n\x06Scalar\x12p\n\x11GetUserAutoScalar\x12+.com.mimikko.app.api.general.scalar.request\x1a,.com.mimikko.app.api.general.scalar.response\"\x00\x12m\n\rGetUserScalar\x12+.com.mimikko.app.api.general.scalar.request\x1a-.com.mimikko.app.api.general.scalar.response2\"\x00\x12y\n\x18ListCoinExchangeRelation\x12,.com.mimikko.app.api.general.scalar.request3\x1a-.com.mimikko.app.api.general.scalar.response3\"\x00\x12i\n\x08\x45xchange\x12,.com.mimikko.app.api.general.scalar.request4\x1a-.com.mimikko.app.api.general.scalar.response4\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'proto.scalar_pb2', globals())
@@ -26,6 +26,18 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _RESPONSE._serialized_end=228
   _RESPONSE2._serialized_start=231
   _RESPONSE2._serialized_end=417
-  _SCALAR._serialized_start=420
-  _SCALAR._serialized_end=653
+  _REQUEST3._serialized_start=419
+  _REQUEST3._serialized_end=461
+  _RESPONSE3._serialized_start=464
+  _RESPONSE3._serialized_end=598
+  _EXCHANGERELATIONREPLY._serialized_start=601
+  _EXCHANGERELATIONREPLY._serialized_end=1000
+  _GETEXCHANGERELATIONREPLYAGGREGATE._serialized_start=1003
+  _GETEXCHANGERELATIONREPLYAGGREGATE._serialized_end=1435
+  _REQUEST4._serialized_start=1437
+  _REQUEST4._serialized_end=1562
+  _RESPONSE4._serialized_start=1564
+  _RESPONSE4._serialized_end=1575
+  _SCALAR._serialized_start=1578
+  _SCALAR._serialized_end=2041
 # @@protoc_insertion_point(module_scope)
