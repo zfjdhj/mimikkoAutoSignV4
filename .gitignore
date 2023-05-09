@@ -3,6 +3,7 @@ readmetest.md
 
 log
 test
+test.py
 *.log
 
 

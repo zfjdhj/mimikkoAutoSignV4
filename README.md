@@ -10,7 +10,8 @@
     |Sign|每日签到|`character_code`见下表|日常签到，希望不要断连签|
     |EnergyExchange|成长值兑换|`character_code`见下表|-|
     |EnergyCenter|能源中心|-|默认硬币换电力|  
-    |OrdinaryWork|工会悬赏任务|`work_characters`见下表|电力换硬币，积累公会等级|
+    |OrdinaryWork|工会悬赏任务|`work_characters`见下表|电力换硬币，积累公会等级|  
+    |Task|每日任务|`task_characters`见下表|完成任务获得成长值|
 
     | 助手名称 | code |
     | :- | :- |

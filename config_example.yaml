@@ -26,3 +26,8 @@ Task:
     enable: True
     # 要接取任务的助手
     work_characters: ["character_ruri", "character_nemuri"]
+  Task:
+    # 任务：助手每日任务:完成可获得好感度
+    enable: True
+    # 要接取助手任务的助手
+    task_characters: ["character_momona", "character_miruku2"]
