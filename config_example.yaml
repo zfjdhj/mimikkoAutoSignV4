@@ -31,3 +31,6 @@ Task:
     enable: True
     # 要接取助手任务的助手
     task_characters: ["character_momona", "character_miruku2"]
+  MailReceive:
+    # 任务：邮件领取:一键领取邮件奖励
+    enable: True

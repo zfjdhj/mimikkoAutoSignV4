@@ -18,6 +18,8 @@ import proto.work_pb2 as work_pb2
 import proto.work_pb2_grpc as work_pb2_grpc
 import proto.task_pb2 as task_pb2
 import proto.task_pb2_grpc as task_pb2_grpc
+import proto.mail_pb2 as mail_pb2
+import proto.mail_pb2_grpc as mail_pb2_grpc
 import proto.param_pb2 as param_pb2
 
 
@@ -244,6 +246,22 @@ class Client():
             metadata=self.metadata)
         return res
 
+    def ListMail(self):
+        sub = mail_pb2_grpc.MailStub(channel=self.ssl_channel)
+        res = sub.ListMail(
+            mail_pb2.request(page=1, pageSize=60),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
+    def ReceiveAllMailAttachment(self):
+        sub = mail_pb2_grpc.MailStub(channel=self.ssl_channel)
+        res = sub.ReceiveAllMailAttachment(
+            mail_pb2.request3(),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
 
 def task_sign(client, character_code):
     # 任务：每日签到
@@ -416,6 +434,24 @@ def task_task(client):
         log.info("助手任务暂时没有事情做")
 
 
+def task_mail_receive(client):
+    # 任务：邮件一键领取
+    log.info("邮件一键领取任务执行中...")
+    # # 获取邮件列表
+    time.sleep(client.delay)
+    mail_list = client.ListMail()
+    # print(mail_list)
+    for mail in mail_list.content:
+        if not mail.received:
+            time.sleep(client.delay)
+            res = client.ReceiveAllMailAttachment()
+            for reward in res.contents:
+                log.info(f"邮件奖励获得：{reward.name}*{reward.num}")
+            break
+    else:
+        log.info("邮件领取暂时没有事情做")
+
+
 def main(device_id, authorization):
     client = Client(device_id, authorization)
     # res = client.ListEnergySourceRecord()
@@ -431,6 +467,8 @@ def main(device_id, authorization):
         task_ordinary_work(client)
     if client.task.Task["enable"]:
         task_task(client)
+    if client.task.MailReceive["enable"]:
+        task_mail_receive(client)
 
 
 if __name__ == '__main__':
