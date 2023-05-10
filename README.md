@@ -13,7 +13,7 @@
     |OrdinaryWork|工会悬赏任务|`work_characters`见下表|电力换硬币，积累公会等级|  
     |Task|每日任务|`task_characters`见下表|完成任务获得成长值|
     |MailReceive|邮件领取|-|邮件一键领取|
-    |MailReceive|硬币商店|`material_code`见下表|硬币换取每周刷新物品|
+    |CoinMall|硬币商店|`material_code`见下表|硬币换取每周刷新物品|
     
 
     | 助手名称 | code |

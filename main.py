@@ -3,8 +3,10 @@ import sys
 import time
 import yaml
 import grpc
-
+from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.events import EVENT_JOB_EXECUTED
 from types import SimpleNamespace
+
 from util.logger import Logger
 import proto.sign_pb2 as sign_pb2
 import proto.sign_pb2_grpc as sign_pb2_grpc
@@ -285,7 +287,7 @@ class Client():
 def task_sign(client, character_code):
     # 任务：每日签到
     res = ""
-    log.info("签到任务执行中...")
+    log.info("「签到」任务执行中...")
     time.sleep(client.delay)
     # 1.获取签到信息
     sign_info = client.GetUserSignStatus()
@@ -302,7 +304,7 @@ def task_sign(client, character_code):
 
 def task_energy_exchange(client, character_code):
     # 任务：成长值兑换
-    log.info("成长值兑换任务执行中...")
+    log.info("「成长值兑换」任务执行中...")
     time.sleep(client.delay)
     # # 获取能量值(用于兑换成长值)信息
     res = client.GetUserAutoScalar()
@@ -318,7 +320,7 @@ def task_energy_exchange(client, character_code):
 
 def task_energy_center(client):
     # 任务：能源中心
-    log.info("能源中心任务执行中...")
+    log.info("「能源中心」任务执行中...")
     time.sleep(client.delay)
     # # 获取能源中心仓位信息
     for i in range(2):
@@ -351,7 +353,7 @@ def task_energy_center(client):
 
 def task_ordinary_work(client):
     # 任务：公会悬赏任务
-    log.info("公会悬赏任务执行中...")
+    log.info("「公会悬赏」任务执行中...")
     time.sleep(client.delay)
     for i in range(2):
         log.info("公会悬赏任务check...")
@@ -401,7 +403,7 @@ def task_ordinary_work(client):
 
 def task_task(client):
     # 任务：助手每日任务
-    log.info("助手每日任务执行中...")
+    log.info("「助手每日任务」执行中...")
     time.sleep(client.delay)
     task_level = ["S", "A", "B", "C", "D"]
     for i in range(2):
@@ -455,7 +457,7 @@ def task_task(client):
 
 def task_mail_receive(client):
     # 任务：邮件一键领取
-    log.info("邮件一键领取任务执行中...")
+    log.info("「邮件一键领取」任务执行中...")
     # # 获取邮件列表
     time.sleep(client.delay)
     mail_list = client.ListMail()
@@ -473,7 +475,7 @@ def task_mail_receive(client):
 
 def task_coin_mall(client):
     # 任务：硬币商店
-    log.info("硬币商店任务执行中...")
+    log.info("「硬币商店」任务执行中...")
     # # 获取商店物品列表
     time.sleep(client.delay)
     exchange_list = client.ListCoinExchangeRelation()
@@ -494,11 +496,9 @@ def task_coin_mall(client):
                 )
 
 
-def main(device_id, authorization):
+def task_start(device_id, authorization):
+    log.info("脚本执行中....")
     client = Client(device_id, authorization)
-    # res = client.ListEnergySourceRecord()
-    # print(res)
-    # return
     if client.task.Sign["enable"]:
         task_sign(client, client.task.EnergyExchange["character_code"])
     if client.task.EnergyExchange["enable"]:
@@ -513,6 +513,29 @@ def main(device_id, authorization):
         task_mail_receive(client)
     if client.task.CoinMall["enable"]:
         task_coin_mall(client)
+    log.info("脚本执行结束....")
+
+
+def job_execute(event):
+    """
+    监听事件处理
+    :param event:
+    :return:
+    """
+    log.info("脚本循环执行一次结束...")
+
+
+def main(device_id, authorization):
+    client = Client(device_id, authorization)
+    task_start(device_id, authorization)
+    if client.basic.scheduler_mode:
+        log.info("脚本定时循环启动...")
+        scheduler = BlockingScheduler()
+        interval_hours = client.basic.scheduler_interval
+        scheduler.add_job(task_start, 'interval', hours=interval_hours, args=[device_id, authorization])
+        # scheduler.add_job(task_start, 'interval', seconds=30, args=[device_id, authorization], id="task_start",)
+        scheduler.add_listener(job_execute, EVENT_JOB_EXECUTED)
+        scheduler.start()
 
 
 if __name__ == '__main__':

@@ -7,6 +7,11 @@ Basic:
   # api延迟 默认0.5秒 防止被封，虽然兽耳官方并不管
   delay: 0.5
   debug: False
+  # 脚本循环模式
+  scheduler_mode: True
+  # 循环间隔1小时
+  scheduler_interval: 1
+
 # 脚本功能相关设置
 Task:
   Sign:
