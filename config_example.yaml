@@ -3,7 +3,9 @@ Basic:
   device_id: ""
   # 抓包获得 "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxx"
   authorization: ""
-
+  # app版本 4.0.3
+  mimikko_version: "40003"
+  
   # api延迟 默认0.5秒 防止被封，虽然兽耳官方并不管
   delay: 0.5
   debug: False

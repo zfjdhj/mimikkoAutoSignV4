@@ -53,10 +53,10 @@ class Client():
         self.host = 'api4.mimikko.cn'
         self.port = '443'
         self.agent = "okhttp/5.0.0-alpha.11"
-        self.mimikko_version = "40002"
         self.sdkversion = "4"
         self.agent = "okhttp/5.0.0-alpha.11"
         self.load_config(device_id, authorization)
+        self.mimikko_version = self.basic.mimikko_version
         self.metadata = ((('authorization', self.authorization),
                           ('device-id', self.device_id),
                           ('x-mimikko-version-number', self.mimikko_version),
