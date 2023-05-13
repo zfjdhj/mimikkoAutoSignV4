@@ -97,6 +97,7 @@ class Client():
 
     def GetUserSignStatus(self):
         # 查询签到信息
+        time.sleep(self.delay)
         sub = sign_pb2_grpc.SignStub(channel=self.ssl_channel)
         res = sub.GetUserSignStatus(
             sign_pb2.EMPTY_request(),
@@ -106,6 +107,7 @@ class Client():
 
     def Sign(self, character_code):
         # 签到
+        time.sleep(self.delay)
         sub = sign_pb2_grpc.SignStub(channel=self.ssl_channel)
         res = sub.Sign(
             sign_pb2.request(characterCode=character_code),
@@ -115,7 +117,7 @@ class Client():
 
     def GetUserAutoScalar(self):
         # 获取能量值信息
-        # 暂时可用，进度90%
+        time.sleep(self.delay)
         sub = scalar_pb2_grpc.ScalarStub(channel=self.ssl_channel)
         res = sub.GetUserAutoScalar(
             scalar_pb2.request(code="user_energy"),
@@ -125,6 +127,7 @@ class Client():
 
     def EnergyExchange(self, character_code):
         # 兑换成长值
+        time.sleep(self.delay)
         sub = character_pb2_grpc.CharacterStub(channel=self.ssl_channel)
         res = sub.EnergyExchange(
             character_pb2.request(character_code=character_code),
@@ -133,6 +136,7 @@ class Client():
         return res
 
     def ListEnergySourceRecord(self,):
+        time.sleep(self.delay)
         sub = energy_pb2_grpc.EnergyStub(channel=self.ssl_channel)
         res = sub.ListEnergySourceRecord(
             energy_pb2.request2(page=1, pageSize=60),
@@ -141,6 +145,7 @@ class Client():
         return res
 
     def ReceiveEnergySourceReward(self, id: int):
+        time.sleep(self.delay)
         sub = energy_pb2_grpc.EnergyStub(channel=self.ssl_channel)
         res = sub.ReceiveEnergySourceReward(
             energy_pb2.request4(id=id),
@@ -149,6 +154,7 @@ class Client():
         return res
 
     def ListEnergySourceModel(self):
+        time.sleep(self.delay)
         sub = energy_pb2_grpc.EnergyStub(channel=self.ssl_channel)
         res = sub.ListEnergySourceModel(
             energy_pb2.request(page=1, pageSize=60),
@@ -157,6 +163,7 @@ class Client():
         return res
 
     def CreateEnergySourceRecord(self, model_id: int, position):
+        time.sleep(self.delay)
         sub = energy_pb2_grpc.EnergyStub(channel=self.ssl_channel)
         res = sub.CreateEnergySourceRecord(
             energy_pb2.request3(modelId=model_id, position=position),
@@ -165,6 +172,7 @@ class Client():
         return res
 
     def ListOrdinaryWork(self):
+        time.sleep(self.delay)
         sub = work_pb2_grpc.WorkStub(channel=self.ssl_channel)
         res = sub.ListOrdinaryWork(
             work_pb2.request(page=1, pageSize=60),
@@ -173,6 +181,7 @@ class Client():
         return res
 
     def GetOrdinaryWorkRecord(self, id):
+        time.sleep(self.delay)
         sub = work_pb2_grpc.WorkStub(channel=self.ssl_channel)
         res = sub.GetOrdinaryWorkRecord(
             work_pb2.request2(id=id),
@@ -181,6 +190,7 @@ class Client():
         return res
 
     def ReceiveOrdinaryWorkReward(self, id):
+        time.sleep(self.delay)
         sub = work_pb2_grpc.WorkStub(channel=self.ssl_channel)
         res = sub.ReceiveOrdinaryWorkReward(
             work_pb2.request3(id=id),
@@ -189,6 +199,7 @@ class Client():
         return res
 
     def ListWorksCharacter(self):
+        time.sleep(self.delay)
         sub = work_pb2_grpc.WorkStub(channel=self.ssl_channel)
         res = sub.ListWorksCharacter(
             work_pb2.request4(page=1, pageSize=60),
@@ -197,6 +208,7 @@ class Client():
         return res
 
     def PickOrdinaryWork(self, id, character_code):
+        time.sleep(self.delay)
         sub = work_pb2_grpc.WorkStub(channel=self.ssl_channel)
         body = work_pb2.PickOrdinaryWorkRequestBody(characterCode=character_code)
         res = sub.PickOrdinaryWork(
@@ -206,6 +218,7 @@ class Client():
         return res
 
     def ListTask(self, type):
+        time.sleep(self.delay)
         sub = task_pb2_grpc.TaskStub(channel=self.ssl_channel)
         res = sub.ListTask(
             task_pb2.request(type=type, page=1, pageSize=60),
@@ -214,6 +227,7 @@ class Client():
         return res
 
     def GetTaskRecord(self, record_id):
+        time.sleep(self.delay)
         sub = task_pb2_grpc.TaskStub(channel=self.ssl_channel)
         res = sub.GetTaskRecord(
             task_pb2.request2(id=record_id),
@@ -223,6 +237,7 @@ class Client():
         return res
 
     def ListTaskCharacter(self, id):
+        time.sleep(self.delay)
         sub = task_pb2_grpc.TaskStub(channel=self.ssl_channel)
         res = sub.ListTaskCharacter(
             task_pb2.request3(id=id, page=1, pageSize=60),
@@ -231,6 +246,7 @@ class Client():
         return res
 
     def ReceiveTaskReward(self, id):
+        time.sleep(self.delay)
         sub = task_pb2_grpc.TaskStub(channel=self.ssl_channel)
         res = sub.ReceiveTaskReward(
             task_pb2.request4(id=id),
@@ -239,6 +255,7 @@ class Client():
         return res
 
     def PickTask(self, id, character_code):
+        time.sleep(self.delay)
         sub = task_pb2_grpc.TaskStub(channel=self.ssl_channel)
         body = task_pb2.PickTaskRequestBody(characterCode=character_code)
         res = sub.PickTask(
@@ -248,6 +265,7 @@ class Client():
         return res
 
     def ListMail(self):
+        time.sleep(self.delay)
         sub = mail_pb2_grpc.MailStub(channel=self.ssl_channel)
         res = sub.ListMail(
             mail_pb2.request(page=1, pageSize=60),
@@ -256,6 +274,7 @@ class Client():
         return res
 
     def ReceiveAllMailAttachment(self):
+        time.sleep(self.delay)
         sub = mail_pb2_grpc.MailStub(channel=self.ssl_channel)
         res = sub.ReceiveAllMailAttachment(
             mail_pb2.request3(),
@@ -264,6 +283,7 @@ class Client():
         return res
 
     def ListCoinExchangeRelation(self):
+        time.sleep(self.delay)
         sub = scalar_pb2_grpc.ScalarStub(channel=self.ssl_channel)
         res = sub.ListCoinExchangeRelation(
             scalar_pb2.request3(page=1, pageSize=60),
@@ -272,6 +292,7 @@ class Client():
         return res
 
     def Exchange(self, relation_code, relation_type, times):
+        time.sleep(self.delay)
         sub = scalar_pb2_grpc.ScalarStub(channel=self.ssl_channel)
         res = sub.Exchange(
             scalar_pb2.request4(
@@ -283,6 +304,7 @@ class Client():
         return res
 
     def ListCharacter(self,):
+        time.sleep(self.delay)
         sub = character_pb2_grpc.CharacterStub(channel=self.ssl_channel)
         res = sub.ListCharacter(
             character_pb2.request2(
@@ -292,10 +314,30 @@ class Client():
         return res
 
     def CharacterLevelManualUpgrade(self, character_code):
+        time.sleep(self.delay)
         sub = character_pb2_grpc.CharacterStub(channel=self.ssl_channel)
         res = sub.CharacterLevelManualUpgrade(
             character_pb2.request3(
                 code=character_code),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
+    def ListCharacterLevelReward(self, character_code):
+        time.sleep(self.delay)
+        sub = character_pb2_grpc.CharacterStub(channel=self.ssl_channel)
+        res = sub.ListCharacterLevelReward(
+            character_pb2.request4(
+                code=character_code, page=1, pageSize=60),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
+    def ReceiveCharacterLevelReward(self, level_id, reward_collection_id):
+        time.sleep(self.delay)
+        sub = character_pb2_grpc.CharacterStub(channel=self.ssl_channel)
+        res = sub.ReceiveCharacterLevelReward(
+            character_pb2.request5(levelId=level_id, rewardCollectionId=reward_collection_id),
             compression=grpc.Compression.Gzip,
             metadata=self.metadata)
         return res
@@ -305,7 +347,6 @@ def task_sign(client, character_code):
     # 任务：每日签到
     res = ""
     log.info("「签到」任务执行中...")
-    time.sleep(client.delay)
     # 1.获取签到信息
     sign_info = client.GetUserSignStatus()
     log.debug(sign_info)
@@ -313,7 +354,6 @@ def task_sign(client, character_code):
     log.info(res)
     if not sign_info.todaySign:
         # 2.签到
-        time.sleep(client.basic.delay)
         log.info("今日还未签到，签到中...")
         client.Sign(character_code=character_code)
     return res
@@ -322,7 +362,6 @@ def task_sign(client, character_code):
 def task_energy_exchange(client, character_code):
     # 任务：成长值兑换
     log.info("「成长值兑换」任务执行中...")
-    time.sleep(client.delay)
     # # 获取能量值(用于兑换成长值)信息
     res = client.GetUserAutoScalar()
     # print(res)
@@ -342,6 +381,19 @@ def task_energy_exchange(client, character_code):
                             if statistic.value > statistic.maxValue:
                                 log.info(f"{char.name}满足升级条件，升级中....")
                                 client.CharacterLevelManualUpgrade(character_code=char.code)
+                                break
+                # # 领取助手升级奖励
+                if client.task.EnergyExchange["receive_level_reward"]:
+                    reward_info = client.ListCharacterLevelReward(character_code=char.code)
+                    for reward in reward_info.content:
+                        status = character_pb2.CharacterLevelRewardReplyStatus.Name(reward.status)
+                        if status == "AVAILABLE":
+                            reward_detail = ""
+                            for r in reward.rewards:
+                                reward_detail += f"{r.name}*{r.num} "
+                            log.info(f"{char.name}领取{reward.level}奖励：{reward_detail}")
+                            client.ReceiveCharacterLevelReward(
+                                level_id=reward.levelId, reward_collection_id=reward.rewardCollectionId)
 
         else:
             print(f"{character_code}成长值兑换失败")
@@ -350,14 +402,11 @@ def task_energy_exchange(client, character_code):
 def task_energy_center(client):
     # 任务：能源中心
     log.info("「能源中心」任务执行中...")
-    time.sleep(client.delay)
     # # 获取能源中心仓位信息
     for i in range(2):
         log.info("能源中心check...")
-        time.sleep(client.delay)
         res = client.ListEnergySourceRecord()
         for i in res.content:
-            time.sleep(client.delay)
             status = energy_pb2.Status.Name(i.status)
             if status == 'FINISHED':
                 # # # 领取
@@ -383,21 +432,16 @@ def task_energy_center(client):
 def task_ordinary_work(client):
     # 任务：公会悬赏任务
     log.info("「公会悬赏」任务执行中...")
-    time.sleep(client.delay)
     for i in range(2):
         log.info("公会悬赏任务check...")
-        time.sleep(client.delay)
         work_list = client.ListOrdinaryWork()
         log.debug(f"今日悬赏任务{work_list.total}个")
         for work in work_list.content:
             status = work_pb2.PlayStatus.Name(work.playStatus)
-            # print(i.level, statusexpected a)
             if status == 'CAN_RECEIVE':
                 # # 收取奖励
                 # 获取任务详细信息
                 work_info = client.GetOrdinaryWorkRecord(work.recordId)
-                time.sleep(client.delay)
-                # print(res2)
                 reward_info = client.ReceiveOrdinaryWorkReward(id=work.recordId)
                 log.info("收取{}级任务{}，奖励:{}*{}".format(
                     work_info.level,
@@ -406,14 +450,11 @@ def task_ordinary_work(client):
                     reward_info.rewards.value)
                 )
             elif status == 'NOT_STARTED':
-                # print(status)
-                time.sleep(client.delay)
                 character_list = client.ListWorksCharacter()
                 log.debug(f"当前空闲助手{character_list.total}个")
-                time.sleep(client.delay)
+
                 work_characters = client.task.OrdinaryWork["work_characters"]
                 for character in character_list.content:
-                    # print(character.code)
                     if character.code in work_characters:
                         log.info("{}将被派往执行{}级任务{}，奖励:{}*{}".format(
                             character.name,
@@ -422,7 +463,6 @@ def task_ordinary_work(client):
                             work.rewards.scalarName,
                             work.rewards.value
                         ))
-                        time.sleep(client.delay)
                         client.PickOrdinaryWork(id=work.recordId, character_code=character.code)
                         # return
                         break
@@ -433,13 +473,10 @@ def task_ordinary_work(client):
 def task_task(client):
     # 任务：助手每日任务
     log.info("「助手每日任务」执行中...")
-    time.sleep(client.delay)
     task_level = ["S", "A", "B", "C", "D"]
     for i in range(2):
         log.info("助手任务check...")
-        time.sleep(client.delay)
         task_list_character = client.ListTask(type="character")
-        time.sleep(client.delay)
         task_list_daily = client.ListTask(type="daily")
         task_list = [x for x in task_list_character.content] + [x for x in task_list_daily.content]
         for allow in task_level:
@@ -449,9 +486,7 @@ def task_task(client):
                     if status == 'CAN_RECEIVE':
                         # # 收取奖励
                         # 获取任务详细信息
-                        time.sleep(client.delay)
                         task_info = client.GetTaskRecord(record_id=task.recordId)
-                        time.sleep(client.delay)
                         reward_info = client.ReceiveTaskReward(id=task.recordId)
                         log.info("收取{}级任务{}，奖励:{}*{}".format(
                             task_info.level,
@@ -461,9 +496,7 @@ def task_task(client):
                         )
                     elif status == "NOT_STARTED":
                         # print(task.recordId)
-                        time.sleep(client.delay)
                         task_info = client.GetTaskRecord(record_id=task.recordId)
-                        time.sleep(client.delay)
                         character_list = client.ListTaskCharacter(id=task_info.id)
                         log.debug(f"{task.level}级任务，当前可参与空闲助手{character_list.total}个")
                         task_characters = client.task.Task["task_characters"]
@@ -476,7 +509,6 @@ def task_task(client):
                                     task_info.characterRewards.rewards.scalarName,
                                     task_info.characterRewards.rewards.value
                                 ))
-                                time.sleep(client.delay)
                                 pick_info = client.PickTask(id=task_info.recordId, character_code=character.code)
                                 log.info(f"参与成功,{pick_info.value}")
                                 break
@@ -488,12 +520,10 @@ def task_mail_receive(client):
     # 任务：邮件一键领取
     log.info("「邮件一键领取」任务执行中...")
     # # 获取邮件列表
-    time.sleep(client.delay)
     mail_list = client.ListMail()
     # print(mail_list)
     for mail in mail_list.content:
         if not mail.received:
-            time.sleep(client.delay)
             res = client.ReceiveAllMailAttachment()
             for reward in res.contents:
                 log.info(f"邮件奖励获得：{reward.name}*{reward.num}")
@@ -506,7 +536,6 @@ def task_coin_mall(client):
     # 任务：硬币商店
     log.info("「硬币商店」任务执行中...")
     # # 获取商店物品列表
-    time.sleep(client.delay)
     exchange_list = client.ListCoinExchangeRelation()
     for exchange in exchange_list.content:
         if exchange.target.materialCode in client.task.CoinMall['exchange_list']:
@@ -516,7 +545,6 @@ def task_coin_mall(client):
                 # # 兑换
                 relation_code = exchange.relationCode
                 relation_type = exchange.relationType
-                time.sleep(client.delay)
                 log.info(f"硬币换取{times}次{exchange.target.materialName}")
                 client.Exchange(
                     relation_code=relation_code,
@@ -562,7 +590,6 @@ def main(device_id, authorization):
         scheduler = BlockingScheduler()
         interval_hours = client.basic.scheduler_interval
         scheduler.add_job(task_start, 'interval', hours=interval_hours, args=[device_id, authorization])
-        # scheduler.add_job(task_start, 'interval', seconds=30, args=[device_id, authorization], id="task_start",)
         scheduler.add_listener(job_execute, EVENT_JOB_EXECUTED)
         scheduler.start()
 

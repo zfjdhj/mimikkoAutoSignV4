@@ -25,6 +25,8 @@ Task:
     enable: True
     # 要换给哪个助手 "character_code"
     character_code: "character_miruku2"
+    # 领取助手升级奖励 默认(全部)助手满足成长值自动升级
+    receive_level_reward: True
   EnergyCenter:
     # 任务：能源中心:硬币换电力
     enable: True
