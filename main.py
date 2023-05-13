@@ -54,7 +54,6 @@ class Client():
         self.port = '443'
         self.agent = "okhttp/5.0.0-alpha.11"
         self.sdkversion = "4"
-        self.agent = "okhttp/5.0.0-alpha.11"
         self.load_config(device_id, authorization)
         self.mimikko_version = self.basic.mimikko_version
         self.metadata = ((('authorization', self.authorization),
@@ -283,6 +282,24 @@ class Client():
             metadata=self.metadata)
         return res
 
+    def ListCharacter(self,):
+        sub = character_pb2_grpc.CharacterStub(channel=self.ssl_channel)
+        res = sub.ListCharacter(
+            character_pb2.request2(
+                page=1, pageSize=60),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
+    def CharacterLevelManualUpgrade(self, character_code):
+        sub = character_pb2_grpc.CharacterStub(channel=self.ssl_channel)
+        res = sub.CharacterLevelManualUpgrade(
+            character_pb2.request3(
+                code=character_code),
+            compression=grpc.Compression.Gzip,
+            metadata=self.metadata)
+        return res
+
 
 def task_sign(client, character_code):
     # 任务：每日签到
@@ -310,10 +327,22 @@ def task_energy_exchange(client, character_code):
     res = client.GetUserAutoScalar()
     # print(res)
     if res.newValue > 0:
-        character_code = "character_miruku2"
+        # character_code = "character_miruku2"
+        character_code = client.task.EnergyExchange['character_code']
         res2 = client.EnergyExchange(character_code)
         if res2.character_code == character_code:
-            print(f"{character_code}成长值兑换成功")
+            log.info(f"{character_code}成长值兑换成功")
+            # # 助手升级
+            char_info = client.ListCharacter()
+            for char in char_info.content:
+                if char.existNextLevel:
+                    log.debug(f"存在后续等级{char.existNextLevel}")
+                    for statistic in char.statistics:
+                        if statistic.typeCode == 'character_favour':
+                            if statistic.value > statistic.maxValue:
+                                log.info(f"{char.name}满足升级条件，升级中....")
+                                client.CharacterLevelManualUpgrade(character_code=char.code)
+
         else:
             print(f"{character_code}成长值兑换失败")
 
@@ -386,7 +415,7 @@ def task_ordinary_work(client):
                 for character in character_list.content:
                     # print(character.code)
                     if character.code in work_characters:
-                        print("{}将被派往执行{}级任务{}，奖励:{}*{}".format(
+                        log.info("{}将被派往执行{}级任务{}，奖励:{}*{}".format(
                             character.name,
                             work.level,
                             work.name,

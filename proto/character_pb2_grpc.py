@@ -19,12 +19,34 @@ class CharacterStub(object):
                 request_serializer=proto_dot_character__pb2.request.SerializeToString,
                 response_deserializer=proto_dot_character__pb2.response.FromString,
                 )
+        self.ListCharacter = channel.unary_unary(
+                '/com.mimikko.app.api.general.character.Character/ListCharacter',
+                request_serializer=proto_dot_character__pb2.request2.SerializeToString,
+                response_deserializer=proto_dot_character__pb2.response2.FromString,
+                )
+        self.CharacterLevelManualUpgrade = channel.unary_unary(
+                '/com.mimikko.app.api.general.character.Character/CharacterLevelManualUpgrade',
+                request_serializer=proto_dot_character__pb2.request3.SerializeToString,
+                response_deserializer=proto_dot_character__pb2.response3.FromString,
+                )
 
 
 class CharacterServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def EnergyExchange(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListCharacter(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CharacterLevelManualUpgrade(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +59,16 @@ def add_CharacterServicer_to_server(servicer, server):
                     servicer.EnergyExchange,
                     request_deserializer=proto_dot_character__pb2.request.FromString,
                     response_serializer=proto_dot_character__pb2.response.SerializeToString,
+            ),
+            'ListCharacter': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListCharacter,
+                    request_deserializer=proto_dot_character__pb2.request2.FromString,
+                    response_serializer=proto_dot_character__pb2.response2.SerializeToString,
+            ),
+            'CharacterLevelManualUpgrade': grpc.unary_unary_rpc_method_handler(
+                    servicer.CharacterLevelManualUpgrade,
+                    request_deserializer=proto_dot_character__pb2.request3.FromString,
+                    response_serializer=proto_dot_character__pb2.response3.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +94,39 @@ class Character(object):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.character.Character/EnergyExchange',
             proto_dot_character__pb2.request.SerializeToString,
             proto_dot_character__pb2.response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListCharacter(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.character.Character/ListCharacter',
+            proto_dot_character__pb2.request2.SerializeToString,
+            proto_dot_character__pb2.response2.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CharacterLevelManualUpgrade(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.character.Character/CharacterLevelManualUpgrade',
+            proto_dot_character__pb2.request3.SerializeToString,
+            proto_dot_character__pb2.response3.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

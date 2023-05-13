@@ -11,19 +11,38 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from proto import material_pb2 as proto_dot_material__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15proto/character.proto\x12%com.mimikko.app.api.general.character\"!\n\x07request\x12\x16\n\x0e\x63haracter_code\x18\x01 \x01(\t\"\"\n\x08response\x12\x16\n\x0e\x63haracter_code\x18\x01 \x01(\t2\x80\x01\n\tCharacter\x12s\n\x0e\x45nergyExchange\x12..com.mimikko.app.api.general.character.request\x1a/.com.mimikko.app.api.general.character.response\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15proto/character.proto\x12%com.mimikko.app.api.general.character\x1a\x14proto/material.proto\"!\n\x07request\x12\x16\n\x0e\x63haracter_code\x18\x01 \x01(\t\"\"\n\x08response\x12\x16\n\x0e\x63haracter_code\x18\x01 \x01(\t\"L\n\x08request2\x12\x10\n\x08typeCode\x18\x01 \x01(\t\x12\x0c\n\x04page\x18\x02 \x01(\x05\x12\x10\n\x08pageSize\x18\x03 \x01(\x05\x12\x0e\n\x06orders\x18\x05 \x01(\t\"\x85\x01\n\tresponse2\x12\r\n\x05total\x18\x01 \x01(\x05\x12\x0c\n\x04page\x18\x02 \x01(\x05\x12\x10\n\x08pageSize\x18\x03 \x01(\x05\x12I\n\x07\x63ontent\x18\x04 \x03(\x0b\x32\x38.com.mimikko.app.api.general.character.GetCharacterReply\"\xb8\x03\n\x11GetCharacterReply\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05level\x18\x03 \x01(\t\x12\x12\n\nlevelValue\x18\x04 \x01(\x05\x12\x16\n\x0e\x65xistNextLevel\x18\x05 \x01(\x05\x12\x0e\n\x06\x61vatar\x18\x06 \x01(\t\x12\x17\n\x0fstorietteLatest\x18\x07 \x01(\t\x12\x44\n\nstatistics\x18\x08 \x03(\x0b\x32\x30.com.mimikko.app.api.general.material.Statistics\x12I\n\x08packages\x18\t \x03(\x0b\x32\x37.com.mimikko.app.api.general.character.PackageTypeReply\x12\x45\n\nattributes\x18\n \x03(\x0b\x32\x31.com.mimikko.app.api.general.character.Attributes\x12K\n\x06origin\x18\x0b \x01(\x0b\x32;.com.mimikko.app.api.general.character.OriginCharacterReply\"\xa3\x01\n\x10PackageTypeReply\x12@\n\x04type\x18\x01 \x01(\x0e\x32\x32.com.mimikko.app.api.general.character.PackageType\x12M\n\rmaterialReply\x18\x02 \x01(\x0b\x32\x36.com.mimikko.app.api.general.material.GetMaterialReply\"(\n\nAttributes\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xf6\x01\n\x14OriginCharacterReply\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05level\x18\x03 \x01(\t\x12\x12\n\nlevelValue\x18\x04 \x01(\x05\x12\x0e\n\x06\x61vatar\x18\x05 \x01(\t\x12H\n\x08packages\x18\x06 \x01(\x0b\x32\x36.com.mimikko.app.api.general.material.GetMaterialReply\x12\x45\n\nattributes\x18\x07 \x01(\x0b\x32\x31.com.mimikko.app.api.general.character.Attributes\"\x18\n\x08request3\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\"\x0b\n\tresponse3*)\n\x0bPackageType\x12\t\n\x05MODEL\x10\x00\x12\x06\n\x02\x41I\x10\x01\x12\x07\n\x03\x45XP\x10\x02\x32\xfb\x02\n\tCharacter\x12s\n\x0e\x45nergyExchange\x12..com.mimikko.app.api.general.character.request\x1a/.com.mimikko.app.api.general.character.response\"\x00\x12t\n\rListCharacter\x12/.com.mimikko.app.api.general.character.request2\x1a\x30.com.mimikko.app.api.general.character.response2\"\x00\x12\x82\x01\n\x1b\x43haracterLevelManualUpgrade\x12/.com.mimikko.app.api.general.character.request3\x1a\x30.com.mimikko.app.api.general.character.response3\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'proto.character_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _REQUEST._serialized_start=64
-  _REQUEST._serialized_end=97
-  _RESPONSE._serialized_start=99
-  _RESPONSE._serialized_end=133
-  _CHARACTER._serialized_start=136
-  _CHARACTER._serialized_end=264
+  _PACKAGETYPE._serialized_start=1310
+  _PACKAGETYPE._serialized_end=1351
+  _REQUEST._serialized_start=86
+  _REQUEST._serialized_end=119
+  _RESPONSE._serialized_start=121
+  _RESPONSE._serialized_end=155
+  _REQUEST2._serialized_start=157
+  _REQUEST2._serialized_end=233
+  _RESPONSE2._serialized_start=236
+  _RESPONSE2._serialized_end=369
+  _GETCHARACTERREPLY._serialized_start=372
+  _GETCHARACTERREPLY._serialized_end=812
+  _PACKAGETYPEREPLY._serialized_start=815
+  _PACKAGETYPEREPLY._serialized_end=978
+  _ATTRIBUTES._serialized_start=980
+  _ATTRIBUTES._serialized_end=1020
+  _ORIGINCHARACTERREPLY._serialized_start=1023
+  _ORIGINCHARACTERREPLY._serialized_end=1269
+  _REQUEST3._serialized_start=1271
+  _REQUEST3._serialized_end=1295
+  _RESPONSE3._serialized_start=1297
+  _RESPONSE3._serialized_end=1308
+  _CHARACTER._serialized_start=1354
+  _CHARACTER._serialized_end=1733
 # @@protoc_insertion_point(module_scope)
