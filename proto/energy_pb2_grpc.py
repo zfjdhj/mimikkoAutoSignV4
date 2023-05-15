@@ -16,22 +16,22 @@ class EnergyStub(object):
         """
         self.ListEnergySourceModel = channel.unary_unary(
                 '/com.mimikko.app.api.general.energy.Energy/ListEnergySourceModel',
-                request_serializer=proto_dot_energy__pb2.request.SerializeToString,
+                request_serializer=proto_dot_energy__pb2.ListEnergySourceModelRequest.SerializeToString,
                 response_deserializer=proto_dot_energy__pb2.response.FromString,
                 )
         self.ListEnergySourceRecord = channel.unary_unary(
                 '/com.mimikko.app.api.general.energy.Energy/ListEnergySourceRecord',
-                request_serializer=proto_dot_energy__pb2.request2.SerializeToString,
+                request_serializer=proto_dot_energy__pb2.ListEnergySourceRecordRequest.SerializeToString,
                 response_deserializer=proto_dot_energy__pb2.response2.FromString,
                 )
         self.CreateEnergySourceRecord = channel.unary_unary(
                 '/com.mimikko.app.api.general.energy.Energy/CreateEnergySourceRecord',
-                request_serializer=proto_dot_energy__pb2.request3.SerializeToString,
+                request_serializer=proto_dot_energy__pb2.CreateEnergySourceRecordRequest.SerializeToString,
                 response_deserializer=proto_dot_energy__pb2.response3.FromString,
                 )
         self.ReceiveEnergySourceReward = channel.unary_unary(
                 '/com.mimikko.app.api.general.energy.Energy/ReceiveEnergySourceReward',
-                request_serializer=proto_dot_energy__pb2.request4.SerializeToString,
+                request_serializer=proto_dot_energy__pb2.ReceiveEnergySourceRewardRequest.SerializeToString,
                 response_deserializer=proto_dot_energy__pb2.response4.FromString,
                 )
 
@@ -68,22 +68,22 @@ def add_EnergyServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ListEnergySourceModel': grpc.unary_unary_rpc_method_handler(
                     servicer.ListEnergySourceModel,
-                    request_deserializer=proto_dot_energy__pb2.request.FromString,
+                    request_deserializer=proto_dot_energy__pb2.ListEnergySourceModelRequest.FromString,
                     response_serializer=proto_dot_energy__pb2.response.SerializeToString,
             ),
             'ListEnergySourceRecord': grpc.unary_unary_rpc_method_handler(
                     servicer.ListEnergySourceRecord,
-                    request_deserializer=proto_dot_energy__pb2.request2.FromString,
+                    request_deserializer=proto_dot_energy__pb2.ListEnergySourceRecordRequest.FromString,
                     response_serializer=proto_dot_energy__pb2.response2.SerializeToString,
             ),
             'CreateEnergySourceRecord': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateEnergySourceRecord,
-                    request_deserializer=proto_dot_energy__pb2.request3.FromString,
+                    request_deserializer=proto_dot_energy__pb2.CreateEnergySourceRecordRequest.FromString,
                     response_serializer=proto_dot_energy__pb2.response3.SerializeToString,
             ),
             'ReceiveEnergySourceReward': grpc.unary_unary_rpc_method_handler(
                     servicer.ReceiveEnergySourceReward,
-                    request_deserializer=proto_dot_energy__pb2.request4.FromString,
+                    request_deserializer=proto_dot_energy__pb2.ReceiveEnergySourceRewardRequest.FromString,
                     response_serializer=proto_dot_energy__pb2.response4.SerializeToString,
             ),
     }
@@ -108,7 +108,7 @@ class Energy(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.energy.Energy/ListEnergySourceModel',
-            proto_dot_energy__pb2.request.SerializeToString,
+            proto_dot_energy__pb2.ListEnergySourceModelRequest.SerializeToString,
             proto_dot_energy__pb2.response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -125,7 +125,7 @@ class Energy(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.energy.Energy/ListEnergySourceRecord',
-            proto_dot_energy__pb2.request2.SerializeToString,
+            proto_dot_energy__pb2.ListEnergySourceRecordRequest.SerializeToString,
             proto_dot_energy__pb2.response2.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -142,7 +142,7 @@ class Energy(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.energy.Energy/CreateEnergySourceRecord',
-            proto_dot_energy__pb2.request3.SerializeToString,
+            proto_dot_energy__pb2.CreateEnergySourceRecordRequest.SerializeToString,
             proto_dot_energy__pb2.response3.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -159,7 +159,7 @@ class Energy(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.energy.Energy/ReceiveEnergySourceReward',
-            proto_dot_energy__pb2.request4.SerializeToString,
+            proto_dot_energy__pb2.ReceiveEnergySourceRewardRequest.SerializeToString,
             proto_dot_energy__pb2.response4.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

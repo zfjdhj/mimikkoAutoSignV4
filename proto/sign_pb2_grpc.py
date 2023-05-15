@@ -17,12 +17,12 @@ class SignStub(object):
         """
         self.GetUserSignStatus = channel.unary_unary(
                 '/com.mimikko.app.api.general.sign.Sign/GetUserSignStatus',
-                request_serializer=proto_dot_sign__pb2.EMPTY_request.SerializeToString,
+                request_serializer=proto_dot_sign__pb2.GetUserSignStatusRequest.SerializeToString,
                 response_deserializer=proto_dot_sign__pb2.response.FromString,
                 )
         self.Sign = channel.unary_unary(
                 '/com.mimikko.app.api.general.sign.Sign/Sign',
-                request_serializer=proto_dot_sign__pb2.request.SerializeToString,
+                request_serializer=proto_dot_sign__pb2.SignRequest.SerializeToString,
                 response_deserializer=proto_dot_sign__pb2.response2.FromString,
                 )
 
@@ -50,12 +50,12 @@ def add_SignServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetUserSignStatus': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUserSignStatus,
-                    request_deserializer=proto_dot_sign__pb2.EMPTY_request.FromString,
+                    request_deserializer=proto_dot_sign__pb2.GetUserSignStatusRequest.FromString,
                     response_serializer=proto_dot_sign__pb2.response.SerializeToString,
             ),
             'Sign': grpc.unary_unary_rpc_method_handler(
                     servicer.Sign,
-                    request_deserializer=proto_dot_sign__pb2.request.FromString,
+                    request_deserializer=proto_dot_sign__pb2.SignRequest.FromString,
                     response_serializer=proto_dot_sign__pb2.response2.SerializeToString,
             ),
     }
@@ -81,7 +81,7 @@ class Sign(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.sign.Sign/GetUserSignStatus',
-            proto_dot_sign__pb2.EMPTY_request.SerializeToString,
+            proto_dot_sign__pb2.GetUserSignStatusRequest.SerializeToString,
             proto_dot_sign__pb2.response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -98,7 +98,7 @@ class Sign(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.sign.Sign/Sign',
-            proto_dot_sign__pb2.request.SerializeToString,
+            proto_dot_sign__pb2.SignRequest.SerializeToString,
             proto_dot_sign__pb2.response2.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -8,11 +8,11 @@
     |Task|功能|参数|说明|
     |-|-|-|-|
     |Sign|每日签到|`character_code`见下表|日常签到，希望不要断连签|
-    |EnergyExchange|成长值兑换|`character_code`见下表|-|
+    |EnergyExchange|成长值兑换|`character_code`见下表|包含助手升级以及领取奖励|
     |EnergyCenter|能源中心|-|默认硬币换电力|  
     |OrdinaryWork|工会悬赏任务|`work_characters`见下表|电力换硬币，积累公会等级|  
     |Task|每日任务|`task_characters`见下表|完成任务获得成长值|
-    |MailReceive|邮件领取|-|邮件一键领取|
+    |MailReceive|邮件领取|-|邮件奖励一键领取|
     |CoinMall|硬币商店|`material_code`见下表|硬币换取每周刷新物品|
     
 

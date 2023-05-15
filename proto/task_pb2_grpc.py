@@ -16,27 +16,27 @@ class TaskStub(object):
         """
         self.ListTask = channel.unary_unary(
                 '/com.mimikko.app.api.play.task.Task/ListTask',
-                request_serializer=proto_dot_task__pb2.request.SerializeToString,
+                request_serializer=proto_dot_task__pb2.ListTaskRequest.SerializeToString,
                 response_deserializer=proto_dot_task__pb2.response.FromString,
                 )
         self.GetTaskRecord = channel.unary_unary(
                 '/com.mimikko.app.api.play.task.Task/GetTaskRecord',
-                request_serializer=proto_dot_task__pb2.request2.SerializeToString,
+                request_serializer=proto_dot_task__pb2.GetTaskRecordRequest.SerializeToString,
                 response_deserializer=proto_dot_task__pb2.response2.FromString,
                 )
         self.ListTaskCharacter = channel.unary_unary(
                 '/com.mimikko.app.api.play.task.Task/ListTaskCharacter',
-                request_serializer=proto_dot_task__pb2.request3.SerializeToString,
+                request_serializer=proto_dot_task__pb2.ListTaskCharacterRequest.SerializeToString,
                 response_deserializer=proto_dot_task__pb2.response3.FromString,
                 )
         self.ReceiveTaskReward = channel.unary_unary(
                 '/com.mimikko.app.api.play.task.Task/ReceiveTaskReward',
-                request_serializer=proto_dot_task__pb2.request4.SerializeToString,
+                request_serializer=proto_dot_task__pb2.ReceiveTaskRewardRequest.SerializeToString,
                 response_deserializer=proto_dot_task__pb2.response4.FromString,
                 )
         self.PickTask = channel.unary_unary(
                 '/com.mimikko.app.api.play.task.Task/PickTask',
-                request_serializer=proto_dot_task__pb2.request5.SerializeToString,
+                request_serializer=proto_dot_task__pb2.PickTaskRequest.SerializeToString,
                 response_deserializer=proto_dot_task__pb2.response5.FromString,
                 )
 
@@ -79,27 +79,27 @@ def add_TaskServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ListTask': grpc.unary_unary_rpc_method_handler(
                     servicer.ListTask,
-                    request_deserializer=proto_dot_task__pb2.request.FromString,
+                    request_deserializer=proto_dot_task__pb2.ListTaskRequest.FromString,
                     response_serializer=proto_dot_task__pb2.response.SerializeToString,
             ),
             'GetTaskRecord': grpc.unary_unary_rpc_method_handler(
                     servicer.GetTaskRecord,
-                    request_deserializer=proto_dot_task__pb2.request2.FromString,
+                    request_deserializer=proto_dot_task__pb2.GetTaskRecordRequest.FromString,
                     response_serializer=proto_dot_task__pb2.response2.SerializeToString,
             ),
             'ListTaskCharacter': grpc.unary_unary_rpc_method_handler(
                     servicer.ListTaskCharacter,
-                    request_deserializer=proto_dot_task__pb2.request3.FromString,
+                    request_deserializer=proto_dot_task__pb2.ListTaskCharacterRequest.FromString,
                     response_serializer=proto_dot_task__pb2.response3.SerializeToString,
             ),
             'ReceiveTaskReward': grpc.unary_unary_rpc_method_handler(
                     servicer.ReceiveTaskReward,
-                    request_deserializer=proto_dot_task__pb2.request4.FromString,
+                    request_deserializer=proto_dot_task__pb2.ReceiveTaskRewardRequest.FromString,
                     response_serializer=proto_dot_task__pb2.response4.SerializeToString,
             ),
             'PickTask': grpc.unary_unary_rpc_method_handler(
                     servicer.PickTask,
-                    request_deserializer=proto_dot_task__pb2.request5.FromString,
+                    request_deserializer=proto_dot_task__pb2.PickTaskRequest.FromString,
                     response_serializer=proto_dot_task__pb2.response5.SerializeToString,
             ),
     }
@@ -124,7 +124,7 @@ class Task(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.task.Task/ListTask',
-            proto_dot_task__pb2.request.SerializeToString,
+            proto_dot_task__pb2.ListTaskRequest.SerializeToString,
             proto_dot_task__pb2.response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -141,7 +141,7 @@ class Task(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.task.Task/GetTaskRecord',
-            proto_dot_task__pb2.request2.SerializeToString,
+            proto_dot_task__pb2.GetTaskRecordRequest.SerializeToString,
             proto_dot_task__pb2.response2.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -158,7 +158,7 @@ class Task(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.task.Task/ListTaskCharacter',
-            proto_dot_task__pb2.request3.SerializeToString,
+            proto_dot_task__pb2.ListTaskCharacterRequest.SerializeToString,
             proto_dot_task__pb2.response3.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -175,7 +175,7 @@ class Task(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.task.Task/ReceiveTaskReward',
-            proto_dot_task__pb2.request4.SerializeToString,
+            proto_dot_task__pb2.ReceiveTaskRewardRequest.SerializeToString,
             proto_dot_task__pb2.response4.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -192,7 +192,7 @@ class Task(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.task.Task/PickTask',
-            proto_dot_task__pb2.request5.SerializeToString,
+            proto_dot_task__pb2.PickTaskRequest.SerializeToString,
             proto_dot_task__pb2.response5.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

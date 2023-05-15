@@ -16,17 +16,17 @@ class MailStub(object):
         """
         self.ListMail = channel.unary_unary(
                 '/com.mimikko.app.api.general.mail.Mail/ListMail',
-                request_serializer=proto_dot_mail__pb2.request.SerializeToString,
+                request_serializer=proto_dot_mail__pb2.ListMailRequest.SerializeToString,
                 response_deserializer=proto_dot_mail__pb2.response.FromString,
                 )
         self.GetMail = channel.unary_unary(
                 '/com.mimikko.app.api.general.mail.Mail/GetMail',
-                request_serializer=proto_dot_mail__pb2.request2.SerializeToString,
+                request_serializer=proto_dot_mail__pb2.GetMailRequest.SerializeToString,
                 response_deserializer=proto_dot_mail__pb2.response2.FromString,
                 )
         self.ReceiveAllMailAttachment = channel.unary_unary(
                 '/com.mimikko.app.api.general.mail.Mail/ReceiveAllMailAttachment',
-                request_serializer=proto_dot_mail__pb2.request3.SerializeToString,
+                request_serializer=proto_dot_mail__pb2.ReceiveAllMailAttachmentRequest.SerializeToString,
                 response_deserializer=proto_dot_mail__pb2.response3.FromString,
                 )
 
@@ -57,17 +57,17 @@ def add_MailServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ListMail': grpc.unary_unary_rpc_method_handler(
                     servicer.ListMail,
-                    request_deserializer=proto_dot_mail__pb2.request.FromString,
+                    request_deserializer=proto_dot_mail__pb2.ListMailRequest.FromString,
                     response_serializer=proto_dot_mail__pb2.response.SerializeToString,
             ),
             'GetMail': grpc.unary_unary_rpc_method_handler(
                     servicer.GetMail,
-                    request_deserializer=proto_dot_mail__pb2.request2.FromString,
+                    request_deserializer=proto_dot_mail__pb2.GetMailRequest.FromString,
                     response_serializer=proto_dot_mail__pb2.response2.SerializeToString,
             ),
             'ReceiveAllMailAttachment': grpc.unary_unary_rpc_method_handler(
                     servicer.ReceiveAllMailAttachment,
-                    request_deserializer=proto_dot_mail__pb2.request3.FromString,
+                    request_deserializer=proto_dot_mail__pb2.ReceiveAllMailAttachmentRequest.FromString,
                     response_serializer=proto_dot_mail__pb2.response3.SerializeToString,
             ),
     }
@@ -92,7 +92,7 @@ class Mail(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.mail.Mail/ListMail',
-            proto_dot_mail__pb2.request.SerializeToString,
+            proto_dot_mail__pb2.ListMailRequest.SerializeToString,
             proto_dot_mail__pb2.response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -109,7 +109,7 @@ class Mail(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.mail.Mail/GetMail',
-            proto_dot_mail__pb2.request2.SerializeToString,
+            proto_dot_mail__pb2.GetMailRequest.SerializeToString,
             proto_dot_mail__pb2.response2.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -126,7 +126,7 @@ class Mail(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.mail.Mail/ReceiveAllMailAttachment',
-            proto_dot_mail__pb2.request3.SerializeToString,
+            proto_dot_mail__pb2.ReceiveAllMailAttachmentRequest.SerializeToString,
             proto_dot_mail__pb2.response3.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

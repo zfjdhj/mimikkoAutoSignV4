@@ -16,27 +16,27 @@ class WorkStub(object):
         """
         self.ListOrdinaryWork = channel.unary_unary(
                 '/com.mimikko.app.api.play.work.Work/ListOrdinaryWork',
-                request_serializer=proto_dot_work__pb2.request.SerializeToString,
+                request_serializer=proto_dot_work__pb2.ListOrdinaryWorkRequest.SerializeToString,
                 response_deserializer=proto_dot_work__pb2.response.FromString,
                 )
         self.GetOrdinaryWorkRecord = channel.unary_unary(
                 '/com.mimikko.app.api.play.work.Work/GetOrdinaryWorkRecord',
-                request_serializer=proto_dot_work__pb2.request2.SerializeToString,
+                request_serializer=proto_dot_work__pb2.GetOrdinaryWorkRecordRequest.SerializeToString,
                 response_deserializer=proto_dot_work__pb2.response2.FromString,
                 )
         self.ReceiveOrdinaryWorkReward = channel.unary_unary(
                 '/com.mimikko.app.api.play.work.Work/ReceiveOrdinaryWorkReward',
-                request_serializer=proto_dot_work__pb2.request3.SerializeToString,
+                request_serializer=proto_dot_work__pb2.ReceiveOrdinaryWorkRewardRequest.SerializeToString,
                 response_deserializer=proto_dot_work__pb2.response3.FromString,
                 )
         self.ListWorksCharacter = channel.unary_unary(
                 '/com.mimikko.app.api.play.work.Work/ListWorksCharacter',
-                request_serializer=proto_dot_work__pb2.request4.SerializeToString,
+                request_serializer=proto_dot_work__pb2.ListWorksCharacterRequest.SerializeToString,
                 response_deserializer=proto_dot_work__pb2.response4.FromString,
                 )
         self.PickOrdinaryWork = channel.unary_unary(
                 '/com.mimikko.app.api.play.work.Work/PickOrdinaryWork',
-                request_serializer=proto_dot_work__pb2.request5.SerializeToString,
+                request_serializer=proto_dot_work__pb2.PickOrdinaryWorkRequest.SerializeToString,
                 response_deserializer=proto_dot_work__pb2.response5.FromString,
                 )
 
@@ -79,27 +79,27 @@ def add_WorkServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ListOrdinaryWork': grpc.unary_unary_rpc_method_handler(
                     servicer.ListOrdinaryWork,
-                    request_deserializer=proto_dot_work__pb2.request.FromString,
+                    request_deserializer=proto_dot_work__pb2.ListOrdinaryWorkRequest.FromString,
                     response_serializer=proto_dot_work__pb2.response.SerializeToString,
             ),
             'GetOrdinaryWorkRecord': grpc.unary_unary_rpc_method_handler(
                     servicer.GetOrdinaryWorkRecord,
-                    request_deserializer=proto_dot_work__pb2.request2.FromString,
+                    request_deserializer=proto_dot_work__pb2.GetOrdinaryWorkRecordRequest.FromString,
                     response_serializer=proto_dot_work__pb2.response2.SerializeToString,
             ),
             'ReceiveOrdinaryWorkReward': grpc.unary_unary_rpc_method_handler(
                     servicer.ReceiveOrdinaryWorkReward,
-                    request_deserializer=proto_dot_work__pb2.request3.FromString,
+                    request_deserializer=proto_dot_work__pb2.ReceiveOrdinaryWorkRewardRequest.FromString,
                     response_serializer=proto_dot_work__pb2.response3.SerializeToString,
             ),
             'ListWorksCharacter': grpc.unary_unary_rpc_method_handler(
                     servicer.ListWorksCharacter,
-                    request_deserializer=proto_dot_work__pb2.request4.FromString,
+                    request_deserializer=proto_dot_work__pb2.ListWorksCharacterRequest.FromString,
                     response_serializer=proto_dot_work__pb2.response4.SerializeToString,
             ),
             'PickOrdinaryWork': grpc.unary_unary_rpc_method_handler(
                     servicer.PickOrdinaryWork,
-                    request_deserializer=proto_dot_work__pb2.request5.FromString,
+                    request_deserializer=proto_dot_work__pb2.PickOrdinaryWorkRequest.FromString,
                     response_serializer=proto_dot_work__pb2.response5.SerializeToString,
             ),
     }
@@ -124,7 +124,7 @@ class Work(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.work.Work/ListOrdinaryWork',
-            proto_dot_work__pb2.request.SerializeToString,
+            proto_dot_work__pb2.ListOrdinaryWorkRequest.SerializeToString,
             proto_dot_work__pb2.response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -141,7 +141,7 @@ class Work(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.work.Work/GetOrdinaryWorkRecord',
-            proto_dot_work__pb2.request2.SerializeToString,
+            proto_dot_work__pb2.GetOrdinaryWorkRecordRequest.SerializeToString,
             proto_dot_work__pb2.response2.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -158,7 +158,7 @@ class Work(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.work.Work/ReceiveOrdinaryWorkReward',
-            proto_dot_work__pb2.request3.SerializeToString,
+            proto_dot_work__pb2.ReceiveOrdinaryWorkRewardRequest.SerializeToString,
             proto_dot_work__pb2.response3.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -175,7 +175,7 @@ class Work(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.work.Work/ListWorksCharacter',
-            proto_dot_work__pb2.request4.SerializeToString,
+            proto_dot_work__pb2.ListWorksCharacterRequest.SerializeToString,
             proto_dot_work__pb2.response4.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -192,7 +192,7 @@ class Work(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.work.Work/PickOrdinaryWork',
-            proto_dot_work__pb2.request5.SerializeToString,
+            proto_dot_work__pb2.PickOrdinaryWorkRequest.SerializeToString,
             proto_dot_work__pb2.response5.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

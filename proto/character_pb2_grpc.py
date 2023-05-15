@@ -16,27 +16,27 @@ class CharacterStub(object):
         """
         self.EnergyExchange = channel.unary_unary(
                 '/com.mimikko.app.api.general.character.Character/EnergyExchange',
-                request_serializer=proto_dot_character__pb2.request.SerializeToString,
+                request_serializer=proto_dot_character__pb2.EnergyExchangeRequest.SerializeToString,
                 response_deserializer=proto_dot_character__pb2.response.FromString,
                 )
         self.ListCharacter = channel.unary_unary(
                 '/com.mimikko.app.api.general.character.Character/ListCharacter',
-                request_serializer=proto_dot_character__pb2.request2.SerializeToString,
+                request_serializer=proto_dot_character__pb2.ListCharacterRequest.SerializeToString,
                 response_deserializer=proto_dot_character__pb2.response2.FromString,
                 )
         self.CharacterLevelManualUpgrade = channel.unary_unary(
                 '/com.mimikko.app.api.general.character.Character/CharacterLevelManualUpgrade',
-                request_serializer=proto_dot_character__pb2.request3.SerializeToString,
+                request_serializer=proto_dot_character__pb2.CharacterLevelManualUpgradeRequest.SerializeToString,
                 response_deserializer=proto_dot_character__pb2.EMPTY.FromString,
                 )
         self.ListCharacterLevelReward = channel.unary_unary(
                 '/com.mimikko.app.api.general.character.Character/ListCharacterLevelReward',
-                request_serializer=proto_dot_character__pb2.request4.SerializeToString,
+                request_serializer=proto_dot_character__pb2.ListCharacterLevelRewardRequest.SerializeToString,
                 response_deserializer=proto_dot_character__pb2.response4.FromString,
                 )
         self.ReceiveCharacterLevelReward = channel.unary_unary(
                 '/com.mimikko.app.api.general.character.Character/ReceiveCharacterLevelReward',
-                request_serializer=proto_dot_character__pb2.request5.SerializeToString,
+                request_serializer=proto_dot_character__pb2.ReceiveCharacterLevelRewardRequest.SerializeToString,
                 response_deserializer=proto_dot_character__pb2.EMPTY.FromString,
                 )
 
@@ -79,27 +79,27 @@ def add_CharacterServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'EnergyExchange': grpc.unary_unary_rpc_method_handler(
                     servicer.EnergyExchange,
-                    request_deserializer=proto_dot_character__pb2.request.FromString,
+                    request_deserializer=proto_dot_character__pb2.EnergyExchangeRequest.FromString,
                     response_serializer=proto_dot_character__pb2.response.SerializeToString,
             ),
             'ListCharacter': grpc.unary_unary_rpc_method_handler(
                     servicer.ListCharacter,
-                    request_deserializer=proto_dot_character__pb2.request2.FromString,
+                    request_deserializer=proto_dot_character__pb2.ListCharacterRequest.FromString,
                     response_serializer=proto_dot_character__pb2.response2.SerializeToString,
             ),
             'CharacterLevelManualUpgrade': grpc.unary_unary_rpc_method_handler(
                     servicer.CharacterLevelManualUpgrade,
-                    request_deserializer=proto_dot_character__pb2.request3.FromString,
+                    request_deserializer=proto_dot_character__pb2.CharacterLevelManualUpgradeRequest.FromString,
                     response_serializer=proto_dot_character__pb2.EMPTY.SerializeToString,
             ),
             'ListCharacterLevelReward': grpc.unary_unary_rpc_method_handler(
                     servicer.ListCharacterLevelReward,
-                    request_deserializer=proto_dot_character__pb2.request4.FromString,
+                    request_deserializer=proto_dot_character__pb2.ListCharacterLevelRewardRequest.FromString,
                     response_serializer=proto_dot_character__pb2.response4.SerializeToString,
             ),
             'ReceiveCharacterLevelReward': grpc.unary_unary_rpc_method_handler(
                     servicer.ReceiveCharacterLevelReward,
-                    request_deserializer=proto_dot_character__pb2.request5.FromString,
+                    request_deserializer=proto_dot_character__pb2.ReceiveCharacterLevelRewardRequest.FromString,
                     response_serializer=proto_dot_character__pb2.EMPTY.SerializeToString,
             ),
     }
@@ -124,7 +124,7 @@ class Character(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.character.Character/EnergyExchange',
-            proto_dot_character__pb2.request.SerializeToString,
+            proto_dot_character__pb2.EnergyExchangeRequest.SerializeToString,
             proto_dot_character__pb2.response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -141,7 +141,7 @@ class Character(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.character.Character/ListCharacter',
-            proto_dot_character__pb2.request2.SerializeToString,
+            proto_dot_character__pb2.ListCharacterRequest.SerializeToString,
             proto_dot_character__pb2.response2.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -158,7 +158,7 @@ class Character(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.character.Character/CharacterLevelManualUpgrade',
-            proto_dot_character__pb2.request3.SerializeToString,
+            proto_dot_character__pb2.CharacterLevelManualUpgradeRequest.SerializeToString,
             proto_dot_character__pb2.EMPTY.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -175,7 +175,7 @@ class Character(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.character.Character/ListCharacterLevelReward',
-            proto_dot_character__pb2.request4.SerializeToString,
+            proto_dot_character__pb2.ListCharacterLevelRewardRequest.SerializeToString,
             proto_dot_character__pb2.response4.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -192,7 +192,7 @@ class Character(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.character.Character/ReceiveCharacterLevelReward',
-            proto_dot_character__pb2.request5.SerializeToString,
+            proto_dot_character__pb2.ReceiveCharacterLevelRewardRequest.SerializeToString,
             proto_dot_character__pb2.EMPTY.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

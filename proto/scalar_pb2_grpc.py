@@ -16,22 +16,22 @@ class ScalarStub(object):
         """
         self.GetUserAutoScalar = channel.unary_unary(
                 '/com.mimikko.app.api.general.scalar.Scalar/GetUserAutoScalar',
-                request_serializer=proto_dot_scalar__pb2.request.SerializeToString,
+                request_serializer=proto_dot_scalar__pb2.GetUserAutoScalarRequest.SerializeToString,
                 response_deserializer=proto_dot_scalar__pb2.response.FromString,
                 )
         self.GetUserScalar = channel.unary_unary(
                 '/com.mimikko.app.api.general.scalar.Scalar/GetUserScalar',
-                request_serializer=proto_dot_scalar__pb2.request.SerializeToString,
+                request_serializer=proto_dot_scalar__pb2.GetUserScalarRequest.SerializeToString,
                 response_deserializer=proto_dot_scalar__pb2.response2.FromString,
                 )
         self.ListCoinExchangeRelation = channel.unary_unary(
                 '/com.mimikko.app.api.general.scalar.Scalar/ListCoinExchangeRelation',
-                request_serializer=proto_dot_scalar__pb2.request3.SerializeToString,
+                request_serializer=proto_dot_scalar__pb2.ListCoinExchangeRelationRequest.SerializeToString,
                 response_deserializer=proto_dot_scalar__pb2.response3.FromString,
                 )
         self.Exchange = channel.unary_unary(
                 '/com.mimikko.app.api.general.scalar.Scalar/Exchange',
-                request_serializer=proto_dot_scalar__pb2.request4.SerializeToString,
+                request_serializer=proto_dot_scalar__pb2.ExchangeRequest.SerializeToString,
                 response_deserializer=proto_dot_scalar__pb2.response4.FromString,
                 )
 
@@ -68,22 +68,22 @@ def add_ScalarServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetUserAutoScalar': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUserAutoScalar,
-                    request_deserializer=proto_dot_scalar__pb2.request.FromString,
+                    request_deserializer=proto_dot_scalar__pb2.GetUserAutoScalarRequest.FromString,
                     response_serializer=proto_dot_scalar__pb2.response.SerializeToString,
             ),
             'GetUserScalar': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUserScalar,
-                    request_deserializer=proto_dot_scalar__pb2.request.FromString,
+                    request_deserializer=proto_dot_scalar__pb2.GetUserScalarRequest.FromString,
                     response_serializer=proto_dot_scalar__pb2.response2.SerializeToString,
             ),
             'ListCoinExchangeRelation': grpc.unary_unary_rpc_method_handler(
                     servicer.ListCoinExchangeRelation,
-                    request_deserializer=proto_dot_scalar__pb2.request3.FromString,
+                    request_deserializer=proto_dot_scalar__pb2.ListCoinExchangeRelationRequest.FromString,
                     response_serializer=proto_dot_scalar__pb2.response3.SerializeToString,
             ),
             'Exchange': grpc.unary_unary_rpc_method_handler(
                     servicer.Exchange,
-                    request_deserializer=proto_dot_scalar__pb2.request4.FromString,
+                    request_deserializer=proto_dot_scalar__pb2.ExchangeRequest.FromString,
                     response_serializer=proto_dot_scalar__pb2.response4.SerializeToString,
             ),
     }
@@ -108,7 +108,7 @@ class Scalar(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.scalar.Scalar/GetUserAutoScalar',
-            proto_dot_scalar__pb2.request.SerializeToString,
+            proto_dot_scalar__pb2.GetUserAutoScalarRequest.SerializeToString,
             proto_dot_scalar__pb2.response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -125,7 +125,7 @@ class Scalar(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.scalar.Scalar/GetUserScalar',
-            proto_dot_scalar__pb2.request.SerializeToString,
+            proto_dot_scalar__pb2.GetUserScalarRequest.SerializeToString,
             proto_dot_scalar__pb2.response2.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -142,7 +142,7 @@ class Scalar(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.scalar.Scalar/ListCoinExchangeRelation',
-            proto_dot_scalar__pb2.request3.SerializeToString,
+            proto_dot_scalar__pb2.ListCoinExchangeRelationRequest.SerializeToString,
             proto_dot_scalar__pb2.response3.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -159,7 +159,7 @@ class Scalar(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.scalar.Scalar/Exchange',
-            proto_dot_scalar__pb2.request4.SerializeToString,
+            proto_dot_scalar__pb2.ExchangeRequest.SerializeToString,
             proto_dot_scalar__pb2.response4.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
