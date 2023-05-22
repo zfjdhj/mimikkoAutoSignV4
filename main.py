@@ -299,7 +299,7 @@ def task_task(client):
         return
     log.info("「助手每日任务」执行中...")
     task_level = ["S", "A", "B", "C", "D"]
-    for i in range(2):
+    for i in range(len(client.task.Task["task_characters"])):
         log.info("助手任务check...")
         task_list_character = client.call_api("Task/ListTask", type="character", page=1, pageSize=60)
         task_list_daily = client.call_api("Task/ListTask", type="daily", page=1, pageSize=60)
@@ -319,6 +319,7 @@ def task_task(client):
                             reward_info.rewards.scalarName,
                             reward_info.rewards.value)
                         )
+                        break
                     elif status == "NOT_STARTED":
                         task_info = client.call_api("Task/GetTaskRecord", id=task.recordId)
                         character_list = client.call_api(
@@ -338,6 +339,10 @@ def task_task(client):
                                     "Task/PickTask", id=task_info.recordId, body={"characterCode": character.code})
                                 log.info(f"参与成功,{pick_info.value}")
                                 break
+                        continue
+            else:
+                continue
+            break
     else:
         log.info("助手任务暂时没有事情做")
 
@@ -349,7 +354,6 @@ def task_mail_receive(client):
     log.info("「邮件一键领取」任务执行中...")
     # # 获取邮件列表
     mail_list = client.call_api("Mail/ListMail", page=1, pageSize=60)
-    # print(mail_list)
     for mail in mail_list.content:
         if not mail.received:
             res = client.call_api("Mail/ReceiveAllMailAttachment")
@@ -376,7 +380,7 @@ def task_coin_mall(client):
                 relation_code = exchange.relationCode
                 relation_type = exchange.relationType
                 log.info(f"硬币换取{times}次{exchange.target.materialName}")
-                client.Exchange("Scalar/Exchange",
+                client.call_api("Scalar/Exchange",
                                 relationCode=relation_code,
                                 relationType=relation_type,
                                 times=times
