@@ -6,7 +6,8 @@ readmetest.md
 log
 test
 test.py
-venvapi4_mimikko_cn.cer
+venv
+api4_mimikko_cn.cer
 *.log
 
 
