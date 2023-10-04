@@ -1,3 +1,4 @@
 grpcio
-yaml
+grpcio-tools
+pyyaml
 apscheduler
