@@ -2,9 +2,9 @@ Basic:
 # 抓包获得 "xxxxxxxxxx",务必保证device_id为常用登录设备
   device_id: ""
   # 抓包获得 "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxx" authorization和账号密码选填其一
-  # authorization不填会导致[阁下您已在别处登录啦>_<] 不太安全
+  # authorization不填可能会导致[阁下您已在别处登录啦>_<] 不太安全
   authorization: ""
-  # app版本 4.1.5
+  # 测试用app版本 4.1.5
   mimikko_version: "40105"
   # 登录状态变化 自动登录 务必保证上方device_id为常用登录设备
   # 兽耳官方账号，暂不支持qq,微信等等登录方式
