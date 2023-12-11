@@ -26,6 +26,8 @@ import proto.mail_pb2_grpc as mail_pb2_grpc
 import proto.auth_pb2 as auth_pb2
 import proto.auth_pb2_grpc as auth_pb2_grpc
 import proto.param_pb2 as param_pb2
+import proto.material_pb2 as material_pb2
+import proto.material_pb2_grpc as material_pb2_grpc
 
 
 base_path = os.path.dirname(os.path.abspath(__file__))
@@ -84,9 +86,11 @@ class Client():
         self.basic = SimpleNamespace(**config['Basic'])
         self.task = SimpleNamespace(**config['Task'])
         if self.basic.debug:
-            log = Logger(base_path, base_path + f"/log/{date}.log", level="debug").logger
+            log = Logger(base_path, base_path +
+                         f"/log/{date}.log", level="debug").logger
         else:
-            log = Logger(base_path, base_path + f"/log/{date}.log", level="info").logger
+            log = Logger(base_path, base_path +
+                         f"/log/{date}.log", level="info").logger
         if device_id and authorization:
             self.authorization = authorization
             self.device_id = device_id
@@ -109,8 +113,10 @@ class Client():
             log.warning("登录状态出错，即将重新登录获取authorization")
             account = self.basic.account
             password = self.basic.password
-            password_hash = hashlib.sha256(bytes(password, encoding='utf8')).hexdigest()
-            res = self.call_api("Auth/Login", accountType=3, account=account, password=password_hash)
+            password_hash = hashlib.sha256(
+                bytes(password, encoding='utf8')).hexdigest()
+            res = self.call_api("Auth/Login", accountType=3,
+                                account=account, password=password_hash)
             if res.token:
                 self.authorization = f"Bearer {res.token}"
                 log.warning("更新config文件,原文件已备份config_old.yaml")
@@ -154,7 +160,7 @@ class Client():
         else:
             if not self.is_login:
                 self.is_login = True
-            log.debug(grpc.StatusCode.OK)
+            # log.debug(grpc.StatusCode.OK)
         # sys.exit(0)
         return res
 
@@ -183,15 +189,18 @@ def task_energy_exchange(client, character_code):
         return
     log.info("「成长值兑换」任务执行中...")
     # # 获取能量值(用于兑换成长值)信息
-    res = client.call_api("Scalar/GetUserAutoScalar", **{"code": "user_energy"})
+    res = client.call_api("Scalar/GetUserAutoScalar",
+                          **{"code": "user_energy"})
     # print(res)
     if res.newValue > 0:
         character_code = client.task.EnergyExchange['character_code']
-        res2 = client.call_api("Character/EnergyExchange", characterCode=character_code)
+        res2 = client.call_api("Character/EnergyExchange",
+                               characterCode=character_code)
         if res2.characterCode == character_code:
             log.info(f"{character_code}成长值兑换成功")
             # # 助手升级
-            char_info = client.call_api("Character/ListCharacter", page=1, pageSize=60)
+            char_info = client.call_api(
+                "Character/ListCharacter", page=1, pageSize=60)
             for char in char_info.content:
                 if char.existNextLevel:
                     log.debug(f"存在后续等级{char.existNextLevel}")
@@ -199,18 +208,21 @@ def task_energy_exchange(client, character_code):
                         if statistic.typeCode == 'character_favour':
                             if statistic.value > statistic.maxValue:
                                 log.info(f"{char.name}满足升级条件，升级中....")
-                                client.call_api("Character/CharacterLevelManualUpgrade", code=char.code)
+                                client.call_api(
+                                    "Character/CharacterLevelManualUpgrade", code=char.code)
                 # # 领取助手升级奖励
                 if client.task.EnergyExchange["receive_level_reward"]:
                     reward_info = client.call_api("Character/ListCharacterLevelReward",
                                                   code=char.code, page=1, pageSize=60)
                     for reward in reward_info.content:
-                        status = character_pb2.CharacterLevelRewardReplyStatus.Name(reward.status)
+                        status = character_pb2.CharacterLevelRewardReplyStatus.Name(
+                            reward.status)
                         if status == "AVAILABLE":
                             reward_detail = ""
                             for r in reward.rewards:
                                 reward_detail += f"{r.name}*{r.num} "
-                            log.info(f"{char.name}领取{reward.level}奖励：{reward_detail}")
+                            log.info(
+                                f"{char.name}领取{reward.level}奖励：{reward_detail}")
                             client.call_api("Character/ReceiveCharacterLevelReward",
                                             levelId=reward.levelId, rewardCollectionId=reward.rewardCollectionId)
 
@@ -226,19 +238,22 @@ def task_energy_center(client):
     # # 获取能源中心仓位信息
     for i in range(2):
         log.info("能源中心check...")
-        res = client.call_api("Energy/ListEnergySourceRecord", page=1, pageSize=60)
+        res = client.call_api(
+            "Energy/ListEnergySourceRecord", page=1, pageSize=60)
         for i in res.content:
             status = energy_pb2.Status.Name(i.status)
             if status == 'FINISHED':
                 # # # 领取
-                res2 = client.call_api("Energy/ReceiveEnergySourceReward", id=i.id)
+                res2 = client.call_api(
+                    "Energy/ReceiveEnergySourceReward", id=i.id)
                 log.debug(res2)
                 log.info(f'能源中心领取{i.position+1}号位')
                 continue
             elif status == 'UNLOCKED':
                 # # # 创建
                 # # # print('获取充能方式-普通芯片-id')
-                res3 = client.call_api("Energy/ListEnergySourceModel", page=1, pageSize=60)
+                res3 = client.call_api(
+                    "Energy/ListEnergySourceModel", page=1, pageSize=60)
                 for item in res3.content:
                     if item.name == '普通芯片':
                         # ## 创建充能
@@ -258,15 +273,18 @@ def task_ordinary_work(client):
     log.info("「公会悬赏」任务执行中...")
     for i in range(2):
         log.info("公会悬赏任务check...")
-        work_list = client.call_api("Work/ListOrdinaryWork", page=1, pageSize=60)
+        work_list = client.call_api(
+            "Work/ListOrdinaryWork", page=1, pageSize=60)
         log.debug(f"今日悬赏任务{work_list.total}个")
         for work in work_list.content:
             status = work_pb2.PlayStatus.Name(work.playStatus)
             if status == 'CAN_RECEIVE':
                 # # 收取奖励
                 # 获取任务详细信息
-                work_info = client.call_api("Work/GetOrdinaryWorkRecord", id=work.recordId)
-                reward_info = client.call_api("Work/ReceiveOrdinaryWorkReward", id=work.recordId)
+                work_info = client.call_api(
+                    "Work/GetOrdinaryWorkRecord", id=work.recordId)
+                reward_info = client.call_api(
+                    "Work/ReceiveOrdinaryWorkReward", id=work.recordId)
                 log.info("收取{}级任务{}，奖励:{}*{}".format(
                     work_info.level,
                     work_info.workName,
@@ -274,11 +292,59 @@ def task_ordinary_work(client):
                     reward_info.rewards.value)
                 )
             elif status == 'NOT_STARTED':
-                character_list = client.call_api("Work/ListWorksCharacter", page=1, pageSize=60)
+                character_list = client.call_api(
+                    "Work/ListWorksCharacter", page=1, pageSize=60)
                 log.debug(f"当前空闲助手{character_list.total}个")
                 work_characters = client.task.OrdinaryWork["work_characters"]
                 for character in character_list.content:
                     if character.code in work_characters:
+                        # 判断是否能源值充足24h*20=480
+                        if client.task.OrdinaryWork["auto_use_energy_pack"]["enable"]:
+                            energy_now = client.call_api(
+                                "Scalar/GetUserScalar", code="user_enegry_source").integerValue
+                            if int(energy_now) > client.task.OrdinaryWork["auto_use_energy_pack"]["energy_min"]:
+                                log.debug(f"当前电力充足{energy_now}")
+                            else:
+                                log.info(f"当前电力不足{energy_now}")
+                                itemlist = client.call_api("Material/ListMaterial",
+                                                           materialTypeCode="consumable",
+                                                           isOwn=1,
+                                                           page=1,
+                                                           pageSize=60
+                                                           )
+                                for item in itemlist.content[::-1]:
+                                    energy_pack_list = {
+                                        "energy_pack_s": {
+                                            "relationCode": "energy_s",
+                                            "value": 50
+                                        },
+                                        "energy_pack_m_2": {
+                                            "relationCode": "energy_m_2",
+                                            "value": 300
+                                        },
+                                        "energy_pack_m_1": {
+                                            "relationCode": "energy_m_1",
+                                            "value": 500,
+                                        },
+                                        "energy_pack_l": {
+                                            "relationCode": "energy_l",
+                                            "value": 1000
+                                        },
+                                    }
+                                    if item.code in energy_pack_list:
+                                        # print(item)
+                                        # break
+                                        energy_max = client.task.OrdinaryWork["auto_use_energy_pack"]["energy_max"]
+                                        use = (
+                                            energy_max - energy_now) // energy_pack_list[item.code]["value"]
+                                        times = min(use, item.statistics.value)
+                                        log.info(f"补充电力:{item.name}*{times}")
+                                        client.call_api("Scalar/Exchange",
+                                                        relationCode=energy_pack_list[item.code]["relationCode"],
+                                                        relationType="common",
+                                                        times=times
+                                                        )
+                                        break
                         log.info("{}将被派往执行{}级任务{}，奖励:{}*{}".format(
                             character.name,
                             work.level,
@@ -301,9 +367,12 @@ def task_task(client):
     task_level = ["S", "A", "B", "C", "D"]
     for i in range(len(client.task.Task["task_characters"])):
         log.info("助手任务check...")
-        task_list_character = client.call_api("Task/ListTask", type="character", page=1, pageSize=60)
-        task_list_daily = client.call_api("Task/ListTask", type="daily", page=1, pageSize=60)
-        task_list = [x for x in task_list_character.content] + [x for x in task_list_daily.content]
+        task_list_character = client.call_api(
+            "Task/ListTask", type="character", page=1, pageSize=60)
+        task_list_daily = client.call_api(
+            "Task/ListTask", type="daily", page=1, pageSize=60)
+        task_list = [x for x in task_list_character.content] + \
+            [x for x in task_list_daily.content]
         for allow in task_level:
             for task in task_list:
                 if task.level == allow:
@@ -311,8 +380,10 @@ def task_task(client):
                     if status == 'CAN_RECEIVE':
                         # # 收取奖励
                         # 获取任务详细信息
-                        task_info = client.call_api("Task/GetTaskRecord", id=task.recordId)
-                        reward_info = client.call_api("Task/ReceiveTaskReward", id=task.recordId)
+                        task_info = client.call_api(
+                            "Task/GetTaskRecord", id=task.recordId)
+                        reward_info = client.call_api(
+                            "Task/ReceiveTaskReward", id=task.recordId)
                         log.info("收取{}级任务{}，奖励:{}*{}".format(
                             task_info.level,
                             task_info.name,
@@ -321,10 +392,12 @@ def task_task(client):
                         )
                         break
                     elif status == "NOT_STARTED":
-                        task_info = client.call_api("Task/GetTaskRecord", id=task.recordId)
+                        task_info = client.call_api(
+                            "Task/GetTaskRecord", id=task.recordId)
                         character_list = client.call_api(
                             "Task/ListTaskCharacter", id=task_info.id, page=1, pageSize=60)
-                        log.debug(f"{task.level}级任务，当前可参与空闲助手{character_list.total}个")
+                        log.debug(
+                            f"{task.level}级任务，当前可参与空闲助手{character_list.total}个")
                         task_characters = client.task.Task["task_characters"]
                         for character in character_list.content:
                             if character.code in task_characters:
@@ -370,7 +443,8 @@ def task_coin_mall(client):
         return
     log.info("「硬币商店」任务执行中...")
     # # 获取商店物品列表
-    exchange_list = client.call_api("Scalar/ListCoinExchangeRelation", page=1, pageSize=60)
+    exchange_list = client.call_api(
+        "Scalar/ListCoinExchangeRelation", page=1, pageSize=60)
     for exchange in exchange_list.content:
         if exchange.target.materialCode in client.task.CoinMall['exchange_list']:
             times = exchange.maxTimes - exchange.userTimes
@@ -394,7 +468,8 @@ def task_start(device_id, authorization):
         if client.task.Sign["enable"]:
             task_sign(client, client.task.EnergyExchange["character_code"])
         if client.task.EnergyExchange["enable"]:
-            task_energy_exchange(client, client.task.EnergyExchange["character_code"])
+            task_energy_exchange(
+                client, client.task.EnergyExchange["character_code"])
         if client.task.EnergyCenter["enable"]:
             task_energy_center(client)
         if client.task.OrdinaryWork["enable"]:
@@ -429,7 +504,8 @@ def main(device_id, authorization):
         log.info("脚本定时循环启动...")
         scheduler = BlockingScheduler()
         interval_hours = client.basic.scheduler_interval
-        scheduler.add_job(task_start, 'interval', hours=interval_hours, args=[device_id, authorization])
+        scheduler.add_job(task_start, 'interval', hours=interval_hours, args=[
+                          device_id, authorization])
         scheduler.add_listener(job_execute, EVENT_JOB_EXECUTED)
         scheduler.start()
 

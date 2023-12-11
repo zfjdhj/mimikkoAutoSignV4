@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:mimikkoAutoSignV4}/test/users.db",
+            "group": "1",
+            "name": "1"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

@@ -13,19 +13,25 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14proto/material.proto\x12$com.mimikko.app.api.general.material\"r\n\nStatistics\x12\x10\n\x08typeCode\x18\x01 \x01(\t\x12\x10\n\x08typeName\x18\x02 \x01(\t\x12\x10\n\x08maxValue\x18\x03 \x01(\x05\x12\r\n\x05value\x18\x04 \x01(\x05\x12\x0b\n\x03url\x18\x05 \x01(\t\x12\x12\n\nattributes\x18\x06 \x01(\t\"\xbf\x02\n\x10GetMaterialReply\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05\x63over\x18\x03 \x01(\t\x12\r\n\x05level\x18\x04 \x01(\t\x12\r\n\x05isOwn\x18\x05 \x01(\x08\x12\x0f\n\x07summary\x18\x06 \x01(\t\x12\x44\n\nattributes\x18\x07 \x03(\x0b\x32\x30.com.mimikko.app.api.general.material.Attributes\x12\x44\n\nstatistics\x18\x08 \x01(\x0b\x32\x30.com.mimikko.app.api.general.material.Statistics\x12\x45\n\x04\x66ile\x18\t \x01(\x0b\x32\x37.com.mimikko.app.api.general.material.MaterialFileReply\"(\n\nAttributes\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"C\n\x11MaterialFileReply\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\x05\x12\x10\n\x08\x63hecksum\x18\x03 \x01(\tb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14proto/material.proto\x12$com.mimikko.app.api.general.material\"t\n\x13ListMaterialRequest\x12\x18\n\x10materialTypeCode\x18\x01 \x01(\t\x12\x14\n\x0cquerySubType\x18\x02 \x01(\x05\x12\r\n\x05isOwn\x18\x03 \x01(\x05\x12\x0c\n\x04page\x18\x04 \x01(\x05\x12\x10\n\x08pageSize\x18\x05 \x01(\x05\"\x82\x01\n\x08response\x12\x0c\n\x04page\x18\x01 \x01(\x05\x12\x10\n\x08pageSize\x18\x02 \x01(\x05\x12\r\n\x05total\x18\x03 \x01(\x05\x12G\n\x07\x63ontent\x18\x04 \x03(\x0b\x32\x36.com.mimikko.app.api.general.material.GetMaterialReply\"\xbf\x02\n\x10GetMaterialReply\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05\x63over\x18\x03 \x01(\t\x12\r\n\x05level\x18\x04 \x01(\t\x12\r\n\x05isOwn\x18\x05 \x01(\x08\x12\x0f\n\x07summary\x18\x06 \x01(\t\x12\x44\n\nattributes\x18\x07 \x03(\x0b\x32\x30.com.mimikko.app.api.general.material.Attributes\x12\x44\n\nstatistics\x18\x08 \x01(\x0b\x32\x30.com.mimikko.app.api.general.material.Statistics\x12\x45\n\x04\x66ile\x18\t \x01(\x0b\x32\x37.com.mimikko.app.api.general.material.MaterialFileReply\"(\n\nAttributes\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"r\n\nStatistics\x12\x10\n\x08typeCode\x18\x01 \x01(\t\x12\x10\n\x08typeName\x18\x02 \x01(\t\x12\x10\n\x08maxValue\x18\x03 \x01(\x05\x12\r\n\x05value\x18\x04 \x01(\x05\x12\x0b\n\x03url\x18\x05 \x01(\t\x12\x12\n\nattributes\x18\x06 \x01(\t\"C\n\x11MaterialFileReply\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\x05\x12\x10\n\x08\x63hecksum\x18\x03 \x01(\t2\x87\x01\n\x08Material\x12{\n\x0cListMaterial\x12\x39.com.mimikko.app.api.general.material.ListMaterialRequest\x1a..com.mimikko.app.api.general.material.response\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'proto.material_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _STATISTICS._serialized_start=62
-  _STATISTICS._serialized_end=176
-  _GETMATERIALREPLY._serialized_start=179
-  _GETMATERIALREPLY._serialized_end=498
-  _ATTRIBUTES._serialized_start=500
-  _ATTRIBUTES._serialized_end=540
-  _MATERIALFILEREPLY._serialized_start=542
-  _MATERIALFILEREPLY._serialized_end=609
+  _LISTMATERIALREQUEST._serialized_start=62
+  _LISTMATERIALREQUEST._serialized_end=178
+  _RESPONSE._serialized_start=181
+  _RESPONSE._serialized_end=311
+  _GETMATERIALREPLY._serialized_start=314
+  _GETMATERIALREPLY._serialized_end=633
+  _ATTRIBUTES._serialized_start=635
+  _ATTRIBUTES._serialized_end=675
+  _STATISTICS._serialized_start=677
+  _STATISTICS._serialized_end=791
+  _MATERIALFILEREPLY._serialized_start=793
+  _MATERIALFILEREPLY._serialized_end=860
+  _MATERIAL._serialized_start=863
+  _MATERIAL._serialized_end=998
 # @@protoc_insertion_point(module_scope)
