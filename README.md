@@ -13,41 +13,47 @@
     |OrdinaryWork|工会悬赏任务|`work_characters`见下表|电力换硬币，积累公会等级|  
     |Task|每日任务|`task_characters`见下表|完成任务获得成长值|
     |MailReceive|邮件领取|-|邮件奖励一键领取|
-    |CoinMall|硬币商店|`material_code`见下表|硬币换取每周刷新物品|
+    |ActivitySign|活动签到|-|活动签到|
+    |UpdateCharacterJson|助手更新|-|更新`助手列表.json`，没有实在意义|
+    |Travel|助手出游|`travel_characters`见下表|旅行收集纪念品|
     
-
+    
     | 助手名称 | code |
     | - | - |
-    | 诺诺纳 | nonona | 
-    | 优莉卡 | ulrica | 
-    | 梦梦奈 | momona | 
-    | 琉璃 | ruri | 
-    | 爱莉安娜 | ariana | 
-    | 阿尔法零 | alpha0 | 
-    | 卡斯塔莉娅 | kasutaria | 
-    | 卡斯塔莉莉 | castariri | 
-    | 奈姆利 | nemuri | 
-    | 胡桃 | kurumi | 
-    | 羲和 | giwa |         
-    | 摩耶 | maya | 
-    | 苏纳 | suna | 
-    | 米璐库 | miruku |         
-    | 米露可 | miruku2 | 
-    | 食蜂操祈 | shokuhou_misaki | 
-    | 御坂妹妹 | sisters | 
-    | 中野一花 | nakanoichika | 
-    | 中野二乃 | nakanonino | 
-    | 中野三玖 | nakanomiku | 
-    | 中野四叶 | nakanoyotsuba | 
-    | 中野五月 | nakanoitsuki | 
-    | 御坂美琴 | misakamikoto | 
-    | 白井黑子 | shiraikuroko | 
-    | 托尔 | tooru | 
-    | 康娜 | kanna | 
-    | 阿波连玲奈 | reina | 
-    | 环古达 | tamakikotatsu | 
-    | 爱丽丝 | alice | 
-    | 泠鸢 | yousa | 
+    | 诺诺纳 | character_nonona | 
+    | 优莉卡 | character_ulrica | 
+    | 梦梦奈 | character_momona | 
+    | 琉璃 | character_ruri | 
+    | 爱莉安娜 | character_ariana | 
+    | 阿尔法零 | character_alpha0 | 
+    | 卡斯塔莉娅 | character_kasutaria | 
+    | 卡斯塔莉莉 | character_castariri | 
+    | 奈姆利 | character_nemuri | 
+    | 胡桃 | character_kurumi | 
+    | 羲和 | character_giwa |         
+    | 摩耶 | character_maya | 
+    | 苏纳 | character_suna | 
+    | 米璐库 | character_miruku |         
+    | 米露可 | character_miruku2 | 
+    | 食蜂操祈 | character_shokuhou_misaki | 
+    | 御坂妹妹 | character_sisters | 
+    | 中野一花 | character_nakanoichika | 
+    | 中野二乃 | character_nakanonino | 
+    | 中野三玖 | character_nakanomiku | 
+    | 中野四叶 | character_nakanoyotsuba | 
+    | 中野五月 | character_nakanoitsuki | 
+    | 御坂美琴 | character_misakamikoto | 
+    | 白井黑子 | character_shiraikuroko | 
+    | 托尔 | character_tooru | 
+    | 康娜 | character_kanna | 
+    | 阿波连玲奈 | character_reina | 
+    | 环古达 | character_tamakikotatsu | 
+    | 爱丽丝 | character_alice | 
+    | 泠鸢 | character_yousa | 
+    | 梅莉 | character_melly |
+    | 衿 | character_eri |
+    | 逢坂大河 | character_aisaka_taiga |
+    | 薇尔莉特 | character_violet |
 
     |物品|material_code|
     | :- | :- |

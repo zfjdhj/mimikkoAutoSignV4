@@ -15,3 +15,4 @@ api4_mimikko_cn.cer
 
 __pycache__
 .flake8
+.vscode

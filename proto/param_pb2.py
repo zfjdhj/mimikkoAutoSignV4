@@ -11,33 +11,30 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.protobuf import struct_pb2 as google_dot_protobuf_dot_struct__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11proto/param.proto\x12\x1e\x63om.mimikko.app.api.play.param\"\xf8\x01\n\x19MaterialScalarDetailReply\x12\x14\n\x0cmaterialCode\x18\x01 \x01(\t\x12\x14\n\x0cmaterialName\x18\x02 \x01(\t\x12\x15\n\rmaterialCover\x18\x03 \x01(\t\x12\x12\n\nscalarCode\x18\x04 \x01(\t\x12\x12\n\nscalarName\x18\x05 \x01(\t\x12\x13\n\x0bscalarCover\x18\x06 \x01(\t\x12\x0c\n\x04\x64\x65sc\x18\x07 \x01(\t\x12\r\n\x05value\x18\x08 \x01(\x02\x12>\n\nattributes\x18\t \x03(\x0b\x32*.com.mimikko.app.api.play.param.Attributes\"\x99\x02\n\x12PlayCharacterReply\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05level\x18\x03 \x01(\x05\x12\x0e\n\x06\x61vatar\x18\x04 \x01(\t\x12>\n\nstatistics\x18\x05 \x03(\x0b\x32*.com.mimikko.app.api.play.param.Statistics\x12\x42\n\x08packages\x18\x06 \x01(\x0b\x32\x30.com.mimikko.app.api.play.param.PackageTypeReply\x12\x44\n\nattributes\x18\x07 \x03(\x0b\x32\x30.com.mimikko.app.api.play.param.AttributesString\".\n\x10\x41ttributesString\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\xb8\x01\n\nAttributes\x12H\n\x07mapdata\x18\x01 \x03(\x0b\x32\x37.com.mimikko.app.api.play.param.Attributes.MapdataEntry\x1a`\n\x0cMapdataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12?\n\x05value\x18\x02 \x01(\x0b\x32\x30.com.mimikko.app.api.play.param.AttributesString:\x02\x38\x01\"\\\n\x10PackageTypeReply\x12\x39\n\x04type\x18\x01 \x01(\x0e\x32+.com.mimikko.app.api.play.param.PackageType\x12\r\n\x05\x63odes\x18\x02 \x03(\t\"\x9e\x01\n\nStatistics\x12\x10\n\x08typeCode\x18\x01 \x01(\t\x12\x10\n\x08typeName\x18\x02 \x01(\t\x12\x10\n\x08maxValue\x18\x03 \x01(\x05\x12\r\n\x05value\x18\x04 \x01(\x05\x12\x0b\n\x03url\x18\x05 \x01(\t\x12>\n\nattributes\x18\x06 \x03(\x0b\x32*.com.mimikko.app.api.play.param.Attributes*)\n\x0bPackageType\x12\t\n\x05MODEL\x10\x00\x12\x06\n\x02\x41I\x10\x01\x12\x07\n\x03\x45XP\x10\x02*I\n\nPlayStatus\x12\x0f\n\x0bNOT_STARTED\x10\x00\x12\x0b\n\x07ONGOING\x10\x01\x12\x0f\n\x0b\x43\x41N_RECEIVE\x10\x02\x12\x0c\n\x08\x46INISHED\x10\x03\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11proto/param.proto\x12\x1e\x63om.mimikko.app.api.play.param\x1a\x1cgoogle/protobuf/struct.proto\"\xe5\x01\n\x19MaterialScalarDetailReply\x12\x14\n\x0cmaterialCode\x18\x01 \x01(\t\x12\x14\n\x0cmaterialName\x18\x02 \x01(\t\x12\x15\n\rmaterialCover\x18\x03 \x01(\t\x12\x12\n\nscalarCode\x18\x04 \x01(\t\x12\x12\n\nscalarName\x18\x05 \x01(\t\x12\x13\n\x0bscalarCover\x18\x06 \x01(\t\x12\x0c\n\x04\x64\x65sc\x18\x07 \x01(\t\x12\r\n\x05value\x18\x08 \x01(\x02\x12+\n\nattributes\x18\t \x01(\x0b\x32\x17.google.protobuf.Struct\"\xde\x02\n\x12PlayCharacterReply\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05level\x18\x03 \x01(\x05\x12\x0e\n\x06\x61vatar\x18\x04 \x01(\t\x12>\n\nstatistics\x18\x05 \x03(\x0b\x32*.com.mimikko.app.api.play.param.Statistics\x12\x42\n\x08packages\x18\x06 \x01(\x0b\x32\x30.com.mimikko.app.api.play.param.PackageTypeReply\x12V\n\nattributes\x18\x07 \x03(\x0b\x32\x42.com.mimikko.app.api.play.param.PlayCharacterReply.AttributesEntry\x1a\x31\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\\\n\x10PackageTypeReply\x12\x39\n\x04type\x18\x01 \x01(\x0e\x32+.com.mimikko.app.api.play.param.PackageType\x12\r\n\x05\x63odes\x18\x02 \x03(\t\"\x8b\x01\n\nStatistics\x12\x10\n\x08typeCode\x18\x01 \x01(\t\x12\x10\n\x08typeName\x18\x02 \x01(\t\x12\x10\n\x08maxValue\x18\x03 \x01(\x05\x12\r\n\x05value\x18\x04 \x01(\x05\x12\x0b\n\x03url\x18\x05 \x01(\t\x12+\n\nattributes\x18\x06 \x01(\x0b\x32\x17.google.protobuf.Struct*)\n\x0bPackageType\x12\t\n\x05MODEL\x10\x00\x12\x06\n\x02\x41I\x10\x01\x12\x07\n\x03\x45XP\x10\x02*I\n\nPlayStatus\x12\x0f\n\x0bNOT_STARTED\x10\x00\x12\x0b\n\x07ONGOING\x10\x01\x12\x0f\n\x0b\x43\x41N_RECEIVE\x10\x02\x12\x0c\n\x08\x46INISHED\x10\x03\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'proto.param_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _ATTRIBUTES_MAPDATAENTRY._options = None
-  _ATTRIBUTES_MAPDATAENTRY._serialized_options = b'8\001'
-  _PACKAGETYPE._serialized_start=1078
-  _PACKAGETYPE._serialized_end=1119
-  _PLAYSTATUS._serialized_start=1121
-  _PLAYSTATUS._serialized_end=1194
-  _MATERIALSCALARDETAILREPLY._serialized_start=54
-  _MATERIALSCALARDETAILREPLY._serialized_end=302
-  _PLAYCHARACTERREPLY._serialized_start=305
-  _PLAYCHARACTERREPLY._serialized_end=586
-  _ATTRIBUTESSTRING._serialized_start=588
-  _ATTRIBUTESSTRING._serialized_end=634
-  _ATTRIBUTES._serialized_start=637
-  _ATTRIBUTES._serialized_end=821
-  _ATTRIBUTES_MAPDATAENTRY._serialized_start=725
-  _ATTRIBUTES_MAPDATAENTRY._serialized_end=821
-  _PACKAGETYPEREPLY._serialized_start=823
-  _PACKAGETYPEREPLY._serialized_end=915
-  _STATISTICS._serialized_start=918
-  _STATISTICS._serialized_end=1076
+  _PLAYCHARACTERREPLY_ATTRIBUTESENTRY._options = None
+  _PLAYCHARACTERREPLY_ATTRIBUTESENTRY._serialized_options = b'8\001'
+  _PACKAGETYPE._serialized_start=904
+  _PACKAGETYPE._serialized_end=945
+  _PLAYSTATUS._serialized_start=947
+  _PLAYSTATUS._serialized_end=1020
+  _MATERIALSCALARDETAILREPLY._serialized_start=84
+  _MATERIALSCALARDETAILREPLY._serialized_end=313
+  _PLAYCHARACTERREPLY._serialized_start=316
+  _PLAYCHARACTERREPLY._serialized_end=666
+  _PLAYCHARACTERREPLY_ATTRIBUTESENTRY._serialized_start=617
+  _PLAYCHARACTERREPLY_ATTRIBUTESENTRY._serialized_end=666
+  _PACKAGETYPEREPLY._serialized_start=668
+  _PACKAGETYPEREPLY._serialized_end=760
+  _STATISTICS._serialized_start=763
+  _STATISTICS._serialized_end=902
 # @@protoc_insertion_point(module_scope)

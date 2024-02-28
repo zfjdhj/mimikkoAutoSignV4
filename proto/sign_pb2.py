@@ -32,4 +32,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _REWARDS._serialized_end=498
   _SIGN._serialized_start=501
   _SIGN._serialized_end=736
+
 # @@protoc_insertion_point(module_scope)
