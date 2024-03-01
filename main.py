@@ -884,7 +884,6 @@ def main(device_id, authorization):
         scheduler.add_job(
             task_start, 'interval',
             hours=interval_hours,
-            max_instances=1,
             args=[device_id, authorization])
         scheduler.add_listener(job_execute, EVENT_JOB_EXECUTED)
         scheduler.start()
