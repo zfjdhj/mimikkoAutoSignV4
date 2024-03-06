@@ -34,6 +34,8 @@ Task:
   EnergyCenter:
     # 任务：能源中心:硬币换电力
     enable: True
+    # 自动使用电力充能券
+    auto_use_energy_speedup_ticket: True
   OrdinaryWork:
     # 任务：公会悬赏:电力换硬币
     enable: True

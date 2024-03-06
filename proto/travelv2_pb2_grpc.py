@@ -29,6 +29,11 @@ class TravelV2Stub(object):
                 request_serializer=proto_dot_travelv2__pb2.ListTravelGroupRequest.SerializeToString,
                 response_deserializer=proto_dot_travelv2__pb2.ListTravelGroupResponse.FromString,
                 )
+        self.ListTravelGroupReward = channel.unary_unary(
+                '/com.mimikko.app.api.play.travelV2.TravelV2/ListTravelGroupReward',
+                request_serializer=proto_dot_travelv2__pb2.ListTravelGroupRewardRequest.SerializeToString,
+                response_deserializer=proto_dot_travelv2__pb2.ListTravelRewardReply.FromString,
+                )
         self.Travel = channel.unary_unary(
                 '/com.mimikko.app.api.play.travelV2.TravelV2/Travel',
                 request_serializer=proto_dot_travelv2__pb2.TravelRequest.SerializeToString,
@@ -77,6 +82,12 @@ class TravelV2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListTravelGroup(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListTravelGroupReward(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -135,6 +146,11 @@ def add_TravelV2Servicer_to_server(servicer, server):
                     servicer.ListTravelGroup,
                     request_deserializer=proto_dot_travelv2__pb2.ListTravelGroupRequest.FromString,
                     response_serializer=proto_dot_travelv2__pb2.ListTravelGroupResponse.SerializeToString,
+            ),
+            'ListTravelGroupReward': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListTravelGroupReward,
+                    request_deserializer=proto_dot_travelv2__pb2.ListTravelGroupRewardRequest.FromString,
+                    response_serializer=proto_dot_travelv2__pb2.ListTravelRewardReply.SerializeToString,
             ),
             'Travel': grpc.unary_unary_rpc_method_handler(
                     servicer.Travel,
@@ -224,6 +240,23 @@ class TravelV2(object):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.travelV2.TravelV2/ListTravelGroup',
             proto_dot_travelv2__pb2.ListTravelGroupRequest.SerializeToString,
             proto_dot_travelv2__pb2.ListTravelGroupResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListTravelGroupReward(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.travelV2.TravelV2/ListTravelGroupReward',
+            proto_dot_travelv2__pb2.ListTravelGroupRewardRequest.SerializeToString,
+            proto_dot_travelv2__pb2.ListTravelRewardReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

@@ -19,6 +19,11 @@ class ScalarStub(object):
                 request_serializer=proto_dot_scalar__pb2.GetUserAutoScalarRequest.SerializeToString,
                 response_deserializer=proto_dot_scalar__pb2.response.FromString,
                 )
+        self.GetUserMaterialScalar = channel.unary_unary(
+                '/com.mimikko.app.api.general.scalar.Scalar/GetUserMaterialScalar',
+                request_serializer=proto_dot_scalar__pb2.GetUserMaterialScalarRequest.SerializeToString,
+                response_deserializer=proto_dot_scalar__pb2.GetUserMaterialScalarResponse.FromString,
+                )
         self.GetUserScalar = channel.unary_unary(
                 '/com.mimikko.app.api.general.scalar.Scalar/GetUserScalar',
                 request_serializer=proto_dot_scalar__pb2.GetUserScalarRequest.SerializeToString,
@@ -40,6 +45,12 @@ class ScalarServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def GetUserAutoScalar(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetUserMaterialScalar(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -70,6 +81,11 @@ def add_ScalarServicer_to_server(servicer, server):
                     servicer.GetUserAutoScalar,
                     request_deserializer=proto_dot_scalar__pb2.GetUserAutoScalarRequest.FromString,
                     response_serializer=proto_dot_scalar__pb2.response.SerializeToString,
+            ),
+            'GetUserMaterialScalar': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUserMaterialScalar,
+                    request_deserializer=proto_dot_scalar__pb2.GetUserMaterialScalarRequest.FromString,
+                    response_serializer=proto_dot_scalar__pb2.GetUserMaterialScalarResponse.SerializeToString,
             ),
             'GetUserScalar': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUserScalar,
@@ -110,6 +126,23 @@ class Scalar(object):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.scalar.Scalar/GetUserAutoScalar',
             proto_dot_scalar__pb2.GetUserAutoScalarRequest.SerializeToString,
             proto_dot_scalar__pb2.response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetUserMaterialScalar(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.scalar.Scalar/GetUserMaterialScalar',
+            proto_dot_scalar__pb2.GetUserMaterialScalarRequest.SerializeToString,
+            proto_dot_scalar__pb2.GetUserMaterialScalarResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

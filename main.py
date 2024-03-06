@@ -291,24 +291,31 @@ def task_energy_center(client):
             status = energy_pb2.Status.Name(i.status)
             if status == 'FINISHED':
                 # # # 领取
-                res2 = client.call_api(
+                client.call_api(
                     "Energy/ReceiveEnergySourceReward", id=i.id)
-                log.debug(res2)
                 log.info(f'能源中心领取{i.position+1}号位')
                 continue
             elif status == 'UNLOCKED':
                 # # # 创建
-                # # # print('获取充能方式-普通芯片-id')
                 res3 = client.call_api(
                     "Energy/ListEnergySourceModel", page=1, pageSize=60)
+                if client.task.EnergyCenter['auto_use_energy_speedup_ticket']:
+                    # 判断 电力充能券数量
+                    res = client.call_api(
+                        "Scalar/GetUserMaterialScalar",
+                        scalarCode="_scalar_material_amount",
+                        materialCode="energy_speedup_ticket")
+                    source_mode = '超级芯片' if res.integerValue > 0 else "普通芯片"
+                    log.debug(f"电力充能券：{res.integerValue}")
+                else:
+                    source_mode = '普通芯片'
                 for item in res3.content:
-                    if item.name == '普通芯片':
+                    if item.name == source_mode:
                         # ## 创建充能
-                        res4 = client.call_api(
+                        client.call_api(
                             "Energy/CreateEnergySourceRecord",
                             modelId=item.modelId, position=i.position)
-                        log.debug(res4)
-                        log.info(f'能源中心创建充能{i.position+1}号位')
+                        log.info(f'能源中心创建充能{i.position+1}号位({source_mode})')
                 continue
     else:
         log.info("能源中心暂时没有事情做")
@@ -757,6 +764,62 @@ def get_item(client, materialCode, materialTypeCode='consumable', num=0):
             return buy_item(client, materialCode, num)
 
 
+def cal_travel_gift(client, area_name, group_name, aid, gid):
+    # 获取背包纪念品列表
+    own_gift_list = []
+    res = client.call_api('Material/ListMaterial', **{
+        'materialTypeCode': 'gift',
+        'isOwn': 1, 'page': 1,
+        'pageSize': 60})
+    for item in res.content:
+        own_gift_list.append(item.name)
+    # 获取当前选择区域纪念品列表
+    possible_rewards = []
+    group_info = client.call_api(
+        "TravelV2/GetTravelGroup", ** {'areaId': aid, 'groupId': gid})
+    for item in group_info.travelGroup.possibleRewards:
+        possible_rewards.append(item.materialName)
+    # 尚未获得
+    do_not_have = set(possible_rewards)-set(own_gift_list)
+    log.info('{}{}纪念品收集进度({}/{}),未收集列表{}'.format(
+        area_name, group_name,
+        len(possible_rewards)-len(do_not_have),
+        len(possible_rewards),
+        do_not_have
+    ))
+
+
+def cal_travel_postcard(client, area_name, group_name, aid, gid, characters):
+    # 获取背包明信片列表
+    own_postcard_list = []
+    for c in characters:
+        res = client.call_api('Material/ListHandbookMaterialByCharacterCode',
+                              **{'code': c,
+                                 "typeCode": "postcard",
+                                 "page": 1,
+                                 "pageSize": 60})
+        for postcard in res.content:
+            if postcard.statistics.value:
+                own_postcard_list.append(postcard.statistics.typeName)
+    # 获取当前选择区域明信片列表
+    possible_rewards = []
+    reward_info = client.call_api(
+        "TravelV2/ListTravelGroupReward", ** {'groupId': gid})
+    for postcard in reward_info.postCards:
+        for c in characters:
+            if c in postcard.materialCode:
+                possible_rewards.append(postcard.materialName)
+    # print(possible_rewards)
+    # 尚未获得
+    do_not_have = set(possible_rewards)-set(own_postcard_list)
+    log.info('{}{}选定助手明信片收集进度({}/{}),未收集列表{}'.format(
+        area_name, group_name,
+        len(possible_rewards)-len(do_not_have),
+        len(possible_rewards),
+        do_not_have
+    ))
+
+
 def task_travel(client):
     # 任务：助手出游
     if not client.is_login:
@@ -777,7 +840,8 @@ def task_travel(client):
             for reward in resp.rewards:
                 if reward.scalarName:
                     reward_l.append(reward.materialName +
-                                    reward.scalarName + "*" + str(reward.value))
+                                    reward.scalarName +
+                                    "*" + str(reward.value))
                 else:
                     reward_l.append(reward.materialName +
                                     "*" + str(reward.value))
@@ -842,6 +906,15 @@ def task_travel(client):
             'travelGroupId': gid,
             'characterCode': travel_characters[:character_num]
         })
+        # 输出显示纪念品/明信片收集列表
+        if group_name != '时光之旅':
+            cal_travel_gift(client, area_name, group_name, aid, gid)
+            cal_travel_postcard(client, area_name, group_name,
+                                aid, gid, travel_characters[:character_num])
+        else:
+            cal_travel_postcard(client, area_name, group_name,
+                                aid, gid, travel_characters[:character_num])
+        # 获取当前出游列表
         list_travel_record(client)
 
 

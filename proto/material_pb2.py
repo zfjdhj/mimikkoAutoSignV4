@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14proto/material.proto\x12$com.mimikko.app.api.general.material\"t\n\x13ListMaterialRequest\x12\x18\n\x10materialTypeCode\x18\x01 \x01(\t\x12\x14\n\x0cquerySubType\x18\x02 \x01(\x05\x12\r\n\x05isOwn\x18\x03 \x01(\x05\x12\x0c\n\x04page\x18\x04 \x01(\x05\x12\x10\n\x08pageSize\x18\x05 \x01(\x05\"\x8e\x01\n\x14ListMaterialResponse\x12\x0c\n\x04page\x18\x01 \x01(\x05\x12\x10\n\x08pageSize\x18\x02 \x01(\x05\x12\r\n\x05total\x18\x03 \x01(\x05\x12G\n\x07\x63ontent\x18\x04 \x03(\x0b\x32\x36.com.mimikko.app.api.general.material.GetMaterialReply\"\x88\x03\n\x10GetMaterialReply\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05\x63over\x18\x03 \x01(\t\x12\r\n\x05level\x18\x04 \x01(\t\x12\r\n\x05isOwn\x18\x05 \x01(\x08\x12\x0f\n\x07summary\x18\x06 \x01(\t\x12Z\n\nattributes\x18\x07 \x03(\x0b\x32\x46.com.mimikko.app.api.general.material.GetMaterialReply.AttributesEntry\x12\x44\n\nstatistics\x18\x08 \x01(\x0b\x32\x30.com.mimikko.app.api.general.material.Statistics\x12\x45\n\x04\x66ile\x18\t \x01(\x0b\x32\x37.com.mimikko.app.api.general.material.MaterialFileReply\x1a\x31\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x8c\x01\n\nAttributes\x12N\n\x07mapdata\x18\x01 \x03(\x0b\x32=.com.mimikko.app.api.general.material.Attributes.MapdataEntry\x1a.\n\x0cMapdataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"r\n\nStatistics\x12\x10\n\x08typeCode\x18\x01 \x01(\t\x12\x10\n\x08typeName\x18\x02 \x01(\t\x12\x10\n\x08maxValue\x18\x03 \x01(\x05\x12\r\n\x05value\x18\x04 \x01(\x05\x12\x0b\n\x03url\x18\x05 \x01(\t\x12\x12\n\nattributes\x18\x06 \x01(\t\"C\n\x11MaterialFileReply\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\x05\x12\x10\n\x08\x63hecksum\x18\x03 \x01(\t\"h\n\x1cListHandbookCharacterRequest\x12\x18\n\x10materialTypeCode\x18\x01 \x01(\t\x12\x0c\n\x04page\x18\x02 \x01(\x05\x12\x10\n\x08pageSize\x18\x03 \x01(\x05\x12\x0e\n\x06orders\x18\x04 \x03(\t\"\x9d\x01\n\x1dListHandbookCharacterResponse\x12\x0c\n\x04page\x18\x01 \x01(\x05\x12\x10\n\x08pageSize\x18\x02 \x01(\x05\x12\r\n\x05total\x18\x03 \x01(\x05\x12M\n\x07\x63ontent\x18\x04 \x03(\x0b\x32<.com.mimikko.app.api.general.material.HandbookCharacterReply\"\xa8\x01\n\x16HandbookCharacterReply\x12\x44\n\nstatistics\x18\x01 \x01(\x0b\x32\x30.com.mimikko.app.api.general.material.Statistics\x12H\n\x08material\x18\x02 \x01(\x0b\x32\x36.com.mimikko.app.api.general.material.GetMaterialReply2\xb9\x02\n\x08Material\x12\x87\x01\n\x0cListMaterial\x12\x39.com.mimikko.app.api.general.material.ListMaterialRequest\x1a:.com.mimikko.app.api.general.material.ListMaterialResponse\"\x00\x12\xa2\x01\n\x15ListHandbookCharacter\x12\x42.com.mimikko.app.api.general.material.ListHandbookCharacterRequest\x1a\x43.com.mimikko.app.api.general.material.ListHandbookCharacterResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14proto/material.proto\x12$com.mimikko.app.api.general.material\"t\n\x13ListMaterialRequest\x12\x18\n\x10materialTypeCode\x18\x01 \x01(\t\x12\x14\n\x0cquerySubType\x18\x02 \x01(\x05\x12\r\n\x05isOwn\x18\x03 \x01(\x05\x12\x0c\n\x04page\x18\x04 \x01(\x05\x12\x10\n\x08pageSize\x18\x05 \x01(\x05\"\x8b\x01\n\x11ListMaterialReply\x12\x0c\n\x04page\x18\x01 \x01(\x05\x12\x10\n\x08pageSize\x18\x02 \x01(\x05\x12\r\n\x05total\x18\x03 \x01(\x05\x12G\n\x07\x63ontent\x18\x04 \x03(\x0b\x32\x36.com.mimikko.app.api.general.material.GetMaterialReply\"\x88\x03\n\x10GetMaterialReply\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\r\n\x05\x63over\x18\x03 \x01(\t\x12\r\n\x05level\x18\x04 \x01(\t\x12\r\n\x05isOwn\x18\x05 \x01(\x08\x12\x0f\n\x07summary\x18\x06 \x01(\t\x12Z\n\nattributes\x18\x07 \x03(\x0b\x32\x46.com.mimikko.app.api.general.material.GetMaterialReply.AttributesEntry\x12\x44\n\nstatistics\x18\x08 \x01(\x0b\x32\x30.com.mimikko.app.api.general.material.Statistics\x12\x45\n\x04\x66ile\x18\t \x01(\x0b\x32\x37.com.mimikko.app.api.general.material.MaterialFileReply\x1a\x31\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xe7\x01\n\nStatistics\x12\x10\n\x08typeCode\x18\x01 \x01(\t\x12\x10\n\x08typeName\x18\x02 \x01(\t\x12\x10\n\x08maxValue\x18\x03 \x01(\x05\x12\r\n\x05value\x18\x04 \x01(\x05\x12\x0b\n\x03url\x18\x05 \x01(\t\x12T\n\nattributes\x18\x06 \x03(\x0b\x32@.com.mimikko.app.api.general.material.Statistics.AttributesEntry\x1a\x31\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"C\n\x11MaterialFileReply\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\x05\x12\x10\n\x08\x63hecksum\x18\x03 \x01(\t\"h\n\x1cListHandbookCharacterRequest\x12\x18\n\x10materialTypeCode\x18\x01 \x01(\t\x12\x0c\n\x04page\x18\x02 \x01(\x05\x12\x10\n\x08pageSize\x18\x03 \x01(\x05\x12\x0e\n\x06orders\x18\x04 \x03(\t\"\x9d\x01\n\x1dListHandbookCharacterResponse\x12\x0c\n\x04page\x18\x01 \x01(\x05\x12\x10\n\x08pageSize\x18\x02 \x01(\x05\x12\r\n\x05total\x18\x03 \x01(\x05\x12M\n\x07\x63ontent\x18\x04 \x03(\x0b\x32<.com.mimikko.app.api.general.material.HandbookCharacterReply\"\xa8\x01\n\x16HandbookCharacterReply\x12\x44\n\nstatistics\x18\x01 \x01(\x0b\x32\x30.com.mimikko.app.api.general.material.Statistics\x12H\n\x08material\x18\x02 \x01(\x0b\x32\x36.com.mimikko.app.api.general.material.GetMaterialReply\"G\n\x1cGetMaterialStatisticsRequest\x12\x10\n\x08typeCode\x18\x01 \x01(\t\x12\x15\n\rcharacterCode\x18\x02 \x01(\t\"\x8b\x01\n*ListHandbookMaterialByCharacterCodeRequest\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\x10\n\x08typeCode\x18\x02 \x01(\t\x12\r\n\x05isOwn\x18\x03 \x01(\x08\x12\x0c\n\x04page\x18\x04 \x01(\x05\x12\x10\n\x08pageSize\x18\x05 \x01(\x05\x12\x0e\n\x06orders\x18\x06 \x01(\t2\xfd\x04\n\x08Material\x12\x84\x01\n\x0cListMaterial\x12\x39.com.mimikko.app.api.general.material.ListMaterialRequest\x1a\x37.com.mimikko.app.api.general.material.ListMaterialReply\"\x00\x12\xa2\x01\n\x15ListHandbookCharacter\x12\x42.com.mimikko.app.api.general.material.ListHandbookCharacterRequest\x1a\x43.com.mimikko.app.api.general.material.ListHandbookCharacterResponse\"\x00\x12\x8f\x01\n\x15GetMaterialStatistics\x12\x42.com.mimikko.app.api.general.material.GetMaterialStatisticsRequest\x1a\x30.com.mimikko.app.api.general.material.Statistics\"\x00\x12\xb2\x01\n#ListHandbookMaterialByCharacterCode\x12P.com.mimikko.app.api.general.material.ListHandbookMaterialByCharacterCodeRequest\x1a\x37.com.mimikko.app.api.general.material.ListMaterialReply\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'proto.material_pb2', globals())
@@ -22,30 +22,32 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _GETMATERIALREPLY_ATTRIBUTESENTRY._options = None
   _GETMATERIALREPLY_ATTRIBUTESENTRY._serialized_options = b'8\001'
-  _ATTRIBUTES_MAPDATAENTRY._options = None
-  _ATTRIBUTES_MAPDATAENTRY._serialized_options = b'8\001'
+  _STATISTICS_ATTRIBUTESENTRY._options = None
+  _STATISTICS_ATTRIBUTESENTRY._serialized_options = b'8\001'
   _LISTMATERIALREQUEST._serialized_start=62
   _LISTMATERIALREQUEST._serialized_end=178
-  _LISTMATERIALRESPONSE._serialized_start=181
-  _LISTMATERIALRESPONSE._serialized_end=323
-  _GETMATERIALREPLY._serialized_start=326
-  _GETMATERIALREPLY._serialized_end=718
-  _GETMATERIALREPLY_ATTRIBUTESENTRY._serialized_start=669
-  _GETMATERIALREPLY_ATTRIBUTESENTRY._serialized_end=718
-  _ATTRIBUTES._serialized_start=721
-  _ATTRIBUTES._serialized_end=861
-  _ATTRIBUTES_MAPDATAENTRY._serialized_start=815
-  _ATTRIBUTES_MAPDATAENTRY._serialized_end=861
-  _STATISTICS._serialized_start=863
-  _STATISTICS._serialized_end=977
-  _MATERIALFILEREPLY._serialized_start=979
-  _MATERIALFILEREPLY._serialized_end=1046
-  _LISTHANDBOOKCHARACTERREQUEST._serialized_start=1048
-  _LISTHANDBOOKCHARACTERREQUEST._serialized_end=1152
-  _LISTHANDBOOKCHARACTERRESPONSE._serialized_start=1155
-  _LISTHANDBOOKCHARACTERRESPONSE._serialized_end=1312
-  _HANDBOOKCHARACTERREPLY._serialized_start=1315
-  _HANDBOOKCHARACTERREPLY._serialized_end=1483
-  _MATERIAL._serialized_start=1486
-  _MATERIAL._serialized_end=1799
+  _LISTMATERIALREPLY._serialized_start=181
+  _LISTMATERIALREPLY._serialized_end=320
+  _GETMATERIALREPLY._serialized_start=323
+  _GETMATERIALREPLY._serialized_end=715
+  _GETMATERIALREPLY_ATTRIBUTESENTRY._serialized_start=666
+  _GETMATERIALREPLY_ATTRIBUTESENTRY._serialized_end=715
+  _STATISTICS._serialized_start=718
+  _STATISTICS._serialized_end=949
+  _STATISTICS_ATTRIBUTESENTRY._serialized_start=666
+  _STATISTICS_ATTRIBUTESENTRY._serialized_end=715
+  _MATERIALFILEREPLY._serialized_start=951
+  _MATERIALFILEREPLY._serialized_end=1018
+  _LISTHANDBOOKCHARACTERREQUEST._serialized_start=1020
+  _LISTHANDBOOKCHARACTERREQUEST._serialized_end=1124
+  _LISTHANDBOOKCHARACTERRESPONSE._serialized_start=1127
+  _LISTHANDBOOKCHARACTERRESPONSE._serialized_end=1284
+  _HANDBOOKCHARACTERREPLY._serialized_start=1287
+  _HANDBOOKCHARACTERREPLY._serialized_end=1455
+  _GETMATERIALSTATISTICSREQUEST._serialized_start=1457
+  _GETMATERIALSTATISTICSREQUEST._serialized_end=1528
+  _LISTHANDBOOKMATERIALBYCHARACTERCODEREQUEST._serialized_start=1531
+  _LISTHANDBOOKMATERIALBYCHARACTERCODEREQUEST._serialized_end=1670
+  _MATERIAL._serialized_start=1673
+  _MATERIAL._serialized_end=2310
 # @@protoc_insertion_point(module_scope)
