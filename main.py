@@ -776,9 +776,11 @@ def task_travel(client):
             reward_l = []
             for reward in resp.rewards:
                 if reward.scalarName:
-                    reward_l.append(reward.materialName + reward.scalarName + "*" + str(reward.value))
+                    reward_l.append(reward.materialName +
+                                    reward.scalarName + "*" + str(reward.value))
                 else:
-                    reward_l.append(reward.materialName + "*" + str(reward.value))
+                    reward_l.append(reward.materialName +
+                                    "*" + str(reward.value))
             res += ",".join(reward_l)
             log.info(res)
             pass
@@ -830,7 +832,7 @@ def task_travel(client):
         if not get_item(client,
                         consume.materialCode,
                         materialTypeCode='consumable',
-                        num=1):
+                        num=character_num):
             log.error('判断物品充足失败')
             return
         # 开始出游
@@ -884,7 +886,6 @@ def main(device_id, authorization):
         scheduler.add_job(
             task_start, 'interval',
             hours=interval_hours,
-            max_instances=1,
             args=[device_id, authorization])
         scheduler.add_listener(job_execute, EVENT_JOB_EXECUTED)
         scheduler.start()
