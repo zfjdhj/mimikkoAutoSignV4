@@ -24,7 +24,9 @@ class Logger(object):
         when="MIDNIGHT",
         interval=1,
         backCount=30,
-        fmt="[%(asctime)s-%(pathname)s][line:%(lineno)d][%(levelname)s]: %(message)s",
+        fmt="[%(asctime)s][%(filename)s:%(lineno)d][%(levelname)s]:%(message)s",
+        sfmt="[%(asctime)s][%(module)s:%(lineno)d][%(levelname)s]:%(message)s"
+        
     ):
         self.logger = logging.getLogger(filename)
         self.logger.handlers = []
@@ -33,8 +35,7 @@ class Logger(object):
         logging.Formatter.converter = self.beijing
         self.logger.setLevel(self.level_relations[level])  # 设置日志级别
         sh = logging.StreamHandler()  # 往屏幕上输出
-        single_format_str = logging.Formatter(
-            "[%(asctime)s][line:%(lineno)d][%(levelname)s]:%(message)s", '%Y%m%d-%H:%M:%S')
+        single_format_str = logging.Formatter(sfmt, '%Y%m%d-%H:%M:%S')
         sh.setFormatter(single_format_str)  # 设置屏幕上显示的格式
         fh = handlers.TimedRotatingFileHandler(
             filename=filename, when=when, interval=interval, backupCount=backCount, encoding="utf-8"

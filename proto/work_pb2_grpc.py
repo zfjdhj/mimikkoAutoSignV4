@@ -39,6 +39,11 @@ class WorkStub(object):
                 request_serializer=proto_dot_work__pb2.PickOrdinaryWorkRequest.SerializeToString,
                 response_deserializer=proto_dot_work__pb2.response5.FromString,
                 )
+        self.Refresh = channel.unary_unary(
+                '/com.mimikko.app.api.play.work.Work/Refresh',
+                request_serializer=proto_dot_work__pb2.RefreshRequest.SerializeToString,
+                response_deserializer=proto_dot_work__pb2.RefreshResponse.FromString,
+                )
 
 
 class WorkServicer(object):
@@ -74,6 +79,12 @@ class WorkServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Refresh(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_WorkServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -101,6 +112,11 @@ def add_WorkServicer_to_server(servicer, server):
                     servicer.PickOrdinaryWork,
                     request_deserializer=proto_dot_work__pb2.PickOrdinaryWorkRequest.FromString,
                     response_serializer=proto_dot_work__pb2.response5.SerializeToString,
+            ),
+            'Refresh': grpc.unary_unary_rpc_method_handler(
+                    servicer.Refresh,
+                    request_deserializer=proto_dot_work__pb2.RefreshRequest.FromString,
+                    response_serializer=proto_dot_work__pb2.RefreshResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -194,5 +210,22 @@ class Work(object):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.work.Work/PickOrdinaryWork',
             proto_dot_work__pb2.PickOrdinaryWorkRequest.SerializeToString,
             proto_dot_work__pb2.response5.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Refresh(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.play.work.Work/Refresh',
+            proto_dot_work__pb2.RefreshRequest.SerializeToString,
+            proto_dot_work__pb2.RefreshResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
