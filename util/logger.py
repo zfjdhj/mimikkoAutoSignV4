@@ -25,24 +25,25 @@ class Logger(object):
         interval=1,
         backCount=30,
         fmt="[%(asctime)s][%(filename)s:%(lineno)d][%(levelname)s]:%(message)s",
-        sfmt="[%(asctime)s][%(module)s:%(lineno)d][%(levelname)s]:%(message)s"
-        
+        sfmt="[%(asctime)s][%(module)s:%(lineno)d][%(levelname)s]:%(message)s",
+        screen=True
+
     ):
         self.logger = logging.getLogger(filename)
         self.logger.handlers = []
-        format_str = logging.Formatter(fmt)  # 设置日志格式
         # 设置时间格式
         logging.Formatter.converter = self.beijing
         self.logger.setLevel(self.level_relations[level])  # 设置日志级别
-        sh = logging.StreamHandler()  # 往屏幕上输出
-        single_format_str = logging.Formatter(sfmt, '%Y%m%d-%H:%M:%S')
-        sh.setFormatter(single_format_str)  # 设置屏幕上显示的格式
+        # screen
+        if screen:
+            sh = logging.StreamHandler()  # 往屏幕上输出
+            single_format_str = logging.Formatter(sfmt, '%Y%m%d-%H:%M:%S')
+            sh.setFormatter(single_format_str)  # 设置屏幕上显示的格式
+            self.logger.addHandler(sh)
+        # file
+        format_str = logging.Formatter(fmt, '%Y%m%d-%H:%M:%S')  # 设置日志格式
         fh = handlers.TimedRotatingFileHandler(
             filename=filename, when=when, interval=interval, backupCount=backCount, encoding="utf-8"
         )
-        # fh_all = handlers.TimedRotatingFileHandler(filename=base_path + "/log/all.log", when="D", interval=30, backupCount=backCount, encoding="utf-8")
-        fh.setFormatter(format_str)  # 设置文件里写入的格式
-        # fh_all.setFormatter(format_str)  # 设置文件里写入的格式
-        self.logger.addHandler(sh)  # 把对象加到logger里
+        fh.setFormatter(format_str)
         self.logger.addHandler(fh)
-        # self.logger.addHandler(fh_all)
