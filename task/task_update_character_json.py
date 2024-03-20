@@ -23,7 +23,7 @@ def get_character_json(path, log):
         with open(path, encoding='utf-8') as f:
             res = json.loads(f.read())
     except Exception as e:
-        log.warning(e)
+        log.error(e)
     return res
 
 
@@ -72,3 +72,18 @@ def write_character_json(old_data, new_character_data, path):
                 old_data.update({k: v})
     with open(path, 'w+', encoding='utf-8') as f:
         f.write(json.dumps(old_data, ensure_ascii=False, indent=4))
+
+
+def get_cname_json(log, characters, res=[]):
+    if type(characters) == list:
+        for c in characters:
+            print(c)
+            res.append(get_cname_json(log, c, res))
+        return res
+    elif type(characters) == str:
+        path = './助手列表.json'
+        json_data = get_character_json(path, log)
+        for name_code in json_data.values():
+            for name, code in name_code.items():
+                if code == characters:
+                    return name

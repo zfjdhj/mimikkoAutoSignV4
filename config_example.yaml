@@ -36,7 +36,7 @@ Task:
     # 任务：能源中心:硬币换电力
     enable: True
     # 自动使用电力充能券
-    auto_use_energy_speedup_ticket: True
+    auto_use_energy_speedup_ticket: False
   OrdinaryWork:
     # 任务：公会悬赏:电力换硬币
     enable: True
@@ -50,7 +50,9 @@ Task:
       # 补充至指定值
       energy_max: 9500
     # 自动使用工作刷新券(建议至少安排三名助手工作)
-    auto_use_work_refresh_ticket: True
+    auto_use_work_refresh_ticket: False
+    # 是否优先完成低等级耗时少的任务，使用工作刷新券时默认为true
+    work_reversed: True
   Task:
     # 任务：助手每日任务:完成可获得好感度
     enable: True
@@ -81,23 +83,26 @@ Task:
     # 0:(推荐)脚本自行判断
     # 1:(可选)普通用户每次出发一人
     # 2:(可选)vip用户每次出发两人
-    character_upper_limit: 1
+    character_upper_limit: 0
     # 当前旅行区域满人是否跳转下一区域
-    auto_next_area: True
+    auto_next_area: False
+    # 明信片兑换(重复明信片掉落时光碎片，5碎片兑换1)
+    exchange_postcard: False
     # 出游助手列表
     travel_characters:
+      # 自行添加不同的助手
       character_ruri:
-        travel_area: 北美洲
-        travel_group: 纪念之旅
-      character_miruku2:
-        travel_area: 北美洲
-        travel_group: 纪念之旅
-      character_momona:
         travel_area: 北美洲
         travel_group: 纪念之旅
       character_nemuri:
         travel_area: 北美洲
         travel_group: 纪念之旅
       character_melly:
+        travel_area: 北美洲
+        travel_group: 纪念之旅
+      character_momona:
+        travel_area: 南美洲
+        travel_group: 纪念之旅
+      character_miruku2:
         travel_area: 北美洲
         travel_group: 纪念之旅

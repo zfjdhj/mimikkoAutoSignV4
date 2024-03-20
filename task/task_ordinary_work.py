@@ -22,7 +22,7 @@ def task_ordinary_work(client):
             if 0 < wait_s < 0.1 * client.basic.scheduler_interval * 3600:
                 log.info(f'[{work.name}]即将完成，等待{wait_s}s')
                 time.sleep(wait_s)
-                task_ordinary_work(client, log)
+                task_ordinary_work(client)
                 return
         status = work_pb2.PlayStatus.Name(work.playStatus)
         if status == 'CAN_RECEIVE':
@@ -124,7 +124,10 @@ def task_ordinary_work(client):
 
 def use_work_refresh_ticket(client, log, content):
     if not client.task.OrdinaryWork['auto_use_work_refresh_ticket'] or len(client.task.OrdinaryWork['work_characters']) < 2:
-        return content
+        if client.task.OrdinaryWork['work_reversed']:
+            return list(reversed(content))
+        else:
+            return content
     else:
         content = list(reversed(content))
         now = datetime.datetime.now()
@@ -166,27 +169,3 @@ def use_work_refresh_ticket(client, log, content):
                 log.info('工作刷新券数量不足')
                 return content
         return content
-
-
-if __name__ == '__main__':
-    import os
-    from main import Client
-    from util.logger import Logger
-
-    # log信息配置
-
-    base_path = os.path.dirname(os.path.abspath(__file__))
-
-    if base_path == "":
-        base_path = "/home/runner/work/mimikkoAutoSignIn/mimikkoAutoSignIn"
-        os.system(f"chmod 777 {base_path}")
-    if not os.path.exists(base_path + "/log"):
-        os.makedirs(f"{base_path}/log", mode=777)
-        os.system(f"chmod 777 {base_path}/log")
-    date = time.strftime("%Y-%m-%d", time.localtime(time.time()))
-    log = Logger(base_path,
-                 base_path + f"/log/{date}.log",
-                 level="debug").logger
-
-    client = Client()
-    task_ordinary_work(client, log)

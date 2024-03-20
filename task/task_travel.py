@@ -9,7 +9,8 @@ travel_log = Logger(
     base_path,
     os.path.abspath("./log/travel.log"),
     level="debug",
-    screen=False).logger
+    screen=False,
+    when='').logger
 
 
 def task_travel(client):
@@ -22,7 +23,7 @@ def task_travel(client):
     all_character_codes = character_cfg.keys()
     areas_name = client.task.Travel['travel_areas']
     # 获取当前出游列表
-    travel_list = list_travel_record(client, log)
+    travel_list = list_travel_record(client)
     for travel in travel_list.content:
         # 等待6分钟接近完成任务
         if travel.travelGroup.endTime:
@@ -31,7 +32,7 @@ def task_travel(client):
                 log.info(
                     f'{[x.name for x in travel.travelGroup.travelingCharacters]}[{travel.travelGroup.name}]即将完成，等待{wait_s}s')
                 time.sleep(wait_s)
-                task_travel(client, log)
+                task_travel(client)
                 return
         if travel.travelGroup.status == 2:
             # 收取奖励
@@ -48,16 +49,18 @@ def task_travel(client):
                         reward.materialName + "*" + str(reward.value))
             for reward in resp.postCards:
                 if reward.scalarName:
-                    reward_l.append(
-                        reward.materialName + reward.scalarName + "*" + str(reward.value))
-                else:
+                    if reward.materialName + reward.scalarName + "*" + str(reward.value) not in reward_l:
+                        reward_l.append(
+                            reward.materialName + reward.scalarName + "*" + str(reward.value))
+                elif reward.materialName + "*" + str(reward.value) not in reward_l:
                     reward_l.append(
                         reward.materialName + "*" + str(reward.value))
             res += ",".join(reward_l)
             log.info(res)
+            # travel_log.info(str(resp))
             travel_log.info(res)
             if client.task.Travel["exchange_postcard"]:
-                exchange_postcard(client, log)
+                exchange_postcard(client)
     # 整理出游列表
     travel_list = {}
     for c in character_cfg:
@@ -154,7 +157,7 @@ def task_travel(client):
                         consume.attributes['number']
                     ))
                     # 判断背包物品是否充足
-                    if not get_item(client, log,
+                    if not get_item(client,
                                     consume.materialCode,
                                     materialTypeCode='consumable',
                                     num=character_num):
@@ -169,20 +172,20 @@ def task_travel(client):
                     })
                     # 输出显示纪念品/明信片收集列表
                     if group_name != '时光之旅':
-                        cal_travel_gift(client, log, area_name,
+                        cal_travel_gift(client, area_name,
                                         group_name, aid, gid)
-                        cal_travel_postcard(client, log, area_name, group_name,
+                        cal_travel_postcard(client, area_name, group_name,
                                             aid, gid,
                                             travel_characters[:character_num])
                     else:
-                        cal_travel_postcard(client, log, area_name, group_name,
+                        cal_travel_postcard(client, area_name, group_name,
                                             aid, gid,
                                             travel_characters[:character_num])
                     # 获取当前出游列表
-                    list_travel_record(client, log)
+                    list_travel_record(client)
 
 
-def list_travel_record(client, log):
+def list_travel_record(client):
     resp = client.call_api(
         api_url='TravelV2/ListTravelRecord',
         **{'page': 1,
@@ -208,7 +211,7 @@ def list_travel_record(client, log):
         status = param_pb2.PlayStatus.Name(
             t.travelGroup.status)
         characters = [x.name for x in t.travelGroup.travelingCharacters]
-        log.info(
+        client.log.info(
             "{}{}[{}]:{},剩余时间:{}/{},结束时间:{}".format(
                 t.travelArea.areaName,
                 t.travelGroup.name,
@@ -254,7 +257,7 @@ def get_areaid_groupid(client, area_name, group_name):
 
 def calculate_travel_consume(client, area_id, group_id, character_codes):
     if not character_codes:
-        log.error('task_tavel:character_codes为空')
+        client.log.error('task_tavel:character_codes为空')
     resp = client.call_api(
         api_url='TravelV2/CalculateTravelConsume',
         **{'areaId': area_id,
@@ -277,7 +280,7 @@ def list_travels_character(client, group_id):
     return resp
 
 
-def buy_item(client, log, materialCode, num):
+def buy_item(client, materialCode, num):
     exchange_list = client.call_api(
         "Scalar/ListCoinExchangeRelation", page=1, pageSize=60)
     for exchange in exchange_list.content:
@@ -289,11 +292,11 @@ def buy_item(client, log, materialCode, num):
                             times=num)
             return True
     else:
-        log.error(f'购买{materialCode}失败')
+        client.log.error(f'购买{materialCode}失败')
         return False
 
 
-def get_item(client, log, materialCode, materialTypeCode='consumable', num=0):
+def get_item(client, materialCode, materialTypeCode='consumable', num=0):
     itemlist = client.call_api("Material/ListMaterial",
                                materialTypeCode=materialTypeCode,
                                isOwn=1,
@@ -303,20 +306,21 @@ def get_item(client, log, materialCode, materialTypeCode='consumable', num=0):
     for item in itemlist.content[::-1]:
         if item.code == materialCode:
             if item.statistics.value >= num:
-                log.info(f'背包中{item.name}*{item.statistics.value},物品充足。')
+                client.log.info(
+                    f'背包中{item.name}*{item.statistics.value},物品充足。')
                 return True
             else:
                 if num:
-                    log.info(f'背包中{item.name}不足，商店购买中...')
-                    return buy_item(client, log, materialCode, num)
+                    client.log.info(f'背包中{item.name}不足，商店购买中...')
+                    return buy_item(client, materialCode, num)
             break
     else:
         if num:
-            log.info(f'背包中{materialCode}不足，商店购买中...')
-            return buy_item(client, log, materialCode, num)
+            client.log.info(f'背包中{materialCode}不足，商店购买中...')
+            return buy_item(client, materialCode, num)
 
 
-def cal_travel_gift(client, log, area_name, group_name, aid, gid):
+def cal_travel_gift(client, area_name, group_name, aid, gid):
     # 获取背包纪念品列表
     own_gift_list = []
     res = client.call_api('Material/ListMaterial', **{
@@ -333,7 +337,7 @@ def cal_travel_gift(client, log, area_name, group_name, aid, gid):
         possible_rewards.append(item.materialName)
     # 尚未获得
     do_not_have = set(possible_rewards) - set(own_gift_list)
-    log.info('{}{}纪念品收集进度({}/{}),未收集列表{}'.format(
+    client.log.info('{}{}纪念品收集进度({}/{}),未收集列表{}'.format(
         area_name, group_name,
         len(possible_rewards) - len(do_not_have),
         len(possible_rewards),
@@ -347,9 +351,10 @@ def cal_travel_gift(client, log, area_name, group_name, aid, gid):
     ))
 
 
-def cal_travel_postcard(client, log, area_name, group_name, aid, gid, characters):
+def cal_travel_postcard(client, area_name, group_name, aid, gid, characters):
     # 获取背包明信片列表
     own_postcard_list = []
+    characters_name = []
     for c in characters:
         res = client.call_api('Material/ListHandbookMaterialByCharacterCode',
                               **{'code': c,
@@ -359,6 +364,10 @@ def cal_travel_postcard(client, log, area_name, group_name, aid, gid, characters
         for postcard in res.content:
             if postcard.statistics.value:
                 own_postcard_list.append(postcard.statistics.typeName)
+            if postcard.attributes.get('characterName'):
+                if postcard.attributes['characterName'] not in characters_name:
+                    characters_name.append(
+                        postcard.attributes['characterName'])
     # 获取当前选择区域明信片列表
     possible_rewards = []
     reward_info = client.call_api(
@@ -369,51 +378,34 @@ def cal_travel_postcard(client, log, area_name, group_name, aid, gid, characters
                 possible_rewards.append(postcard.materialName)
     # 尚未获得
     do_not_have = set(possible_rewards) - set(own_postcard_list)
-    log.info('{}{}选定助手明信片收集进度({}/{}),未收集列表{}'.format(
+    client.log.info('{}{}{}明信片收集进度({}/{}),未收集列表{}'.format(
         area_name, group_name,
+        characters_name,
         len(possible_rewards) - len(do_not_have),
         len(possible_rewards),
         do_not_have
     ))
-    travel_log.info('{}{}选定助手明信片收集进度({}/{}),未收集列表{}'.format(
+    travel_log.info('{}{}{}明信片收集进度({}/{}),未收集列表{}'.format(
         area_name, group_name,
+        characters_name,
         len(possible_rewards) - len(do_not_have),
         len(possible_rewards),
         do_not_have
     ))
 
 
-def exchange_postcard(client, log):
+def exchange_postcard(client):
     # 获得背包时光碎片数量
     res = client.call_api(
         "Scalar/GetUserMaterialScalar",
         scalarCode="_scalar_material_amount",
         materialCode="time_ticket")
     if res.integerValue < 5:
-        log.info(f"当前时光碎片数量：{res.integerValue}")
+        client.log.info(f"当前时光碎片数量：{res.integerValue}")
     else:
         # 兑换
         res = client.call_api(
             "TravelV2/ExchangePostcard")
+        travel_log.debug(str(res))
         if res.name:
-            log.info(f"兑换成功，恭喜获得：{res.name}")
-
-
-if __name__ == '__main__':
-    import os
-    from util.logger import Logger
-    from main import Client
-    # log信息配置
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    if not os.path.exists(base_path + "/log"):
-        os.makedirs(f"{base_path}/log", mode=777)
-        os.system(f"chmod 777 {base_path}/log")
-    date = time.strftime("%Y-%m-%d", time.localtime(time.time()))
-    log = Logger(base_path,
-                 base_path + f"/log/{date}.log",
-                 level="debug").logger
-    # main
-    client = Client()
-    task_travel(client, log)
-    # debug
-    # exchange_postcard(client, log)
+            client.log.info(f"兑换成功，恭喜获得：{res.name}")

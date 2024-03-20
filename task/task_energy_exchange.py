@@ -1,5 +1,7 @@
 import proto.character_pb2 as character_pb2
 
+from task.task_update_character_json import get_cname_json
+
 
 def task_energy_exchange(client):
     # 任务：成长值兑换
@@ -15,18 +17,19 @@ def task_energy_exchange(client):
         character_code = client.task.EnergyExchange['character_code']
         res2 = client.call_api("Character/EnergyExchange",
                                characterCode=character_code)
+        name = get_cname_json(log, character_code)
         if res2.characterCode == character_code:
-            log.info(f"{character_code}成长值兑换成功")
+            log.info(f"「{name}」成长值兑换成功")
             # # 助手升级
             char_info = client.call_api(
                 "Character/ListCharacter", page=1, pageSize=60)
             for char in char_info.content:
                 if char.existNextLevel:
-                    log.debug(f"存在后续等级{char.existNextLevel}")
+                    log.debug("存在后续等级")
                     for statistic in char.statistics:
                         if statistic.typeCode == 'character_favour':
                             if statistic.value > statistic.maxValue:
-                                log.info(f"{char.name}满足升级条件，升级中....")
+                                log.info(f"「{char.name}」满足升级条件，升级中....")
                                 client.call_api(
                                     "Character/CharacterLevelManualUpgrade",
                                     code=char.code)
@@ -42,7 +45,7 @@ def task_energy_exchange(client):
                             reward_detail = ""
                             for r in reward.rewards:
                                 reward_detail += f"{r.name}*{r.num} "
-                            log.info("{}领取{}奖励：{}".format(
+                            log.info("「{}」领取{}奖励：{}".format(
                                 char.name,
                                 reward.level,
                                 reward_detail
@@ -53,4 +56,4 @@ def task_energy_exchange(client):
                                 rewardCollectionId=reward.rewardCollectionId)
 
         else:
-            log.info(f"{character_code}成长值兑换失败")
+            log.info(f"「{name}」成长值兑换失败")

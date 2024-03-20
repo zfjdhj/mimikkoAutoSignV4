@@ -39,7 +39,6 @@ import proto.travelv2_pb2_grpc as travelv2_pb2_grpc
 import proto.work_pb2 as work_pb2
 import proto.work_pb2_grpc as work_pb2_grpc
 
-
 from task.task_travel import task_travel
 from task.task_coin_mall import task_coin_mall
 from task.task_energy_center import task_energy_center
@@ -91,7 +90,7 @@ class Client():
                 ('grpc.max_metadata_size', MAX_METADATA_LENGTH)
             )
         )
-        self.load_config(device_id, authorization)
+        self.load_config()
         self.mimikko_version = self.basic.mimikko_version
         self.delay = self.basic.delay
         if device_id and authorization:
@@ -109,7 +108,7 @@ class Client():
             self.log.error("缺少账户信息,device_id authorization")
             sys.exit(0)
 
-    def load_config(self, device_id, authorization):
+    def load_config(self,):
         with open(self.cfg_file, 'r', encoding='utf-8') as f:
             config = yaml.safe_load(f)
         self.basic = SimpleNamespace(**config['Basic'])

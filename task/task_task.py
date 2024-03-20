@@ -24,7 +24,7 @@ def task_task(client):
             if 0 < wait_s < 0.1 * client.basic.scheduler_interval * 3600:
                 log.info(f'{task.name}即将完成，等待{wait_s}s')
                 time.sleep(wait_s)
-                task_task(client, log)
+                task_task(client)
                 return
         status = param_pb2.PlayStatus.Name(task.status)
         if status == 'CAN_RECEIVE':
@@ -77,29 +77,3 @@ def task_task(client):
             continue
         break
     log.info("助手任务暂时没有事情做")
-
-
-if __name__ == '__main__':
-
-    import os
-
-    from main import Client
-    from util.logger import Logger
-
-    # log信息配置
-
-    base_path = os.path.dirname(os.path.abspath(__file__))
-
-    if base_path == "":
-        base_path = "/home/runner/work/mimikkoAutoSignIn/mimikkoAutoSignIn"
-        os.system(f"chmod 777 {base_path}")
-    if not os.path.exists(base_path + "/log"):
-        os.makedirs(f"{base_path}/log", mode=777)
-        os.system(f"chmod 777 {base_path}/log")
-    date = time.strftime("%Y-%m-%d", time.localtime(time.time()))
-    log = Logger(base_path,
-                 base_path + f"/log/{date}.log",
-                 level="debug").logger
-
-    client = Client()
-    task_task(client, log)

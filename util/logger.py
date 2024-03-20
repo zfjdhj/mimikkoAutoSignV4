@@ -42,8 +42,11 @@ class Logger(object):
             self.logger.addHandler(sh)
         # file
         format_str = logging.Formatter(fmt, '%Y%m%d-%H:%M:%S')  # 设置日志格式
-        fh = handlers.TimedRotatingFileHandler(
-            filename=filename, when=when, interval=interval, backupCount=backCount, encoding="utf-8"
-        )
+        if when:
+            fh = handlers.TimedRotatingFileHandler(
+                filename=filename, when=when, interval=interval, backupCount=backCount, encoding="utf-8"
+            )
+        else:
+            fh = logging.FileHandler(filename=filename, encoding="utf-8")
         fh.setFormatter(format_str)
         self.logger.addHandler(fh)
