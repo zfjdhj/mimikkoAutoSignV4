@@ -71,6 +71,7 @@
 20240322：
 - CoinMall(硬币商店): add 额外换取活动添加物品
 - fix bug
+
 20240320：
 - EnergyCenter(能源中心)：add 自动使用电力充能券
 - OrdinaryWork(公会悬赏)：add 自动使用工作刷新券

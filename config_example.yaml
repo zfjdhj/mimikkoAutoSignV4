@@ -65,11 +65,17 @@ Task:
     # 任务：硬币商店:硬币换取每周刷新
     enable: True
     exchange_list: 
+    # 补签卡
     - _supplementary_signature_card
+    # 工作刷新券
     - _work_refresh_ticket
+    # 电力充能券
     - energy_speedup_ticket
+    # 硬币兑换八周年限时时光旅票
     - coin_to_travel_time_invitation_time_limit_8th
+    # 硬币兑换八周年限时能源罐
     - coin_to_energy_pack_s_time_limit_8th
+    # 硬币兑换八周年限时硬币包小
     - coin_to_coin_pack_s_time_limit_8th
   ActivitySign:
     # 任务：活动签到
