@@ -23,3 +23,16 @@ def task_coin_mall(client):
                     exchange.target.materialName,
                     times)
                 log.info(f"硬币换取{times}次{exchange.target.materialName}")
+        elif exchange.relationCode in client.task.CoinMall[
+                'exchange_list']:
+            times = exchange.maxTimes - exchange.userTimes
+            log.debug(f"本周还可换取{times}次{exchange.target.materialName}")
+            if exchange.maxTimes > exchange.userTimes:
+                # # 兑换
+                buy_item(
+                    client,
+                    exchange.target.materialCode,
+                    exchange.target.materialName,
+                    times,
+                    relation_code=exchange.relationCode)
+                log.info(f"硬币换取{times}次{exchange.target.materialName}")

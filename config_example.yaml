@@ -64,7 +64,13 @@ Task:
   CoinMall:
     # 任务：硬币商店:硬币换取每周刷新
     enable: True
-    exchange_list: ['_supplementary_signature_card','_work_refresh_ticket','energy_speedup_ticket']
+    exchange_list: 
+    - _supplementary_signature_card
+    - _work_refresh_ticket
+    - energy_speedup_ticket
+    - coin_to_travel_time_invitation_time_limit_8th
+    - coin_to_energy_pack_s_time_limit_8th
+    - coin_to_coin_pack_s_time_limit_8th
   ActivitySign:
     # 任务：活动签到
     enable: True

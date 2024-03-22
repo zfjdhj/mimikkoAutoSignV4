@@ -284,11 +284,19 @@ def list_travels_character(client, group_id):
     return resp
 
 
-def buy_item(client, materialCode, materialName, num):
+def buy_item(client, materialCode, materialName, num, relation_code=""):
     exchange_list = client.call_api(
         "Scalar/ListCoinExchangeRelation", page=1, pageSize=60)
     for exchange in exchange_list.content:
-        if exchange.target.materialCode == materialCode:
+        if relation_code:
+            if exchange.relationCode == relation_code:
+                # 购买物品
+                client.call_api("Scalar/Exchange",
+                                relationCode=exchange.relationCode,
+                                relationType=exchange.relationType,
+                                times=num)
+                return True
+        elif exchange.target.materialCode == materialCode:
             # 购买物品
             client.call_api("Scalar/Exchange",
                             relationCode=exchange.relationCode,

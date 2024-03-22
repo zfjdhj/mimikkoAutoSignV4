@@ -60,20 +60,21 @@
     |补签卡|`_supplementary_signature_card`|
     |工作刷新券|`_work_refresh_ticket`|
     |电力充能券|`energy_speedup_ticket`|
+    |硬币兑换八周年限时时光旅票|`coin_to_travel_time_invitation_time_limit_8th`|
+    |硬币兑换八周年限时能源罐|`coin_to_energy_pack_s_time_limit_8th`|
+    |硬币兑换八周年限时硬币包小|`coin_to_coin_pack_s_time_limit_8th`|
     
 3. ```python main.py```
 ## 说明
 这只是一个脚本，不要期望有太多功能。  
 ## 更新
-20240322
+20240322：
+- CoinMall(硬币商店): add 额外换取活动添加物品
 - fix bug
-20240320：注意config修改
+20240320：
 - EnergyCenter(能源中心)：add 自动使用电力充能券
 - OrdinaryWork(公会悬赏)：add 自动使用工作刷新券
 - OrdinaryWork(公会悬赏)：add 优先完成低等级耗时少的任务
 - Travel(助手出游): add 旅行区域满人跳转下一区域
 - Travel(助手出游): add 明信片兑换
 - Travel(助手出游): add 自行添加助手指定区域出游  
-
-TODO(等3.22活动更新)
-- CoinMall(硬币商店): 额外换取活动添加物品
