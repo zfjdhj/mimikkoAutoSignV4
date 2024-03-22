@@ -14,7 +14,7 @@
     |Task|每日任务|`task_characters`见下表|完成任务获得成长值|
     |MailReceive|邮件领取|-|邮件奖励一键领取|
     |ActivitySign|活动签到|-|活动签到|
-    |UpdateCharacterJson|助手更新|-|更新`助手列表.json`，没有实在意义|
+    |UpdateCharacterJson|助手更新|-|更新`助手列表.json`，务必启用|
     |Travel|助手出游|`travel_characters`见下表|旅行收集纪念品|
     
     
@@ -65,6 +65,8 @@
 ## 说明
 这只是一个脚本，不要期望有太多功能。  
 ## 更新
+20240322
+- fix bug
 20240320：注意config修改
 - EnergyCenter(能源中心)：add 自动使用电力充能券
 - OrdinaryWork(公会悬赏)：add 自动使用工作刷新券

@@ -69,7 +69,7 @@ Task:
     # 任务：活动签到
     enable: True
   UpdateCharacterJson:
-    # 任务：助手更新:更新`助手列表.json`，没有实在意义
+    # 任务：助手更新:更新`助手列表.json`，务必启用
     enable: True
   Travel:
     # 任务：助手出游:旅行收集纪念品

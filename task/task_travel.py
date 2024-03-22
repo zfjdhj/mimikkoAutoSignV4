@@ -2,6 +2,7 @@ import os
 import time
 
 import proto.param_pb2 as param_pb2
+from task.task_update_character_json import get_cname_json
 from util.logger import Logger
 
 base_path = os.path.dirname(os.path.abspath(__file__))
@@ -147,24 +148,27 @@ def task_travel(client):
                         ))
                         log.info("config:character_upper_limit:1设置项取消此提示")
                         return
+                    name = get_cname_json(
+                        log, travel_characters[:character_num], [])
                     consume = calculate_travel_consume(
                         client, aid, gid, travel_characters[:character_num]
                     ).travelConsumes[0]
                     log.info('{}{}{}消耗{}*{}'.format(
                         area_name, group_name,
-                        travel_characters[:character_num],
+                        name,
                         consume.materialName,
                         consume.attributes['number']
                     ))
                     # 判断背包物品是否充足
                     if not get_item(client,
                                     consume.materialCode,
+                                    consume.materialName,
                                     materialTypeCode='consumable',
                                     num=character_num):
                         log.error('判断物品充足失败')
                         return
                     # 开始出游
-                    log.info(f'{travel_characters[:character_num]}开始出游')
+                    log.info(f'{name}开始出游')
                     client.call_api('TravelV2/Travel', **{
                         'areaId': aid,
                         'travelGroupId': gid,
@@ -280,7 +284,7 @@ def list_travels_character(client, group_id):
     return resp
 
 
-def buy_item(client, materialCode, num):
+def buy_item(client, materialCode, materialName, num):
     exchange_list = client.call_api(
         "Scalar/ListCoinExchangeRelation", page=1, pageSize=60)
     for exchange in exchange_list.content:
@@ -292,11 +296,11 @@ def buy_item(client, materialCode, num):
                             times=num)
             return True
     else:
-        client.log.error(f'购买{materialCode}失败')
+        client.log.error(f'购买{materialName}失败')
         return False
 
 
-def get_item(client, materialCode, materialTypeCode='consumable', num=0):
+def get_item(client, materialCode, materialName, materialTypeCode='consumable', num=0):
     itemlist = client.call_api("Material/ListMaterial",
                                materialTypeCode=materialTypeCode,
                                isOwn=1,
@@ -312,12 +316,12 @@ def get_item(client, materialCode, materialTypeCode='consumable', num=0):
             else:
                 if num:
                     client.log.info(f'背包中{item.name}不足，商店购买中...')
-                    return buy_item(client, materialCode, num)
+                    return buy_item(client, materialCode, materialName, num)
             break
     else:
         if num:
-            client.log.info(f'背包中{materialCode}不足，商店购买中...')
-            return buy_item(client, materialCode, num)
+            client.log.info(f'背包中{materialName}不足，商店购买中...')
+            return buy_item(client, materialCode, materialName, num)
 
 
 def cal_travel_gift(client, area_name, group_name, aid, gid):
