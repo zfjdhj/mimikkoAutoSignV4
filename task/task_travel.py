@@ -88,7 +88,8 @@ def task_travel(client):
                         log.info(f'{area.areaName}暂时没有出游次数')
                         if not client.task.Travel['auto_next_area']:
                             break
-                        next_area = areas_name[areas_name.index(area_name) + 1]
+                        next_area = areas_name[(areas_name.index(
+                            area_name) + 1) % len(areas_name)]
                         log.info(f'{travel_list[area_name]}移动至下一区域{next_area}')
                         if not travel_list.get(next_area):
                             travel_list[next_area] = travel_list[area_name]
@@ -380,6 +381,8 @@ def cal_travel_postcard(client, area_name, group_name, aid, gid, characters):
                 if postcard.attributes['characterName'] not in characters_name:
                     characters_name.append(
                         postcard.attributes['characterName'])
+    if not characters_name:
+        characters_name = get_cname_json(client.log, characters)
     # 获取当前选择区域明信片列表
     possible_rewards = []
     reward_info = client.call_api(
@@ -420,4 +423,4 @@ def exchange_postcard(client):
             "TravelV2/ExchangePostcard")
         travel_log.debug(str(res))
         if res.name:
-            client.log.info(f"兑换成功，恭喜获得：{res.name}")
+            client.log.info(f"时光碎片兑换成功，恭喜获得：{res.name}")

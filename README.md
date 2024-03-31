@@ -68,6 +68,10 @@
 ## 说明
 这只是一个脚本，不要期望有太多功能。  
 ## 更新
+20240331：
+- fix bug：Travel:'ExchangePostcard'
+- fix bug：Travel:移动下一区域
+
 20240322：
 - CoinMall(硬币商店): add 额外换取活动添加物品
 - fix bug
