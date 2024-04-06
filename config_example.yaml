@@ -19,6 +19,7 @@ Basic:
   scheduler_interval: 1
 
 # 脚本功能相关设置
+# 为避免错误操作 按需启用个功能
 Task:
 # 以下顺序就是脚本执行顺序，可调换顺序
   Sign:
@@ -27,24 +28,24 @@ Task:
     enable: True
   EnergyExchange:
     # 任务：能量值兑换成长值。随时间增加的那个，不是电力能源
-    enable: True
+    enable: False
     # 要换给哪个助手 "character_code"
     character_code: "character_miruku2"
     # 领取助手升级奖励 默认(全部)助手满足成长值自动升级
     receive_level_reward: True
   EnergyCenter:
     # 任务：能源中心:硬币换电力
-    enable: True
+    enable: False
     # 自动使用电力充能券
     auto_use_energy_speedup_ticket: False
   OrdinaryWork:
     # 任务：公会悬赏:电力换硬币
-    enable: True
+    enable: False
     # 要接取悬赏任务的助手
     work_characters: ["character_ruri", "character_nemuri"]
     # 自动使用背包内的“能源罐”
     auto_use_energy_pack:
-      enable: True
+      enable: False
       # 低于指定值使用
       energy_min: 500
       # 补充至指定值
@@ -53,17 +54,25 @@ Task:
     auto_use_work_refresh_ticket: False
     # 是否优先完成低等级耗时少的任务，使用工作刷新券时默认为true
     work_reversed: True
+    # 等待300秒即将完成的任务
+    wait_for_finish: 300
+    # 等待完成后助手执行任务（用于完成一些自定义操作）
+    then_do_task: task_travel
   Task:
     # 任务：助手每日任务:完成可获得好感度
-    enable: True
+    enable: False
+    # 等待300秒即将完成的任务
+    wait_for_finish: 300
+    # 等待完成后助手执行任务（用于完成一些自定义操作）
+    then_do_task: task_task
     # 要接取助手任务的助手
     task_characters: ["character_momona", "character_miruku2"]
   MailReceive:
     # 任务：邮件领取:一键领取邮件奖励
-    enable: True
+    enable: False
   CoinMall:
     # 任务：硬币商店:硬币换取每周刷新
-    enable: True
+    enable: False
     exchange_list: 
     # 补签卡
     - _supplementary_signature_card
@@ -79,13 +88,13 @@ Task:
     - coin_to_coin_pack_s_time_limit_8th
   ActivitySign:
     # 任务：活动签到
-    enable: True
+    enable: False
   UpdateCharacterJson:
     # 任务：助手更新:更新`助手列表.json`，务必启用
-    enable: True
+    enable: False
   Travel:
     # 任务：助手出游:旅行收集纪念品
-    enable: True
+    enable: False
     # 旅行区域：北美洲，南美洲，欧洲，亚洲
     travel_areas: ["北美洲","南美洲","欧洲","亚洲"]
     # 旅行类别：纪念之旅，心灵之旅，时光之旅
@@ -100,21 +109,25 @@ Task:
     auto_next_area: False
     # 明信片兑换(重复明信片掉落时光碎片，5碎片兑换1)
     exchange_postcard: False
+    # 等待300秒即将完成的任务
+    wait_for_finish: 300
+    # 等待完成后助手执行任务（用于完成一些自定义操作）
+    then_do_task: task_travel
     # 出游助手列表
     travel_characters:
-      # 自行添加不同的助手
+      # 自行添加修改不同的助手
       character_ruri:
-        travel_area: 北美洲
-        travel_group: 纪念之旅
+        travel_area: 欧洲
+        travel_group: 时光之旅
       character_nemuri:
-        travel_area: 北美洲
-        travel_group: 纪念之旅
+        travel_area: 欧洲
+        travel_group: 时光之旅
       character_melly:
-        travel_area: 北美洲
-        travel_group: 纪念之旅
+        travel_area: 欧洲
+        travel_group: 时光之旅
       character_momona:
-        travel_area: 南美洲
-        travel_group: 纪念之旅
+        travel_area: 亚洲
+        travel_group: 时光之旅
       character_miruku2:
-        travel_area: 北美洲
-        travel_group: 纪念之旅
+        travel_area: 欧洲
+        travel_group: 时光之旅

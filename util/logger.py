@@ -2,6 +2,7 @@ import logging
 from logging import handlers
 import datetime
 import pytz
+import os
 
 
 class Logger(object):
@@ -27,8 +28,12 @@ class Logger(object):
         fmt="[%(asctime)s][%(filename)s:%(lineno)d][%(levelname)s]:%(message)s",
         sfmt="[%(asctime)s][%(module)s:%(lineno)d][%(levelname)s]:%(message)s",
         screen=True
-
     ):
+        dir = os.path.dirname(filename)
+        if not os.path.exists(dir):
+            print(f'创建日志目录：{dir}')
+            os.makedirs(dir)
+            os.system(f"chmod 777 {dir}")
         self.logger = logging.getLogger(filename)
         self.logger.handlers = []
         # 设置时间格式

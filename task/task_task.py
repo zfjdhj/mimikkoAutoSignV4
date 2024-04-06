@@ -18,14 +18,13 @@ def task_task(client):
         [x for x in task_list_daily.content]
     # 收取已完成任务奖励
     for task in task_list:
-        # 等待6分钟接近完成任务
+        # 等待300秒即将完成的任务
         if task.remainingTime:
             wait_s = int(task.remainingTime - time.time())
-            if 0 < wait_s < 0.1 * client.basic.scheduler_interval * 3600:
+            if 0 < wait_s < client.task.Task['wait_for_finish']:
                 log.info(f'{task.name}即将完成，等待{wait_s}s')
                 time.sleep(wait_s)
-                task_task(client)
-                return
+                return client.task.Task['then_do_task']
         status = param_pb2.PlayStatus.Name(task.status)
         if status == 'CAN_RECEIVE':
             # 收取奖励

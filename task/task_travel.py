@@ -26,15 +26,14 @@ def task_travel(client):
     # 获取当前出游列表
     travel_list = list_travel_record(client)
     for travel in travel_list.content:
-        # 等待6分钟接近完成任务
+        # 等待300秒即将完成的任务
         if travel.travelGroup.endTime:
             wait_s = int(travel.travelGroup.endTime.seconds - time.time())
-            if 0 < wait_s < 0.1 * client.basic.scheduler_interval * 3600:
+            if 0 < wait_s < client.task.Travel['wait_for_finish']:
                 log.info(
                     f'{[x.name for x in travel.travelGroup.travelingCharacters]}[{travel.travelGroup.name}]即将完成，等待{wait_s}s')
                 time.sleep(wait_s)
-                task_travel(client)
-                return
+                return client.task.Travel['then_do_task']
         if travel.travelGroup.status == 2:
             # 收取奖励
             resp = client.call_api('TravelV2/ReceiveTravelReward',

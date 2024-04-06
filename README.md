@@ -11,7 +11,7 @@
     |EnergyExchange|成长值兑换|`character_code`见下表|包含助手升级以及领取奖励|
     |EnergyCenter|能源中心|-|默认硬币换电力|  
     |OrdinaryWork|工会悬赏任务|`work_characters`见下表|电力换硬币，积累公会等级|  
-    |Task|每日任务|`task_characters`见下表|完成任务获得成长值|
+    |Task|助手任务|`task_characters`见下表|完成任务获得成长值|
     |MailReceive|邮件领取|-|邮件奖励一键领取|
     |ActivitySign|活动签到|-|活动签到|
     |UpdateCharacterJson|助手更新|-|更新`助手列表.json`，务必启用|
@@ -68,6 +68,21 @@
 ## 说明
 这只是一个脚本，不要期望有太多功能。  
 ## 更新
+20240406：
+- fix bug：log文件夹创建错误(#8)
+- OrdinaryWork(公会悬赏),Task(助手任务),Travel(助手出游)：add 等待300秒即将完成的任务
+(防止由于网络延时，致使任务完成延后至下一脚本循环，浪费时间收益)
+- OrdinaryWork(公会悬赏),Task(助手任务),Travel(助手出游)：add 等待时间完成后执行操作
+(用于完成一些自定义操作)
+
+    例如：一个助手同时处于“公会悬赏”，“助手任务”，“助手出游”名单中
+    ，即config文件，work_characters，task_characters，travel_characters中  
+    默认情况下：等待300s完成任务“助手出游”，仍会安排“助手出游”  
+    自定义：`then_do_task: task_ordinary_work`后，待300s后会安排“公会悬赏”。  
+    即目前助手优先级：大时间循环下参考config中task先后顺序，等待300s时参考`then_do_task`
+
+- `config.yaml`有变动注意修改，为避免错误操作 按需启用各功能
+
 20240331：
 - fix bug：Travel:'ExchangePostcard'
 - fix bug：Travel:移动下一区域

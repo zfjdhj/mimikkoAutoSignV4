@@ -17,4 +17,4 @@ def task_sign(client):
         # 2.签到
         log.info("今日还未签到，签到中...")
         client.call_api("Sign/Sign", **{"characterCode": character_code})
-    return res
+    return

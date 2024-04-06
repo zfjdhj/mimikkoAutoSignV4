@@ -11,6 +11,7 @@ from types import SimpleNamespace
 
 from util.logger import Logger
 from util.openstick_led import red_on
+
 import proto.activitynew_pb2 as activitynew_pb2
 import proto.activitynew_pb2_grpc as activitynew_pb2_grpc
 import proto.auth_pb2 as auth_pb2
@@ -50,11 +51,9 @@ from task.task_task import task_task
 from task.task_activity_sign import task_activity_sign
 from task.task_update_character_json import task_update_character_json
 
-# log信息配置
+
 base_path = os.path.dirname(os.path.abspath(__file__))
-if not os.path.exists(base_path + "/log"):
-    os.makedirs(f"{base_path}/log", mode=777)
-    os.system(f"chmod 777 {base_path}/log")
+
 # 启动参数设置
 if len(sys.argv) == 3:
     device_id = sys.argv[1]
@@ -221,7 +220,9 @@ def task_start(device_id, authorization):
         if client.task.__dict__[task_name]['enable']:
             task = globals()['task_' + camel_to_snake(task_name)]
             try:
-                task(client)
+                res = task(client)
+                if res in globals():
+                    globals()[res](client)
             except Exception as e:
                 log.error(f"{task_name}:{e}")
                 err_openstick(log)

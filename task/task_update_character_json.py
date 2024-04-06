@@ -77,7 +77,6 @@ def write_character_json(old_data, new_character_data, path):
 def get_cname_json(log, characters, res=[]):
     if type(characters) == list:
         for c in characters:
-            print(c)
             res.append(get_cname_json(log, c, res))
         return res
     elif type(characters) == str:

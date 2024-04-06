@@ -16,14 +16,13 @@ def task_ordinary_work(client):
     log.debug(f"今日悬赏任务{work_list.total}个")
     # 收取已完成任务奖励
     for work in work_list.content:
-        # 等待6分钟接近完成任务
+        # 等待300秒即将完成的任务
         if work.endAt.seconds:
             wait_s = int(work.endAt.seconds - time.time())
-            if 0 < wait_s < 0.1 * client.basic.scheduler_interval * 3600:
+            if 0 < wait_s < client.task.OrdinaryWork['wait_for_finish']:
                 log.info(f'[{work.name}]即将完成，等待{wait_s}s')
                 time.sleep(wait_s)
-                task_ordinary_work(client)
-                return
+                return client.task.OrdinaryWork['then_do_task']
         status = work_pb2.PlayStatus.Name(work.playStatus)
         if status == 'CAN_RECEIVE':
             # # 收取奖励
