@@ -13,6 +13,7 @@
     |OrdinaryWork|工会悬赏任务|`work_characters`见下表|电力换硬币，积累公会等级|  
     |Task|助手任务|`task_characters`见下表|完成任务获得成长值|
     |MailReceive|邮件领取|-|邮件奖励一键领取|
+    |CoinMall|硬币商店|-|硬币换取每周刷新|
     |ActivitySign|活动签到|-|活动签到|
     |UpdateCharacterJson|助手更新|-|更新`助手列表.json`，务必启用|
     |Travel|助手出游|`travel_characters`见下表|旅行收集纪念品|
@@ -63,13 +64,33 @@
     |硬币兑换八周年限时时光旅票|`coin_to_travel_time_invitation_time_limit_8th`|
     |硬币兑换八周年限时能源罐|`coin_to_energy_pack_s_time_limit_8th`|
     |硬币兑换八周年限时硬币包小|`coin_to_coin_pack_s_time_limit_8th`|
+
+    |可支持操作|then_do_task|
+    | :- | :- |
+    |从头开始执行一遍|task_start|
+    |每日签到|task_sign|
+    |成长值兑换|task_energy_exchange|
+    |能源中心|task_energy_center|
+    |工会悬赏任务|task_ordinary_work|
+    |助手任务|task_task|
+    |邮件领取|task_mail_receive|
+    |硬币商店|task_coin_mall|
+    |活动签到|task_activity_sign|
+    |助手更新|task_update_character_json|
+    |助手出游|task_travel|
+    
     
 3. ```python main.py```
 ## 说明
 这只是一个脚本，不要期望有太多功能。  
 ## 更新
+20240407: 
+- update: config_example.yaml中错误的默认操作(then_do_task)
+    [line:65]OrdinaryWork错误的指向了task_travel
+- update: readme.md 新增"可支持操作(then_do_task)"解释字段
+
 20240406：
-- fix bug：log文件夹创建错误(#8)
+- fix bug：log文件夹创建错误[#8](https://github.com/zfjdhj/mimikkoAutoSignV4/issues/8)
 - OrdinaryWork(公会悬赏),Task(助手任务),Travel(助手出游)：add 等待300秒即将完成的任务
 (防止由于网络延时，致使任务完成延后至下一脚本循环，浪费时间收益)
 - OrdinaryWork(公会悬赏),Task(助手任务),Travel(助手出游)：add 等待时间完成后执行操作

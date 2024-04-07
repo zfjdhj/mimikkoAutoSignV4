@@ -1,5 +1,5 @@
 Basic:
-# 抓包获得 "xxxxxxxxxx",务必保证device_id为常用登录设备
+  # 抓包获得 "xxxxxxxxxx",务必保证device_id为常用登录设备
   device_id: ""
   # 抓包获得 "Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxx" authorization和账号密码选填其一
   # authorization不填可能会导致[阁下您已在别处登录啦>_<] 不太安全
@@ -19,9 +19,9 @@ Basic:
   scheduler_interval: 1
 
 # 脚本功能相关设置
-# 为避免错误操作 按需启用个功能
+# 为避免错误操作 按需启用各功能
 Task:
-# 以下顺序就是脚本执行顺序，可调换顺序
+  # 以下顺序就是脚本执行顺序，可调换顺序
   Sign:
     # 任务：每日签到
     # 是否启用
@@ -57,7 +57,7 @@ Task:
     # 等待300秒即将完成的任务
     wait_for_finish: 300
     # 等待完成后助手执行任务（用于完成一些自定义操作）
-    then_do_task: task_travel
+    then_do_task: task_ordinary_work
   Task:
     # 任务：助手每日任务:完成可获得好感度
     enable: False
@@ -90,8 +90,9 @@ Task:
     # 任务：活动签到
     enable: False
   UpdateCharacterJson:
-    # 任务：助手更新:更新`助手列表.json`，务必启用
-    enable: False
+    # 任务：助手更新:更新`助手列表.json`，务必启用。
+    # 用不到助手名称相关功能可禁用（仅当作签到脚本）
+    enable: True
   Travel:
     # 任务：助手出游:旅行收集纪念品
     enable: False

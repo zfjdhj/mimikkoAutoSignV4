@@ -212,7 +212,7 @@ def camel_to_snake(camel):
     return underscore[1:] if underscore.startswith("_") else underscore
 
 
-def task_start(device_id, authorization):
+def task_start(device_id="", authorization="", client=""):
     client = Client(device_id, authorization)
     log = client.log
     log.info("脚本执行中....")
@@ -222,7 +222,7 @@ def task_start(device_id, authorization):
             try:
                 res = task(client)
                 if res in globals():
-                    globals()[res](client)
+                    globals()[res](client=client)
             except Exception as e:
                 log.error(f"{task_name}:{e}")
                 err_openstick(log)
