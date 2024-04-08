@@ -222,6 +222,7 @@ def task_start(device_id="", authorization="", client=""):
             try:
                 res = task(client)
                 if res in globals():
+                    client = Client(device_id, authorization)
                     globals()[res](client=client)
             except Exception as e:
                 log.error(f"{task_name}:{e}")

@@ -84,6 +84,8 @@
 ## 说明
 这只是一个脚本，不要期望有太多功能。  
 ## 更新
+- fix bug: 等待300s,连接超时
+
 20240407: 
 - update: config_example.yaml中错误的默认操作(then_do_task)
     [line:65]OrdinaryWork错误的指向了task_travel
