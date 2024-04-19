@@ -84,7 +84,11 @@
 ## 说明
 这只是一个脚本，不要期望有太多功能。  
 ## 更新
+20240419:
 - fix bug: 等待300s,连接超时
+- CoinMall(硬币商店):add 高级物资调换券兑换复刻服装，贵重物品开启需谨慎
+- CoinMall(硬币商店):del 过期物品兑换项
+- `config.yaml`有变动注意修改，为避免错误操作 按需启用各功能
 
 20240407: 
 - update: config_example.yaml中错误的默认操作(then_do_task)

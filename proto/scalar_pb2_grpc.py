@@ -39,6 +39,11 @@ class ScalarStub(object):
                 request_serializer=proto_dot_scalar__pb2.ExchangeRequest.SerializeToString,
                 response_deserializer=proto_dot_scalar__pb2.response4.FromString,
                 )
+        self.ListMallExchangeRelation = channel.unary_unary(
+                '/com.mimikko.app.api.general.scalar.Scalar/ListMallExchangeRelation',
+                request_serializer=proto_dot_scalar__pb2.ListMallExchangeRelationRequest.SerializeToString,
+                response_deserializer=proto_dot_scalar__pb2.ListMallExchangeRelationResponse.FromString,
+                )
 
 
 class ScalarServicer(object):
@@ -74,6 +79,12 @@ class ScalarServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListMallExchangeRelation(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ScalarServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -101,6 +112,11 @@ def add_ScalarServicer_to_server(servicer, server):
                     servicer.Exchange,
                     request_deserializer=proto_dot_scalar__pb2.ExchangeRequest.FromString,
                     response_serializer=proto_dot_scalar__pb2.response4.SerializeToString,
+            ),
+            'ListMallExchangeRelation': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListMallExchangeRelation,
+                    request_deserializer=proto_dot_scalar__pb2.ListMallExchangeRelationRequest.FromString,
+                    response_serializer=proto_dot_scalar__pb2.ListMallExchangeRelationResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -194,5 +210,22 @@ class Scalar(object):
         return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.scalar.Scalar/Exchange',
             proto_dot_scalar__pb2.ExchangeRequest.SerializeToString,
             proto_dot_scalar__pb2.response4.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListMallExchangeRelation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/com.mimikko.app.api.general.scalar.Scalar/ListMallExchangeRelation',
+            proto_dot_scalar__pb2.ListMallExchangeRelationRequest.SerializeToString,
+            proto_dot_scalar__pb2.ListMallExchangeRelationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

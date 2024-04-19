@@ -73,6 +73,9 @@ Task:
   CoinMall:
     # 任务：硬币商店:硬币换取每周刷新
     enable: False
+    # 高级物资调换券兑换复刻服装，贵重物品开启需谨慎
+    clothes_exchange: False
+    # 硬币换取物品列表
     exchange_list: 
     # 补签卡
     - _supplementary_signature_card
@@ -80,8 +83,8 @@ Task:
     - _work_refresh_ticket
     # 电力充能券
     - energy_speedup_ticket
-    # 硬币兑换八周年限时时光旅票
-    - coin_to_travel_time_invitation_time_limit_8th
+    # 硬币兑换八周年限时时光旅票（已过期）
+    # - coin_to_travel_time_invitation_time_limit_8th
     # 硬币兑换八周年限时能源罐
     - coin_to_energy_pack_s_time_limit_8th
     # 硬币兑换八周年限时硬币包小
