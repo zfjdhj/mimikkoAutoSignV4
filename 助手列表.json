@@ -16,7 +16,9 @@
         "摩耶": "character_maya",
         "苏纳": "character_suna",
         "米璐库": "character_miruku",
-        "米露可": "character_miruku2"
+        "米露可": "character_miruku2",
+        "可洛蒂娅": "character_gurodia",
+        "清": "character_kiyo"
     },
     "联动助手": {
         "逢坂大河": "character_aisaka_taiga",
@@ -35,6 +37,10 @@
         "阿波连玲奈": "character_reina",
         "环古达": "character_tamakikotatsu",
         "爱丽丝": "character_alice",
-        "泠鸢": "character_yousa"
+        "泠鸢": "character_yousa",
+        "一之濑千鹤": "character_mizuhara_chizuru",
+        "更科瑠夏": "character_sarashina_ruka",
+        "樱泽墨": "character_sakurasawa_sumi",
+        "七海麻美": "character_asami_nanami"
     }
 }

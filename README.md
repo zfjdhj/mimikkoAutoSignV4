@@ -55,15 +55,21 @@
     | 衿 | character_eri |
     | 逢坂大河 | character_aisaka_taiga |
     | 薇尔莉特 | character_violet |
+    | 可洛蒂娅 | character_gurodia |
+    | 清 | character_kiyo |
+    | 一之濑千鹤 | character_mizuhara_chizuru |
+    | 更科瑠夏 | character_sarashina_ruka |
+    | 樱泽墨 | character_sakurasawa_sumi |
+    | 七海麻美 | character_asami_nanami |
 
     |物品|material_code|
     | :- | :- |
     |补签卡|`_supplementary_signature_card`|
     |工作刷新券|`_work_refresh_ticket`|
     |电力充能券|`energy_speedup_ticket`|
-    |硬币兑换八周年限时时光旅票|`coin_to_travel_time_invitation_time_limit_8th`|
-    |硬币兑换八周年限时能源罐|`coin_to_energy_pack_s_time_limit_8th`|
-    |硬币兑换八周年限时硬币包小|`coin_to_coin_pack_s_time_limit_8th`|
+    |硬币兑换九周年限时时光旅票|`coin_to_travel_time_invitation_time_limit_9th`|
+    |硬币兑换九周年限时能源罐|`coin_to_energy_pack_s_9th`|
+    |硬币兑换九周年限时硬币包小|`coin_to_coin_pack_s_9th`|
 
     |可支持操作|then_do_task|
     | :- | :- |
@@ -84,6 +90,13 @@
 ## 说明
 这只是一个脚本，不要期望有太多功能。  
 ## 更新
+20250321:(`config.yaml`有变动注意修改。)
+- 9周年活动相关内容添加
+- 升级app版本4.2.8.2(config.yaml中mimikko_version: "40215")
+- Travel(助手出游): add 大洋洲相关内容
+- CoinMall(硬币商店): add 额外换取9周年活动添加物品
+- 助手列表更新
+
 20240419:
 - fix bug: 等待300s,连接超时
 - CoinMall(硬币商店):add 高级物资调换券兑换复刻服装，贵重物品开启需谨慎
