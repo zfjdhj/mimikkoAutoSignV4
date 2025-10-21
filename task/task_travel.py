@@ -7,7 +7,7 @@ from util.logger import Logger
 
 def safe_hms(seconds) -> str:
     try:
-        sec = int(seconds)
+        sec = int(seconds) % 86400
     except Exception:
         sec = 0
     if sec < 0:
@@ -220,7 +220,7 @@ def list_travel_record(client):
             total_time = str(total_time_s // 86400) + 'day'
         else:
             total_time = ''
-        total_time += safe_hms(total_time_s))
+        total_time += safe_hms(total_time_s)
         date = time.strftime(
             "%Y-%m-%d-[%H:%M:%S]",
             time.localtime(t.travelGroup.endTime.seconds))
