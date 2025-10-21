@@ -5,6 +5,18 @@ import proto.param_pb2 as param_pb2
 from task.task_update_character_json import get_cname_json
 from util.logger import Logger
 
+def safe_hms(seconds) -> str:
+    try:
+        sec = int(seconds)
+    except Exception:
+        sec = 0
+    if sec < 0:
+        sec = 0
+    h = sec // 3600
+    m = (sec % 3600) // 60
+    s = sec % 60
+    return f"{h:02d}:{m:02d}:{s:02d}"
+
 base_path = os.path.dirname(os.path.abspath(__file__))
 travel_log = Logger(
     base_path,
@@ -202,13 +214,13 @@ def list_travel_record(client):
             remain_time = str(remain_time_s // 86400) + 'day'
         else:
             remain_time = ''
-        remain_time += time.strftime("%H:%M:%S", time.gmtime(remain_time_s))
+        remain_time += safe_hms(remain_time_s)
         total_time_s = t.travelGroup.totalTime
         if total_time_s > 86400:
             total_time = str(total_time_s // 86400) + 'day'
         else:
             total_time = ''
-        total_time += time.strftime("%H:%M:%S", time.gmtime(total_time_s))
+        total_time += safe_hms(total_time_s))
         date = time.strftime(
             "%Y-%m-%d-[%H:%M:%S]",
             time.localtime(t.travelGroup.endTime.seconds))
@@ -423,3 +435,4 @@ def exchange_postcard(client):
         travel_log.debug(str(res))
         if res.name:
             client.log.info(f"时光碎片兑换成功，恭喜获得：{res.name}")
+

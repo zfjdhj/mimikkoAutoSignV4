@@ -35,7 +35,20 @@ class Logger(object):
             os.makedirs(dir)
             os.system(f"chmod 777 {dir}")
         self.logger = logging.getLogger(filename)
-        self.logger.handlers = []
+
+        # 关闭并移除旧的 handler，避免未关闭文件句柄
+        for h in list(self.logger.handlers):
+            try:
+                h.flush()
+            except Exception:
+                pass
+            try:
+                h.close()
+            except Exception:
+                pass
+            self.logger.removeHandler(h)
+        self.logger.propagate = False
+
         # 设置时间格式
         logging.Formatter.converter = self.beijing
         self.logger.setLevel(self.level_relations[level])  # 设置日志级别

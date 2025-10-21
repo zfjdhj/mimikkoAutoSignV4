@@ -137,4 +137,7 @@
 - OrdinaryWork(公会悬赏)：add 优先完成低等级耗时少的任务
 - Travel(助手出游): add 旅行区域满人跳转下一区域
 - Travel(助手出游): add 明信片兑换
+
 - Travel(助手出游): add 自行添加助手指定区域出游  
+
+
