@@ -90,6 +90,12 @@
 ## 说明
 这只是一个脚本，不要期望有太多功能。  
 ## 更新
+20261105:
+- fix bug：`api4_mimikko_cn.cer` 过期导致所有任务报错 `CERTIFICATE_VERIFY_FAILED`
+    - 原因：旧文件是 `*.mimikko.cn` 的网站证书本身（2026-09-23 到期），服务器换新证书后校验失败
+    - 现改为签发机构的 CA 证书（DigiCert Global Root G2 + RapidSSL TLS RSA CA G1），以后服务器续签证书无需再更新此文件
+    - 已部署的用户只需替换这个文件
+
 20250321:(`config.yaml`有变动注意修改。)
 - 9周年活动相关内容添加
 - 升级app版本4.2.8.2(config.yaml中mimikko_version: "40215")
